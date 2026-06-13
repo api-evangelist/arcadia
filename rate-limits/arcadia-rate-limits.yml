@@ -1,0 +1,60 @@
+name: Arcadia API Rate Limits
+description: >-
+  Arcadia does not publish specific numeric rate limits in its public
+  documentation. The API uses OAuth 2.0 bearer tokens that expire after one
+  hour and must be refreshed by calling the token endpoint. The platform
+  recommends webhook-based integrations in production to avoid polling overhead.
+  Specific rate limit thresholds are defined in enterprise agreements and
+  communicated through the developer dashboard. Data collection latency can
+  range from a few minutes to several hours depending on the utility provider.
+specificationVersion: '0.1'
+limits:
+  - name: Access Token Lifetime
+    description: >-
+      OAuth 2.0 access tokens obtained via POST to
+      https://api.arcadia.com/oauth2/token are valid for exactly one hour.
+      Clients must re-authenticate after expiry. Tokens provide access to all
+      Arcadia API endpoints scoped to the authenticated client.
+    type: time
+    value: 1
+    unit: hour
+    scope: per token
+  - name: Connect URL Validity Window
+    description: >-
+      Connect URLs generated for end-user credential submission via the
+      Generate Encoded Connect URL endpoint are valid for 5 days from the time
+      of issuance. After this window the URL expires and a new one must be
+      generated.
+    type: time
+    value: 5
+    unit: days
+    scope: per URL
+  - name: Custom Data Fields - Account Level
+    description: >-
+      A maximum of 25 custom data fields may be stored at the account level
+      per utility connection. These fields support arbitrary key-value metadata
+      attached to user accounts.
+    type: capacity
+    value: 25
+    unit: fields
+    scope: per account
+  - name: Custom Data Fields - Meter Level
+    description: >-
+      A maximum of 10 custom data fields may be stored at the meter level.
+      These fields support arbitrary key-value metadata attached to individual
+      meters within an account.
+    type: capacity
+    value: 10
+    unit: fields
+    scope: per meter
+  - name: API Request Rate Limits
+    description: >-
+      Specific numeric request-per-minute or request-per-day rate limits are
+      not disclosed in public documentation. Enterprise agreements include
+      contractual rate limits appropriate to deployment scale. Contact Arcadia
+      sales for production rate limit details.
+    type: requests
+    value: undisclosed
+    unit: requests
+    scope: per client
+    url: https://www.arcadia.com/platform

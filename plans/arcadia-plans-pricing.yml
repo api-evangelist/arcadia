@@ -1,0 +1,49 @@
+name: Arcadia Plans and Pricing
+description: >-
+  Arcadia does not publish self-serve pricing publicly. All plans are negotiated
+  through enterprise sales engagements and are scoped based on the number of
+  connected utility accounts, selected API modules (Plug, Signal, Switch,
+  Utility Cloud), data volumes, and deployment scale. Prospective customers are
+  directed to request a demo to receive a custom quote. A sandbox environment
+  with API credentials is available for development and testing at no cost.
+specificationVersion: '0.1'
+plans:
+  - name: Sandbox
+    description: >-
+      Free sandbox environment for development and testing. Provides API
+      credentials from the developer dashboard to test integration against
+      simulated utility accounts. No production data access. Access tokens
+      expire after one hour and must be refreshed via the OAuth 2.0 token
+      endpoint.
+    url: https://docs.arcadia.com/docs/api-quick-start-guide
+    price: '0.00'
+    unit: ''
+    limits: []
+    features:
+      - Sandbox API credentials
+      - Arc Connect component testing
+      - Simulated utility account data
+      - OAuth 2.0 token generation
+      - Webhook testing
+  - name: Enterprise (Custom)
+    description: >-
+      Production access to Arcadia's APIs is available through a negotiated
+      enterprise agreement. Pricing is based on the number of connected utility
+      accounts, selected product modules (Plug, Signal, Switch, Utility Cloud,
+      DataHub), and data refresh cadence. Contact the sales team via the demo
+      request form for a custom quote.
+    url: https://www.arcadia.com/platform
+    price: custom
+    unit: per connected utility account / per module
+    limits: []
+    features:
+      - Plug API (statements, meters, intervals)
+      - Signal API (tariff and rate calculation)
+      - Switch API (rate plan optimization)
+      - Utility Cloud (enterprise data warehouse access)
+      - DataHub (SQL access via Snowflake)
+      - Arc Connect (credential sync UI component)
+      - Webhook event notifications
+      - Dedicated support and SLAs
+      - 95%+ US utility account coverage
+      - 15-minute interval data

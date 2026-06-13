@@ -1,0 +1,88 @@
+name: Arcadia FinOps Framework
+description: >-
+  Financial operations guidance for managing Arcadia API spend under the FinOps
+  Framework 1.0 FOCUS specification. Arcadia pricing is usage-based and
+  enterprise-negotiated, with costs driven primarily by the number of connected
+  utility accounts, active product modules, and data refresh frequency. Because
+  Arcadia does not publish list prices, cost visibility depends on contract terms
+  and dashboard reporting. Teams should track connected account counts as the
+  primary cost driver and monitor webhook event volumes as a secondary signal.
+specificationVersion: '1.0'
+focus:
+  provider: Arcadia
+  providerURL: https://www.arcadia.com/
+  billingModel: enterprise-negotiated
+  primaryCostDriver: connected utility accounts
+  secondaryCostDrivers:
+    - active API modules (Plug, Signal, Switch, Utility Cloud, DataHub)
+    - data refresh cadence (statement vs. interval)
+    - webhook event volume
+    - number of meters with interval data enabled
+costCategories:
+  - name: Plug API - Statement Data
+    description: >-
+      Core billing for access to monthly utility billing statements per
+      connected account. Statement data collection is activated automatically
+      when an account is connected. Statements include line-item charges,
+      usage totals, and account metadata.
+    unit: per connected account per month
+    pricing: enterprise contract
+  - name: Plug API - Interval Data
+    description: >-
+      Incremental cost for 15-minute interval meter data. Interval collection
+      must be explicitly enabled per meter by setting isIntervalsProductActive
+      to true. Because interval data carries higher storage and processing
+      costs than statements, it is typically a separate line item in enterprise
+      agreements.
+    unit: per meter with intervals enabled per month
+    pricing: enterprise contract
+  - name: Signal API
+    description: >-
+      Cost for access to the tariff and energy rate calculation engine.
+      Signal is typically licensed as a separate module from the Plug API and
+      priced based on query volume or flat monthly entitlement per agreement.
+    unit: per query or flat monthly module fee
+    pricing: enterprise contract
+  - name: Switch API
+    description: >-
+      Cost for rate plan recommendation queries. Priced as a separate module,
+      typically based on the number of rate plan optimization queries or as a
+      bundled module fee.
+    unit: per query or flat monthly module fee
+    pricing: enterprise contract
+  - name: Utility Cloud / DataHub
+    description: >-
+      Enterprise data warehouse access via DataHub (Snowflake SQL). Priced
+      based on data volume, number of seats, and query compute. Larger
+      deployments with high query volumes may face significant DataHub costs
+      separate from per-account API fees.
+    unit: per data volume / compute / seats
+    pricing: enterprise contract
+optimizationGuidance:
+  - name: Disable Unused Interval Data
+    description: >-
+      Interval data collection must be explicitly enabled per meter. Audit
+      active meters and disable isIntervalsProductActive for meters where
+      15-minute granularity is not required to reduce data costs.
+  - name: Use Webhooks Over Polling
+    description: >-
+      Arcadia recommends webhook-based production integrations. Polling the
+      API for statement or credential status consumes unnecessary API quota
+      and may trigger rate limits. Configure webhooks for credential
+      verification, statement availability, and data refresh events.
+  - name: Scope Connect Token Lifetime
+    description: >-
+      Connect URLs are valid for 5 days. Issue them close to when users are
+      expected to complete credential submission to reduce the window for
+      abandoned connections that still consume token quota.
+  - name: Monitor Connected Account Count
+    description: >-
+      The primary billing unit is the connected account. Implement automated
+      reconciliation of connected accounts against active users to identify
+      and disconnect stale or test accounts that are accruing costs without
+      delivering value.
+  - name: Sandbox for Development
+    description: >-
+      Use the free sandbox environment for all development and QA work.
+      Avoid connecting real production accounts during testing to prevent
+      unnecessary billable account activations.
