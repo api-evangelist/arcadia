@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api.arcadia.com/schemas/UtilityMeter",
+  "title": "UtilityMeter",
+  "required": [
+    "id",
+    "client_user_id",
+    "utility_credential_id",
+    "utility_account_id",
+    "meter_number",
+    "service_type",
+    "created_at",
+    "updated_at",
+    "sandboxed"
+  ],
+  "properties": {
+    "id": {
+      "type": "integer",
+      "example": 12345
+    },
+    "client_user_id": {
+      "type": "string",
+      "example": "fff57dc7-3a2b-4395-8a62-e3486d46dabe"
+    },
+    "utility_credential_id": {
+      "type": "integer",
+      "example": 54321
+    },
+    "utility_account_id": {
+      "type": "integer",
+      "example": 65432
+    },
+    "meter_number": {
+      "type": "string",
+      "example": "12300000045 67"
+    },
+    "service_type": {
+      "type": "string",
+      "enum": [
+        "electric",
+        "gas",
+        "water"
+      ]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sandboxed": {
+      "type": "boolean",
+      "example": false
+    }
+  },
+  "additionalProperties": false
+}

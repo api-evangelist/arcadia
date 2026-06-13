@@ -1,0 +1,66 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api.arcadia.com/schemas/WebhookEvent",
+  "title": "WebhookEvent",
+  "required": [
+    "id",
+    "created_at",
+    "updated_at",
+    "webhook_endpoint_id",
+    "type",
+    "sandboxed",
+    "delivered"
+  ],
+  "properties": {
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "example": "3847dd41-8c90-499a-ac6e-10a027dd231f"
+    },
+    "webhook_endpoint_id": {
+      "type": "string",
+      "format": "uuid",
+      "example": "3847dd41-8c90-499a-ac6e-10a027dd231f"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "test",
+        "utility_credential_verified",
+        "utility_credential_rejected",
+        "utility_credential_revoked",
+        "utility_credential_verification_error",
+        "utility_accounts_discovered",
+        "utility_accounts_discovery_error",
+        "new_utility_statement_available"
+      ]
+    },
+    "sandboxed": {
+      "type": "boolean",
+      "example": false
+    },
+    "delivered": {
+      "type": "boolean",
+      "example": true
+    },
+    "data": {
+      "type": "object",
+      "description": "Original `data` payload of the webhook event. See [webhook events](#tag/Webhook-Events) for schema details."
+    },
+    "delivery_attempts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/WebhookDeliveryAttempt"
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api.arcadia.com/schemas/ChargeCostResponse",
+  "title": "ChargeCostResponse",
+  "required": [
+    "tariff",
+    "normalized_start_time",
+    "normalized_consumption_kwh",
+    "cost_cents"
+  ],
+  "properties": {
+    "utility_account_id": {
+      "example": 12345,
+      "type": "integer",
+      "nullable": true
+    },
+    "tariff": {
+      "$ref": "#/components/schemas/MostRecentTariff"
+    },
+    "normalized_start_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The start_time normalized down to the resolution that lines up with any TOU periods on the tariff (generally hourly).",
+      "example": "2021-03-18T22:00:00-07:00"
+    },
+    "normalized_consumption_kwh": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "The `energy_usage_kwh` aggregated into periods that line up with any TOU periods on the tariff (generally hourly).",
+      "example": [
+        0,
+        0,
+        7.2,
+        0,
+        7.2,
+        2.9
+      ]
+    },
+    "cost_cents": {
+      "type": "integer",
+      "example": 525,
+      "description": "Cost of the charging curve on the utility account's tariff, in cents."
+    }
+  },
+  "additionalProperties": false
+}

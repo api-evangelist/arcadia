@@ -1,0 +1,207 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "arcadia": "https://api.arcadia.com/vocab/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "id": "@id",
+    "type": "@type",
+
+    "UtilityAccount": "arcadia:UtilityAccount",
+    "UtilityMeter": "arcadia:UtilityMeter",
+    "UtilityCredential": "arcadia:UtilityCredential",
+    "UtilityStatement": "arcadia:UtilityStatement",
+    "UtilityIntervalItem": "arcadia:UtilityIntervalItem",
+    "Tariff": "arcadia:Tariff",
+    "WebhookEndpoint": "arcadia:WebhookEndpoint",
+    "WebhookEvent": "arcadia:WebhookEvent",
+    "User": "arcadia:User",
+    "BundleEnrollment": "arcadia:BundleEnrollment",
+    "UtilityRemittanceItem": "arcadia:UtilityRemittanceItem",
+    "ChargeCurve": "arcadia:ChargeCurve",
+    "LoadServingEntity": "arcadia:LoadServingEntity",
+
+    "utility_account_id": {
+      "@id": "arcadia:utilityAccountId",
+      "@type": "xsd:integer"
+    },
+    "utility_credential_id": {
+      "@id": "arcadia:utilityCredentialId",
+      "@type": "xsd:integer"
+    },
+    "utility_meter_id": {
+      "@id": "arcadia:utilityMeterId",
+      "@type": "xsd:integer"
+    },
+    "utility_statement_id": {
+      "@id": "arcadia:utilityStatementId",
+      "@type": "xsd:integer"
+    },
+    "client_user_id": {
+      "@id": "arcadia:clientUserId",
+      "@type": "xsd:string"
+    },
+    "utility_name": {
+      "@id": "arcadia:utilityName",
+      "@type": "xsd:string"
+    },
+    "utility_long_name": {
+      "@id": "arcadia:utilityLongName",
+      "@type": "xsd:string"
+    },
+    "account_number": {
+      "@id": "arcadia:accountNumber",
+      "@type": "xsd:string"
+    },
+    "meter_number": {
+      "@id": "arcadia:meterNumber",
+      "@type": "xsd:string"
+    },
+    "service_type": {
+      "@id": "arcadia:serviceType",
+      "@type": "xsd:string"
+    },
+    "service_address_city": {
+      "@id": "arcadia:serviceAddressCity",
+      "@type": "xsd:string"
+    },
+    "service_address_state": {
+      "@id": "arcadia:serviceAddressState",
+      "@type": "xsd:string"
+    },
+    "service_address_street_one": {
+      "@id": "arcadia:serviceAddressStreetOne",
+      "@type": "xsd:string"
+    },
+    "service_address_street_two": {
+      "@id": "arcadia:serviceAddressStreetTwo",
+      "@type": "xsd:string"
+    },
+    "service_address_zip": {
+      "@id": "arcadia:serviceAddressZip",
+      "@type": "xsd:string"
+    },
+    "service_customer_name": {
+      "@id": "arcadia:serviceCustomerName",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "arcadia:status",
+      "@type": "xsd:string"
+    },
+    "sandboxed": {
+      "@id": "arcadia:sandboxed",
+      "@type": "xsd:boolean"
+    },
+    "created_at": {
+      "@id": "arcadia:createdAt",
+      "@type": "xsd:dateTime"
+    },
+    "updated_at": {
+      "@id": "arcadia:updatedAt",
+      "@type": "xsd:dateTime"
+    },
+    "statement_date": {
+      "@id": "arcadia:statementDate",
+      "@type": "xsd:date"
+    },
+    "due_date": {
+      "@id": "arcadia:dueDate",
+      "@type": "xsd:date"
+    },
+    "start_date": {
+      "@id": "arcadia:startDate",
+      "@type": "xsd:date"
+    },
+    "end_date": {
+      "@id": "arcadia:endDate",
+      "@type": "xsd:date"
+    },
+    "start_time": {
+      "@id": "arcadia:startTime",
+      "@type": "xsd:dateTime"
+    },
+    "end_time": {
+      "@id": "arcadia:endTime",
+      "@type": "xsd:dateTime"
+    },
+    "amount_due": {
+      "@id": "arcadia:amountDue",
+      "@type": "xsd:decimal"
+    },
+    "balance_carried_forward": {
+      "@id": "arcadia:balanceCarriedForward",
+      "@type": "xsd:decimal"
+    },
+    "kwh": {
+      "@id": "arcadia:kwh",
+      "@type": "xsd:decimal"
+    },
+    "tariff_code": {
+      "@id": "arcadia:tariffCode",
+      "@type": "xsd:string"
+    },
+    "tariff_name": {
+      "@id": "arcadia:tariffName",
+      "@type": "xsd:string"
+    },
+    "main_tariff_id": {
+      "@id": "arcadia:mainTariffId",
+      "@type": "xsd:string"
+    },
+    "access_token": {
+      "@id": "arcadia:accessToken",
+      "@type": "xsd:string"
+    },
+    "connect_token": {
+      "@id": "arcadia:connectToken",
+      "@type": "xsd:string"
+    },
+    "expires_in": {
+      "@id": "arcadia:expiresIn",
+      "@type": "xsd:integer"
+    },
+    "webhook_url": {
+      "@id": "arcadia:webhookUrl",
+      "@type": "xsd:anyURI"
+    },
+    "event_type": {
+      "@id": "arcadia:eventType",
+      "@type": "xsd:string"
+    },
+    "feature_availability": {
+      "@id": "arcadia:featureAvailability",
+      "@type": "arcadia:FeatureAvailability"
+    },
+    "most_recent_tariff": {
+      "@id": "arcadia:mostRecentTariff",
+      "@type": "arcadia:Tariff"
+    },
+    "utility_meters": {
+      "@id": "arcadia:utilityMeters",
+      "@container": "@set",
+      "@type": "arcadia:UtilityMeter"
+    },
+    "services": {
+      "@id": "arcadia:services",
+      "@container": "@set"
+    },
+    "supplier_account_id": {
+      "@id": "arcadia:supplierAccountId",
+      "@type": "xsd:string"
+    },
+    "supplier_name": {
+      "@id": "arcadia:supplierName",
+      "@type": "xsd:string"
+    },
+    "load_serving_entity_id": {
+      "@id": "arcadia:loadServingEntityId",
+      "@type": "xsd:integer"
+    },
+    "load_serving_entity_name": {
+      "@id": "arcadia:loadServingEntityName",
+      "@type": "xsd:string"
+    }
+  }
+}

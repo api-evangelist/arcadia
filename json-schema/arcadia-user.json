@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api.arcadia.com/schemas/User",
+  "title": "User",
+  "required": [
+    "client_user_id",
+    "created_at",
+    "utility_credentials"
+  ],
+  "properties": {
+    "client_user_id": {
+      "type": "string",
+      "example": "fff57dc7-3a2b-4395-8a62-e3712d46dafl"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "utility_credentials": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/UtilityCredential"
+          },
+          {
+            "type": "object",
+            "required": [
+              "utility_accounts"
+            ],
+            "properties": {
+              "utility_accounts": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UtilityAccount"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

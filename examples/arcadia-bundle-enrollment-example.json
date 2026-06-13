@@ -1,0 +1,16 @@
+{
+  "client_user_id": "fff57dc7-3a2b-4395-8a62-e3486d46dabe",
+  "utility_account_id": 1234,
+  "product_key": "string",
+  "status": "enrolled",
+  "ineligibility_reasons": [
+    {
+      "resolvable": false,
+      "reason": "string"
+    }
+  ],
+  "removal_reason": null,
+  "start_date": "string",
+  "override_email": "apb0123456@a.arcadiapower.com",
+  "sandboxed": false
+}

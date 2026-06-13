@@ -1,0 +1,13 @@
+{
+  "main_tariff_id": "gen_mtid_3331108",
+  "property_inputs": [
+    {
+      "id": "territoryId",
+      "value": 3
+    }
+  ],
+  "supplier_name": "East Bay Community Energy",
+  "tariff_code": "EV-2A-TOU",
+  "tariff_name": "Residential - Time of Use - Plug-In Electric Vehicle 2",
+  "utility_name": "Pacific Gas & Electric"
+}

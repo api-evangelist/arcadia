@@ -1,0 +1,168 @@
+vocabulary:
+  - term: utility_account
+    label: Utility Account
+    description: >-
+      A utility customer account associated with a specific service address and
+      utility provider. Contains billing, tariff, and service information.
+    domain: https://api.arcadia.com
+    type: Resource
+
+  - term: utility_credential
+    label: Utility Credential
+    description: >-
+      The login credentials (username/password) a user provides to connect their
+      utility account to the Arcadia platform via Arc Connect.
+    domain: https://api.arcadia.com
+    type: Resource
+
+  - term: utility_meter
+    label: Utility Meter
+    description: >-
+      A physical or logical meter associated with a utility account, representing
+      a point of energy delivery. May be electric, gas, or water.
+    domain: https://api.arcadia.com
+    type: Resource
+
+  - term: utility_statement
+    label: Utility Statement
+    description: >-
+      A structured billing statement retrieved from a utility provider, containing
+      charges, usage data, and tariff information for a service period.
+    domain: https://api.arcadia.com
+    type: Resource
+
+  - term: utility_interval
+    label: Utility Interval
+    description: >-
+      Granular energy usage data at 15-minute or hourly resolution, retrieved
+      from smart meters or utility AMI systems.
+    domain: https://api.arcadia.com
+    type: Resource
+
+  - term: tariff
+    label: Tariff
+    description: >-
+      A utility rate schedule defining how a customer's energy usage is priced,
+      including time-of-use rates, fixed charges, and demand charges.
+    domain: https://api.arcadia.com
+    type: Concept
+
+  - term: arc_connect
+    label: Arc Connect
+    description: >-
+      Arcadia's white-label front-end component that enables end users to securely
+      enter utility login credentials and connect their utility accounts.
+    domain: https://api.arcadia.com
+    type: Component
+
+  - term: plug_api
+    label: Plug API
+    description: >-
+      The primary Arcadia API surface for connecting end users to utility accounts
+      and retrieving normalized billing, meter, and interval data.
+    domain: https://api.arcadia.com
+    type: API
+
+  - term: spark_api
+    label: Spark API (Signal)
+    description: >-
+      Arcadia's tariff intelligence engine providing rate modeling, cost
+      calculation, EV charge optimization, and storage dispatch scheduling.
+    domain: https://api.arcadia.com
+    type: API
+
+  - term: bundle
+    label: Bundle
+    description: >-
+      Arcadia's utility remittance service that enables automated payment
+      collection from utility customers on behalf of energy service companies.
+    domain: https://api.arcadia.com
+    type: Service
+
+  - term: client_user_id
+    label: Client User ID
+    description: >-
+      A partner-assigned unique identifier for an end user, used to associate
+      utility credentials and accounts with the partner's user records.
+    domain: https://api.arcadia.com
+    type: Identifier
+
+  - term: webhook_endpoint
+    label: Webhook Endpoint
+    description: >-
+      A registered HTTPS URL that Arcadia delivers event notifications to,
+      such as new utility statement available or credential status changes.
+    domain: https://api.arcadia.com
+    type: Resource
+
+  - term: webhook_event
+    label: Webhook Event
+    description: >-
+      An event notification payload delivered to a webhook endpoint when a
+      significant state change occurs on a utility account or credential.
+    domain: https://api.arcadia.com
+    type: Event
+
+  - term: service_type
+    label: Service Type
+    description: >-
+      The type of utility service associated with a meter or account.
+      Valid values are electric, gas, or water.
+    domain: https://api.arcadia.com
+    type: Enumeration
+    values:
+      - electric
+      - gas
+      - water
+
+  - term: availability
+    label: Feature Availability
+    description: >-
+      Indicates whether a particular Arcadia feature is available for a given
+      utility account. Values are AVAILABLE, NOT_AVAILABLE, or NOT_READY.
+    domain: https://api.arcadia.com
+    type: Enumeration
+    values:
+      - AVAILABLE
+      - NOT_AVAILABLE
+      - NOT_READY
+
+  - term: connect_token
+    label: Connect Token
+    description: >-
+      A short-lived token used to initialize the Arc Connect component for a
+      specific user session. Expires after two hours.
+    domain: https://api.arcadia.com
+    type: SecurityToken
+
+  - term: access_token
+    label: Access Token
+    description: >-
+      A Bearer token obtained from the Arcadia auth endpoint using client
+      credentials, required for all API calls. Valid for two hours.
+    domain: https://api.arcadia.com
+    type: SecurityToken
+
+  - term: load_serving_entity
+    label: Load Serving Entity (LSE)
+    description: >-
+      A utility or electricity provider that delivers power to end customers and
+      administers tariff rate schedules. Used by the Spark tariff API.
+    domain: https://api.arcadia.com
+    type: Concept
+
+  - term: utility_remittance_item
+    label: Utility Remittance Item
+    description: >-
+      A record of a scheduled or completed payment remittance to a utility
+      provider on behalf of a customer enrolled in the Bundle service.
+    domain: https://api.arcadia.com
+    type: Resource
+
+  - term: charge_curve
+    label: Charge Curve
+    description: >-
+      An EV charging schedule represented as a time-series of power delivery
+      values, used by the Spark API to optimize charging cost and timing.
+    domain: https://api.arcadia.com
+    type: Concept

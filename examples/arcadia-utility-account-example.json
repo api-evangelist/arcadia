@@ -1,0 +1,47 @@
+{
+  "id": 12345,
+  "client_user_id": "fff57dc7-3a2b-4395-8a62-e3486d46dabe",
+  "utility_name": "AEP SWEPCO",
+  "utility_long_name": "AEP SWEPCO AR",
+  "utility_credential_id": 54321,
+  "account_number": "7626177069",
+  "service_address_street_one": "1060 W Addison",
+  "service_address_street_two": "Apartment 1",
+  "service_address_city": "Chicago",
+  "service_address_state": "IL",
+  "service_address_zip": "60613",
+  "service_customer_name": "Joan Arcadia",
+  "supplier_account_id": "123456789",
+  "status": null,
+  "most_recent_tariff": null,
+  "flags": [
+    "string"
+  ],
+  "services": [
+    "string"
+  ],
+  "created_at": "string",
+  "updated_at": "string",
+  "feature_availability": {
+    "charge_cost": "string",
+    "smart_charge": "string",
+    "utility_intervals": "string",
+    "utility_statements": "string",
+    "hosted_payments": "string",
+    "utility_remittance": "string"
+  },
+  "utility_meters": [
+    {
+      "id": 12345,
+      "client_user_id": "fff57dc7-3a2b-4395-8a62-e3486d46dabe",
+      "utility_credential_id": 54321,
+      "utility_account_id": 65432,
+      "meter_number": "12300000045 67",
+      "service_type": "string",
+      "created_at": "string",
+      "updated_at": "string",
+      "sandboxed": false
+    }
+  ],
+  "sandboxed": false
+}

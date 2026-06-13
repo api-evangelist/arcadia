@@ -1,0 +1,164 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api.arcadia.com/schemas/UtilityAccount",
+  "title": "UtilityAccount",
+  "required": [
+    "id",
+    "client_user_id",
+    "utility_name",
+    "utility_long_name",
+    "utility_credential_id",
+    "account_number",
+    "service_address_city",
+    "service_address_state",
+    "service_address_street_one",
+    "service_address_street_two",
+    "service_address_zip",
+    "service_customer_name",
+    "status",
+    "supplier_account_id",
+    "most_recent_tariff",
+    "flags",
+    "services",
+    "created_at",
+    "updated_at",
+    "feature_availability",
+    "utility_meters",
+    "sandboxed"
+  ],
+  "properties": {
+    "id": {
+      "type": "integer",
+      "example": 12345
+    },
+    "client_user_id": {
+      "type": "string",
+      "example": "fff57dc7-3a2b-4395-8a62-e3486d46dabe"
+    },
+    "utility_name": {
+      "type": "string",
+      "example": "AEP SWEPCO",
+      "description": "The list of supported Arcadia utilities can be found [here](https://arc.arcadia.com/coverage?first=25&page=1)."
+    },
+    "utility_long_name": {
+      "type": "string",
+      "example": "AEP SWEPCO AR",
+      "description": "Provides greater detail than `utility_name`. The list of supported Arcadia utilities can be found [here](https://arc.arcadia.com/coverage?first=25&page=1)."
+    },
+    "utility_credential_id": {
+      "type": "integer",
+      "example": 54321
+    },
+    "account_number": {
+      "type": "string",
+      "nullable": true,
+      "example": "7626177069",
+      "description": "The account number used by the utility to identify this UtilityAccount"
+    },
+    "service_address_street_one": {
+      "example": "1060 W Addison",
+      "type": "string",
+      "nullable": true
+    },
+    "service_address_street_two": {
+      "example": "Apartment 1",
+      "type": "string",
+      "nullable": true
+    },
+    "service_address_city": {
+      "example": "Chicago",
+      "type": "string",
+      "nullable": true
+    },
+    "service_address_state": {
+      "example": "IL",
+      "type": "string",
+      "nullable": true
+    },
+    "service_address_zip": {
+      "example": "60613",
+      "type": "string",
+      "nullable": true
+    },
+    "service_customer_name": {
+      "example": "Joan Arcadia",
+      "type": "string",
+      "nullable": true
+    },
+    "supplier_account_id": {
+      "example": "123456789",
+      "description": "Utility specific account identifier for energy suppliers.\n",
+      "type": "string",
+      "nullable": true
+    },
+    "status": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "enum": [
+            "active",
+            "closed",
+            "incomplete",
+            "locked",
+            "unknown"
+          ]
+        }
+      ]
+    },
+    "most_recent_tariff": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/components/schemas/MostRecentTariff"
+        }
+      ]
+    },
+    "flags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "utility_statement_past_due"
+        ]
+      }
+    },
+    "services": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "electric",
+          "gas",
+          "water"
+        ]
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "feature_availability": {
+      "$ref": "#/components/schemas/FeatureAvailability"
+    },
+    "utility_meters": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/UtilityMeter"
+      }
+    },
+    "sandboxed": {
+      "type": "boolean",
+      "example": false
+    }
+  },
+  "additionalProperties": false
+}

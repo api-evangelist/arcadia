@@ -1,0 +1,24 @@
+{
+  "utility_account_id": 12345,
+  "tariff": {
+    "main_tariff_id": "gen_mtid_3331108",
+    "property_inputs": [
+      {}
+    ],
+    "supplier_name": "East Bay Community Energy",
+    "tariff_code": "EV-2A-TOU",
+    "tariff_name": "Residential - Time of Use - Plug-In Electric Vehicle 2",
+    "utility_name": "Pacific Gas & Electric",
+    "tariff_as_of_date": "2021-03-01"
+  },
+  "normalized_start_time": "2021-03-18T22:00:00-07:00",
+  "normalized_consumption_kwh": [
+    0,
+    0,
+    7.2,
+    0,
+    7.2,
+    2.9
+  ],
+  "cost_cents": 525
+}

@@ -47,7 +47,9 @@ apis:
       - type: Documentation
         url: https://docs.arcadia.com/
       - type: OpenAPI
-        url: https://docs.arcadia.com/llms.txt
+        url: https://api.arcadia.com/openapi.yaml
+      - type: OpenAPI
+        url: openapi/arcadia-plug-openapi.yml
   - name: Arcadia Signal API
     description: >-
       Signal provides a tariff and energy rate calculation engine that allows

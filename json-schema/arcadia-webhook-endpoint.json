@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api.arcadia.com/schemas/WebhookEndpoint",
+  "title": "WebhookEndpoint",
+  "required": [
+    "created_at",
+    "updated_at",
+    "id",
+    "signing_key",
+    "url",
+    "sandboxed",
+    "enabled",
+    "arc_version"
+  ],
+  "properties": {
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "example": "3847dd41-8c90-499a-ac6e-10a027dd231f"
+    },
+    "signing_key": {
+      "type": "string",
+      "example": "MIZ1ImBK1FiVisS1"
+    },
+    "url": {
+      "type": "string",
+      "example": "https://example.com/webhook-endpoint"
+    },
+    "sandboxed": {
+      "type": "boolean",
+      "example": false
+    },
+    "enabled": {
+      "type": "boolean",
+      "example": true
+    },
+    "arc_version": {
+      "type": "string",
+      "example": "2022-10-13"
+    }
+  },
+  "additionalProperties": false
+}

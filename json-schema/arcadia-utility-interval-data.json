@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api.arcadia.com/schemas/UtilityIntervalDataResponse",
+  "title": "UtilityIntervalDataResponse",
+  "required": [
+    "client_user_id",
+    "utility_account_id",
+    "intervals_earliest_time",
+    "intervals_latest_time",
+    "utility_meter_id",
+    "data"
+  ],
+  "properties": {
+    "client_user_id": {
+      "type": "string",
+      "example": "fff57dc7-3a2b-4395-8a62-e3486d46dabe"
+    },
+    "utility_account_id": {
+      "type": "integer"
+    },
+    "utility_meter_id": {
+      "example": 1234,
+      "type": "integer",
+      "nullable": true
+    },
+    "intervals_earliest_time": {
+      "description": "The earliest available interval data timestamp",
+      "type": "string",
+      "format": "date-time"
+    },
+    "intervals_latest_time": {
+      "description": "The latest available interval data timestamp",
+      "type": "string",
+      "format": "date-time"
+    },
+    "batch_start_time": {
+      "description": "The starting timestamp for the interval data included in this response",
+      "type": "string",
+      "format": "date-time"
+    },
+    "batch_end_time": {
+      "description": "The ending timestamp for the interval data included in this response",
+      "type": "string",
+      "format": "date-time"
+    },
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/UtilityIntervalItem"
+      }
+    }
+  },
+  "additionalProperties": false
+}

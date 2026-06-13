@@ -1,0 +1,35 @@
+{
+  "id": 123,
+  "client_user_id": "fff57dc7-3a2b-4395-8a62-e3486d46dabe",
+  "tariff": null,
+  "utility_name": "AEP SWEPCO",
+  "utility_long_name": "AEP SWEPCO AR",
+  "utility_account_id": 2243,
+  "statement_date": "2019-08-24",
+  "due_date": "2019-09-24",
+  "service_start_date": "2019-08-24",
+  "service_end_date": "2019-09-24",
+  "kwh": 100,
+  "utility_charge": 90.33,
+  "supplier_charge": 41.54,
+  "gas_charge": 23.32,
+  "past_due": false,
+  "created_at": "string",
+  "updated_at": "string",
+  "sandboxed": false,
+  "pdf_url": "string",
+  "final_bill": false,
+  "service_window_inclusive_of_end_date": true,
+  "net_metering": null,
+  "virtual_net_metering": null,
+  "most_recent_payment_detail": null,
+  "commercial_line_items_detail": null,
+  "billing_flags": [
+    {
+      "type": "string",
+      "details": {
+        "conflicting_utility_statment_id": 0
+      }
+    }
+  ]
+}

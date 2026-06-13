@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api.arcadia.com/schemas/UtilityIntervalItem",
+  "title": "UtilityIntervalItem",
+  "required": [
+    "start_time",
+    "end_time",
+    "kwh",
+    "is_null_kwh",
+    "consumption_kwh",
+    "generation_kwh",
+    "net_kwh"
+  ],
+  "properties": {
+    "start_time": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2021-03-18T22:00:00Z"
+    },
+    "end_time": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2021-03-18T22:00:00Z"
+    },
+    "consumption_kwh": {
+      "description": "Consumption kilowatt hours usage for this interval. Availability varies by utility.",
+      "type": "number",
+      "nullable": true
+    },
+    "generation_kwh": {
+      "description": "Generation kilowatt hours usage for the interval. Availabiltiy varies by utility.",
+      "type": "number",
+      "nullable": true
+    },
+    "net_kwh": {
+      "description": "Net kilowatt hours usage for the interval.",
+      "type": "number"
+    },
+    "kwh": {
+      "description": "Prefer net_kwh instead",
+      "deprecated": true,
+      "type": "number"
+    },
+    "is_null_kwh": {
+      "description": "Indicates whether kwh was unavailable for this interval. When `true` the kwh field should be interpreted as null.",
+      "deprecated": true,
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": false
+}
