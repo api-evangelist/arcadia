@@ -13,7 +13,7 @@ description: >-
   Signal for tariff rate calculation, Switch for plan recommendations, and
   DataHub for warehouse-native SQL access to aggregated energy datasets.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/arcadia/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -35,7 +35,7 @@ apis:
       Developers can connect end users to their utility accounts via the Arc
       Connect component, then retrieve normalized billing and consumption data
       across thousands of US utility providers.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://docs.arcadia.com/
     baseURL: https://api.arcadia.com
     tags:
@@ -57,7 +57,7 @@ apis:
       American utility tariffs. It supports cost-benefit analysis, bill auditing,
       and energy procurement optimization by exposing the most comprehensive
       tariff rate database available.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://docs.arcadia.com/
     baseURL: https://api.arcadia.com
     tags:
@@ -74,7 +74,7 @@ apis:
       plan for a customer based on their actual usage patterns. It supports
       customer-facing energy plan recommendation workflows for utilities, brokers,
       and energy management platforms.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://docs.arcadia.com/
     baseURL: https://api.arcadia.com
     tags:
@@ -91,7 +91,7 @@ apis:
       business entities at scale. It supports integration with data platforms
       such as Snowflake and offers SQL-based access through DataHub for
       warehouse-native energy analytics.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://docs.arcadia.com/v1.0-Utility-Cloud/docs/api-quick-start-guide
     baseURL: https://api.arcadia.com
     tags:
