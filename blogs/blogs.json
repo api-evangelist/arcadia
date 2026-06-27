@@ -2,10 +2,13 @@
   "repo": "arcadia",
   "feeds": [
     {
-      "source": "https://www.linkedin.com/company/arcadiahq/",
-      "error": "HTTPError"
+      "source": "https://www.arcadia.com/blog",
+      "feed_url": "",
+      "saved": 0,
+      "method": "agent-scrape"
     }
   ],
   "post_count": 0,
-  "fetched": "2026-06-14T20:42:17Z"
+  "fetched": "2026-06-27T12:24:24Z",
+  "agent_pulled": "2026-06-27"
 }
