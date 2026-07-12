@@ -103,6 +103,14 @@ apis:
       - type: Documentation
         url: https://docs.arcadia.com/v1.0-Utility-Cloud/docs/api-quick-start-guide
 common:
+  - type: TrustCenter
+    url: security/arcadia-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/arcadia-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/arcadia-domain-security.yml
+  - type: Authentication
+    url: authentication/arcadia-authentication.yml
   - type: Website
     url: https://www.arcadia.com/
   - type: Documentation
