@@ -103,6 +103,8 @@ apis:
       - type: Documentation
         url: https://docs.arcadia.com/v1.0-Utility-Cloud/docs/api-quick-start-guide
 common:
+  - type: AgenticAccess
+    url: agentic-access/arcadia-agentic-access.yml
   - type: TrustCenter
     url: security/arcadia-trust-center.yml
   - type: VulnerabilityDisclosure
