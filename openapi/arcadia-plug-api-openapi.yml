@@ -1,0 +1,1168 @@
+openapi: 3.0.3
+info:
+  title: Arcadia API Reference Auth Plug API
+  version: 0.3.0
+  contact:
+    email: platformsupport@arcadia.com
+servers:
+- url: https://api.arcadia.com
+security:
+- bearerAuth: []
+tags:
+- name: Plug
+paths:
+  /plug/utility_statements:
+    get:
+      tags:
+      - Plug
+      summary: List Utility Statements
+      description: Returns a paginated list of UtilityStatements for all users, or filtered by `utility_account_id`. Default ordered by descending `updated_at`.
+      operationId: getUtilityStatements
+      parameters:
+      - $ref: '#/components/parameters/deprecatedClientUserIdQueryParam'
+      - $ref: '#/components/parameters/utilityAccountIdQueryParam'
+      - $ref: '#/components/parameters/paginationLimitParam'
+      - $ref: '#/components/parameters/paginationUpdatedAfterParam'
+      - $ref: '#/components/parameters/paginationUpdatedBeforeParam'
+      - $ref: '#/components/parameters/paginationOrderParam'
+      - $ref: '#/components/parameters/arcVersionInHeaderParam'
+      responses:
+        '200':
+          description: Success
+          headers:
+            Arcadia-Version:
+              $ref: '#/components/headers/ArcVersion'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedUtilityStatements'
+        '404':
+          description: Not Found
+          headers:
+            Arcadia-Version:
+              $ref: '#/components/headers/ArcVersion'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UtilityAccountNotFoundError'
+        '422':
+          description: Unprocessable Entity
+          headers:
+            Arcadia-Version:
+              $ref: '#/components/headers/ArcVersion'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UtilityStatementsFeatureAvailabilityError'
+  /plug/utility_statements/{utility_statement_id}:
+    get:
+      tags:
+      - Plug
+      summary: Get Utility Statement
+      description: Returns a single UtilityStatement specified by ID.
+      operationId: getUtilityStatement
+      parameters:
+      - $ref: '#/components/parameters/utilityStatementIdInPathParam'
+      - $ref: '#/components/parameters/arcVersionInHeaderParam'
+      responses:
+        '200':
+          description: Success
+          headers:
+            Arcadia-Version:
+              $ref: '#/components/headers/ArcVersion'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UtilityStatement'
+  /plug/utility_statements/{utility_statement_id}/intervals:
+    get:
+      tags:
+      - Plug
+      summary: List Utility Intervals For A Utility Statement (Beta)
+      description: '**This endpoint is in _beta_. Click [here](release-phases) for a description on Arcadia''s release phases.**
+
+        Returns the Utility Intervals for the time span of the given Utility Statement. If the Utility Statement contains charges for multiple Utility Meters, this endpoint will aggregate each Utility Meter''s Utility Intervals together to create one set of Utility Intervals.
+
+        Note that the Utility Intervals feature is limited to a subset of utilities at this time:
+
+        - SDG&E
+
+        - SCE
+
+        - PG&E
+
+        - ComEd
+
+        - Delmarva (DE & MD)
+
+        - BG&E
+
+        - PPL
+
+        - Southern Company
+
+        - PEPCO (DC and MD)
+
+        - PECO
+
+        - National Grid NY
+
+        - Florida Power and Light
+
+        - Duke Energy (IN, KY, NC, OH, Progress FL, Progress NC, Progress SC, SC)
+
+
+        Note of the availability of interval data:
+
+        - When an account is first enrolled we retrieve interval data from the utility if available
+
+        - We will retrieve new utility interval data whenever a new utility statement is discovered
+
+
+        To test Utility Intervals using a [test account scenario](ref:testing):
+
+        * Select one of the utilities supported above
+
+        * Enter a [test username](ref:testing) that has at least one electric account
+
+        '
+      operationId: getUtilityStatementIntervals
+      parameters:
+      - $ref: '#/components/parameters/utilityStatementIdInPathParam'
+      - $ref: '#/components/parameters/arcVersionInHeaderParam'
+      responses:
+        '200':
+          description: Success
+          headers:
+            Arcadia-Version:
+              $ref: '#/components/headers/ArcVersion'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UtilityIntervalsPerStatementDataResponse'
+        '404':
+          description: Not Found
+          headers:
+            Arcadia-Version:
+              $ref: '#/components/headers/ArcVersion'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UtilityIntervalsPerStatementNotFoundError'
+        '422':
+          description: Unprocessable Entity
+          headers:
+            Arcadia-Version:
+              $ref: '#/components/headers/ArcVersion'
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/UtilityIntervalsFeatureAvailabilityError'
+                - $ref: '#/components/schemas/UtilityIntervalsStatementRangeUnavailableError'
+  /plug/utility_intervals:
+    get:
+      tags:
+      - Plug
+      summary: List Utility Intervals (Beta)
+      description: '**This endpoint is in _beta_. Click [here](release-phases) for a description on Arcadia''s release phases.**
+
+        Returns up to a year of interval data per request for a Utility Account.
+
+        Note that the Utility Intervals feature is limited to a subset of utilities at this time. Check the [utility coverage page](https://arc.arcadia.com/coverage?first=25&page=1&strictFilters[productAvailability][0]=PLUG_INTERVALS_SUPPORTED) to see which utilities are supported.
+
+
+        Note of the availability of interval data:
+
+        - When an account is first enrolled we retrieve interval data from the utility if available
+
+        - We will retrieve new utility interval data whenever a new utility statement is discovered
+
+
+        To test Utility Intervals using a [test account scenario](ref:testing):
+
+        * Select one of the utilities supported above
+
+        * Enter a [test username](ref:testing) that has at least one electric account
+
+        '
+      operationId: getUtilityIntervals
+      parameters:
+      - $ref: '#/components/parameters/intervalDataUtilityAccountIdQueryParam'
+      - $ref: '#/components/parameters/intervalDataUtilityMeterIdQueryParam'
+      - $ref: '#/components/parameters/startTimeQueryParam'
+      - $ref: '#/components/parameters/endTimeQueryParam'
+      - $ref: '#/components/parameters/utilityStatementIdQueryParam'
+      - $ref: '#/components/parameters/arcVersionInHeaderParam'
+      responses:
+        '200':
+          description: Success
+          headers:
+            Arcadia-Version:
+              $ref: '#/components/headers/ArcVersion'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UtilityIntervalDataResponse'
+        '404':
+          description: Not Found
+          headers:
+            Arcadia-Version:
+              $ref: '#/components/headers/ArcVersion'
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/UtilityIntervalsNoDataForMeterError'
+                - $ref: '#/components/schemas/UtilityIntervalsPerStatementNotFoundError'
+        '422':
+          description: Unprocessable Entity
+          headers:
+            Arcadia-Version:
+              $ref: '#/components/headers/ArcVersion'
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/UtilityIntervalsFeatureAvailabilityError'
+                - $ref: '#/components/schemas/UtilityIntervalsStatementRangeUnavailableError'
+                - $ref: '#/components/schemas/UtilityIntervalsBothAccountIdAndMeterIdProvided'
+                - $ref: '#/components/schemas/UtilityIntervalsInvalidMeterServiceTypeError'
+                - $ref: '#/components/schemas/UtilityIntervalsAmbiguousMeterError'
+                - $ref: '#/components/schemas/UtilityIntervalsInvalidTimeRange'
+  /plug/utility_intervals/metadata:
+    get:
+      tags:
+      - Plug
+      summary: Fetch Utility Interval Metadata (Beta)
+      description: '**This endpoint is in _beta_. Click [here](release-phases) for a description on Arcadia''s release phases.**
+
+        Returns metadata on what utility interval data is available.
+
+        '
+      operationId: getUtilityIntervalMetadata
+      parameters:
+      - $ref: '#/components/parameters/intervalDataUtilityAccountIdQueryParam'
+      - $ref: '#/components/parameters/intervalDataUtilityMeterIdQueryParam'
+      - $ref: '#/components/parameters/arcVersionInHeaderParam'
+      responses:
+        '200':
+          description: Success
+          headers:
+            Arcadia-Version:
+              $ref: '#/components/headers/ArcVersion'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UtilityIntervalMetadataResponse'
+        '404':
+          description: Not Found
+          headers:
+            Arcadia-Version:
+              $ref: '#/components/headers/ArcVersion'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UtilityIntervalsNoDataForMeterError'
+        '422':
+          description: Unprocessable Entity
+          headers:
+            Arcadia-Version:
+              $ref: '#/components/headers/ArcVersion'
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/UtilityIntervalsFeatureAvailabilityError'
+                - $ref: '#/components/schemas/UtilityIntervalsBothAccountIdAndMeterIdProvided'
+                - $ref: '#/components/schemas/UtilityIntervalsInvalidMeterServiceTypeError'
+                - $ref: '#/components/schemas/UtilityIntervalsAmbiguousMeterError'
+components:
+  parameters:
+    utilityStatementIdQueryParam:
+      in: query
+      name: utility_statement_id
+      required: false
+      description: Retrieve interval data from the service period of a specific utility statement. Cannot be used with start_time or end_time parameters.
+      schema:
+        type: integer
+    paginationLimitParam:
+      in: query
+      name: limit
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 10
+    paginationOrderParam:
+      in: query
+      name: order
+      required: false
+      description: Used to specify the order in which records should be returned. Currently ordered by `updated_at` timestamp.
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+        default: desc
+    intervalDataUtilityMeterIdQueryParam:
+      in: query
+      name: utility_meter_id
+      required: false
+      description: ID of the utility meter to pull interval data from. You must provide this parameter or `utility_account_id`, but not both.
+      schema:
+        type: integer
+    utilityStatementIdInPathParam:
+      name: utility_statement_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    arcVersionInHeaderParam:
+      name: Arcadia-Version
+      in: header
+      example: '2022-10-13'
+      description: The Arcadia-Version for the request
+      required: true
+      schema:
+        type: string
+        default: '2022-10-13'
+    startTimeQueryParam:
+      in: query
+      name: start_time
+      required: false
+      description: Retrieve interval data starting from and including this timestamp. If not provided, this will default to a year before the end timestamp.
+      schema:
+        type: string
+        format: date-time
+        example: '2020-03-18T22:00:00-07:00'
+    intervalDataUtilityAccountIdQueryParam:
+      in: query
+      name: utility_account_id
+      required: false
+      description: ID of the utility account to pull interval data from. You must provide this parameter or `utility_meter_id`, but not both.
+      schema:
+        type: integer
+    utilityAccountIdQueryParam:
+      in: query
+      name: utility_account_id
+      required: false
+      description: A utility account id to filter the list of returned items by.
+      schema:
+        type: integer
+    deprecatedClientUserIdQueryParam:
+      in: query
+      name: client_user_id
+      required: false
+      deprecated: true
+      description: A client_user_id to filter the list of returned items by. This field is deprecated, prefer to use `utility_account_id` instead.
+      schema:
+        type: string
+    paginationUpdatedBeforeParam:
+      in: query
+      name: updated_before
+      required: false
+      description: ISO8601 datetime, used to traverse paginated responses. Use of this parameter is mutually exclusive with `updated_after`.
+      schema:
+        type: string
+        format: date-time
+    endTimeQueryParam:
+      in: query
+      name: end_time
+      required: false
+      description: Retrieve interval data up to and including this timestamp. Defaults to the most recently available interval data's timestamp.
+      schema:
+        type: string
+        format: date-time
+        example: '2021-03-18T22:00:00-07:00'
+    paginationUpdatedAfterParam:
+      in: query
+      name: updated_after
+      required: false
+      description: ISO8601 datetime, used to traverse paginated responses. Use of this parameter is mutually exclusive with `updated_before`.
+      schema:
+        type: string
+        format: date-time
+  schemas:
+    UtilityAccountNotFoundError:
+      required:
+      - error
+      properties:
+        error:
+          type: string
+          enum:
+          - Couldn't find UtilityAccount
+      additionalProperties: false
+    UtilityIntervalsNoDataForMeterError:
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - description
+          - type
+          properties:
+            description:
+              type: string
+              enum:
+              - There are no utility intervals available for this utility meter.
+            type:
+              type: string
+              enum:
+              - NOT_FOUND
+      additionalProperties: false
+    UtilityIntervalItem:
+      required:
+      - start_time
+      - end_time
+      - kwh
+      - is_null_kwh
+      - consumption_kwh
+      - generation_kwh
+      - net_kwh
+      properties:
+        start_time:
+          type: string
+          format: date-time
+          example: '2021-03-18T22:00:00Z'
+        end_time:
+          type: string
+          format: date-time
+          example: '2021-03-18T22:00:00Z'
+        consumption_kwh:
+          description: Consumption kilowatt hours usage for this interval. Availability varies by utility.
+          type: number
+          nullable: true
+        generation_kwh:
+          description: Generation kilowatt hours usage for the interval. Availabiltiy varies by utility.
+          type: number
+          nullable: true
+        net_kwh:
+          description: Net kilowatt hours usage for the interval.
+          type: number
+        kwh:
+          description: Prefer net_kwh instead
+          deprecated: true
+          type: number
+        is_null_kwh:
+          description: Indicates whether kwh was unavailable for this interval. When `true` the kwh field should be interpreted as null.
+          deprecated: true
+          type: boolean
+      additionalProperties: false
+    UtilityIntervalsPerStatementNotFoundError:
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - description
+          - type
+          - details
+          properties:
+            description:
+              type: string
+              enum:
+              - We do not yet have utility intervals covering the entirety of this utility statement's time range. Please see details for which utility meter's data is incomplete.
+            type:
+              type: string
+              enum:
+              - NOT_FOUND
+            details:
+              type: object
+              required:
+              - intervals_earliest_time
+              - intervals_latest_time
+              - utility_meter_id
+              properties:
+                intervals_earliest_time:
+                  type: string
+                  format: date-time
+                  example: '2021-03-19T08:00:00-07:00'
+                intervals_latest_time:
+                  type: string
+                  format: date-time
+                  example: '2022-03-19T08:00:00-07:00'
+                utility_meter_id:
+                  type: number
+                  example: '358901'
+                  description: Which utility meter did not have full coverage for the time range of this utility statement.
+      additionalProperties: false
+    UtilityStatementsFeatureAvailabilityError:
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - description
+          - type
+          - details
+          properties:
+            description:
+              type: string
+              enum:
+              - The utility_statements feature is not available for this UtilityAccount.
+              - The utility_statements feature is not ready yet. Please refer to UtilityAccount#FeatureAvailability for updates.
+            type:
+              type: string
+              enum:
+              - BAD_REQUEST
+            details:
+              type: object
+              nullable: true
+      additionalProperties: false
+    UtilityIntervalsFeatureAvailabilityError:
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - description
+          - type
+          - details
+          properties:
+            description:
+              type: string
+              enum:
+              - The utility_intervals feature is not available for this UtilityAccount.
+              - The utility_intervals feature is not ready yet. Please refer to UtilityAccount#FeatureAvailability for updates.
+              - Parameter(s) start_time and/or end_time cannot be used with utility_statement_id parameter.
+            type:
+              type: string
+              enum:
+              - BAD_REQUEST
+            details:
+              type: object
+              nullable: true
+      additionalProperties: false
+    UtilityIntervalDataResponse:
+      required:
+      - client_user_id
+      - utility_account_id
+      - intervals_earliest_time
+      - intervals_latest_time
+      - utility_meter_id
+      - data
+      properties:
+        client_user_id:
+          type: string
+          example: fff57dc7-3a2b-4395-8a62-e3486d46dabe
+        utility_account_id:
+          type: integer
+        utility_meter_id:
+          example: 1234
+          type: integer
+          nullable: true
+        intervals_earliest_time:
+          description: The earliest available interval data timestamp
+          type: string
+          format: date-time
+        intervals_latest_time:
+          description: The latest available interval data timestamp
+          type: string
+          format: date-time
+        batch_start_time:
+          description: The starting timestamp for the interval data included in this response
+          type: string
+          format: date-time
+        batch_end_time:
+          description: The ending timestamp for the interval data included in this response
+          type: string
+          format: date-time
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UtilityIntervalItem'
+      additionalProperties: false
+    Tariff:
+      description: Information about a tariff.
+      required:
+      - main_tariff_id
+      - tariff_code
+      - tariff_name
+      - utility_name
+      properties:
+        main_tariff_id:
+          type: string
+          description: The Genability 'masterTariffId' unique identifier for this tariff. See [Genability documentation](https://developer.genability.com/api-reference/tariff-api/tariff/) for details.
+          example: gen_mtid_3331108
+        property_inputs:
+          description: Properties applied to this tariff which may affect the calculated cost of electricity.
+          type: array
+          items:
+            type: object
+            required:
+            - id
+            - value
+            properties:
+              id:
+                type: string
+                example: territoryId
+              value:
+                type: boolean
+                example: 3
+        supplier_name:
+          description: The name of the retail electricity supplier or the community choice aggregator. If there is no retail electricity supplier or community choice aggregator, this field is null.
+          example: East Bay Community Energy
+          type: string
+          nullable: true
+        tariff_code:
+          type: string
+          description: Abbreviation code of the tariff used for this calculation.
+          example: EV-2A-TOU
+        tariff_name:
+          type: string
+          description: Full name of the tariff used for this calculation.
+          example: Residential - Time of Use - Plug-In Electric Vehicle 2
+        utility_name:
+          type: string
+          description: Name of the utility associated with this tariff
+          example: Pacific Gas & Electric
+    UtilityIntervalsStatementRangeUnavailableError:
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - description
+          - type
+          properties:
+            description:
+              type: string
+              enum:
+              - Unable to determine service window for the given utility statement.
+            type:
+              type: string
+              enum:
+              - BAD_REQUEST
+      additionalProperties: false
+    PaginatedUtilityStatements:
+      required:
+      - data
+      - total_count
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UtilityStatement'
+        total_count:
+          type: integer
+          example: 1
+      additionalProperties: false
+    UtilityIntervalsBothAccountIdAndMeterIdProvided:
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - description
+          - type
+          properties:
+            description:
+              type: string
+              enum:
+              - You must provide exactly one of the utility_account_id or utility_meter_id parameters.
+            type:
+              type: string
+              enum:
+              - BAD_REQUEST
+      additionalProperties: false
+    UtilityIntervalMetadataResponse:
+      required:
+      - intervals_earliest_time
+      - intervals_latest_time
+      properties:
+        intervals_earliest_time:
+          description: The earliest available interval data timestamp
+          type: string
+          format: date-time
+        intervals_latest_time:
+          description: The latest available interval data timestamp
+          type: string
+          format: date-time
+        utility_meter_id:
+          example: 1234
+          type: integer
+          nullable: true
+      additionalProperties: false
+    UtilityIntervalsInvalidTimeRange:
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - description
+          - type
+          - details
+          properties:
+            description:
+              type: string
+              enum:
+              - Provided start_time and/or end_time are outside this account's available utility intervals time range. Please see details for the available time range.
+            type:
+              type: string
+              enum:
+              - BAD_REQUEST
+            details:
+              anyOf:
+              - type: 'null'
+              - type: object
+                required:
+                - intervals_earliest_time
+                - intervals_latest_time
+                properties:
+                  intervals_earliest_time:
+                    type: string
+                    format: date-time
+                    example: '2021-03-19T08:00:00-07:00'
+                  intervals_latest_time:
+                    type: string
+                    format: date-time
+                    example: '2022-03-19T08:00:00-07:00'
+      additionalProperties: false
+    UtilityIntervalsInvalidMeterServiceTypeError:
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - description
+          - type
+          properties:
+            description:
+              type: string
+              enum:
+              - Arcadia does not currently support interval data for non-electric utility meters.
+            type:
+              type: string
+              enum:
+              - BAD_REQUEST
+      additionalProperties: false
+    UtilityStatement:
+      required:
+      - client_user_id
+      - created_at
+      - due_date
+      - final_bill
+      - gas_charge
+      - id
+      - kwh
+      - past_due
+      - pdf_url
+      - sandboxed
+      - service_end_date
+      - service_start_date
+      - statement_date
+      - supplier_charge
+      - tariff
+      - updated_at
+      - utility_account_id
+      - utility_charge
+      - utility_name
+      - utility_long_name
+      - service_window_inclusive_of_end_date
+      - commercial_line_items_detail
+      - billing_flags
+      - virtual_net_metering
+      - most_recent_payment_detail
+      properties:
+        id:
+          type: integer
+          example: 123
+        client_user_id:
+          type: string
+          example: fff57dc7-3a2b-4395-8a62-e3486d46dabe
+        tariff:
+          anyOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/Tariff'
+        utility_name:
+          type: string
+          example: AEP SWEPCO
+          description: The list of supported Arcadia utilities can be found [here](https://arc.arcadia.com/coverage?first=25&page=1).
+        utility_long_name:
+          type: string
+          example: AEP SWEPCO AR
+          description: Provides greater detail than `utility_name`. The list of supported Arcadia utilities can be found [here](https://arc.arcadia.com/coverage?first=25&page=1).
+        utility_account_id:
+          type: integer
+          example: 2243
+        statement_date:
+          type: string
+          format: date
+          example: '2019-08-24'
+        due_date:
+          type: string
+          format: date
+          example: '2019-09-24'
+          nullable: true
+        service_start_date:
+          type: string
+          format: date
+          example: '2019-08-24'
+        service_end_date:
+          type: string
+          format: date
+          example: '2019-09-24'
+        kwh:
+          type: integer
+          example: 100
+        utility_charge:
+          type: number
+          example: 90.33
+          description: Total dollar amount billed by the utility on this statement.
+        supplier_charge:
+          example: 41.54
+          description: 'Total dollar amount billed by the energy supplier.
+
+
+            **Note**: Not available for all utilities.
+
+            '
+          type: number
+          nullable: true
+        gas_charge:
+          example: 23.32
+          description: 'Total dollar amount billed by the utility for natural gas.
+
+
+            **Note**: Not available for all utilities that provide gas service.
+
+            '
+          type: number
+          nullable: true
+        past_due:
+          type: boolean
+          example: false
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        sandboxed:
+          type: boolean
+          example: false
+        pdf_url:
+          format: uri
+          description: A url to the utility created PDF bill for this statement. Note that this url will only be valid for 600 seconds.
+          type: string
+          nullable: true
+        final_bill:
+          description: Indicates if this is the final bill that this account will receive before closing.
+          example: false
+          type: boolean
+          nullable: true
+        service_window_inclusive_of_end_date:
+          type: boolean
+          example: true
+          description: Indicates that the service window for this UtilityStatement includes the service_end_date.
+        net_metering:
+          anyOf:
+          - type: 'null'
+          - type: object
+            description: Details on the customer's net metering credit data. Currently only supported for Versant.
+            required:
+            - current_cycle_generated_kwh
+            properties:
+              current_cycle_generated_kwh:
+                description: The kwh generated during the current cycle
+                example: 40.57
+                type: number
+                nullable: true
+        virtual_net_metering:
+          anyOf:
+          - type: 'null'
+          - type: object
+            description: Details on the customer's virtual net metering credit data. Currently only supported for National Grid New York and Central Maine Power.
+            required:
+            - current_cycle_generated_credits
+            - current_cycle_applied_credits
+            - last_cycle_carry_over_credits
+            - next_cycle_carry_over_credits
+            - current_cycle_generated_kwh
+            - current_cycle_applied_kwh
+            - last_cycle_carry_over_kwh
+            - next_cycle_carry_over_kwh
+            - current_cycle_expiring_kwh
+            - current_cycle_allocation_percentage
+            - cdg_net_credit
+            properties:
+              current_cycle_generated_credits:
+                description: The amount of credits generated during the current cycle, in dollars
+                example: 100.15
+                type: number
+                nullable: true
+              current_cycle_applied_credits:
+                description: The amount of credits applied during the current cycle, in dollars
+                example: 90.33
+                type: number
+                nullable: true
+              last_cycle_carry_over_credits:
+                description: The amount of credits carried over from the last cycle, in dollars
+                example: 3.83
+                type: number
+                nullable: true
+              next_cycle_carry_over_credits:
+                description: The amount of credits carried over to the next cycle, in dollars
+                example: 5.99
+                type: number
+                nullable: true
+              current_cycle_generated_kwh:
+                description: The kwh generated during the current cycle
+                example: 40
+                type: number
+                nullable: true
+              current_cycle_applied_kwh:
+                description: The kwh applied during the current cycle
+                example: 30
+                type: number
+                nullable: true
+              last_cycle_carry_over_kwh:
+                description: The kwh carried over to the next cycle
+                example: 5
+                type: number
+                nullable: true
+              next_cycle_carry_over_kwh:
+                description: The kwh carried over to the next cycle
+                example: 10
+                type: number
+                nullable: true
+              current_cycle_expiring_kwh:
+                description: the kwh that are expiring during the current cycle
+                example: 5
+                type: number
+                nullable: true
+              current_cycle_allocation_percentage:
+                description: the fixed allocation percentage during the current cycle
+                example: '0.05'
+                type: string
+                nullable: true
+              cdg_net_credit:
+                description: The net credit from the community solar project, in dollars
+                example: 10
+                type: number
+                nullable: true
+        most_recent_payment_detail:
+          anyOf:
+          - type: 'null'
+          - type: object
+            description: Detail on the most recent payment. Currently only supported for National Grid Massachusetts and NYSEG.
+            required:
+            - most_recent_payment_received_amount
+            - most_recent_payment_received_date
+            properties:
+              most_recent_payment_received_amount:
+                example: 50.5
+                description: Total dollar amount received on the most recent payment.
+                type: number
+                nullable: true
+              most_recent_payment_received_date:
+                type: string
+                format: date
+                description: The date of the most recent payment.
+                example: '2023-08-24'
+                nullable: true
+        commercial_line_items_detail:
+          anyOf:
+          - type: 'null'
+          - type: object
+            description: This field is in *beta*. Click [here](release-phases) for a description on Arcadia's release phases. -- Details on line items specific to commercial accounts. Currently only supported for the ConEd utility.
+            required:
+            - supply_energy_kwh
+            - supply_energy_cost
+            - supply_demand_kw
+            - supply_demand_cost
+            - supply_customer_charge
+            - supply_merchant_function_charge
+            - supply_taxes
+            - supply_total_charge
+            - delivery_energy_kwh
+            - delivery_energy_cost
+            - delivery_demand_kw
+            - delivery_demand_cost
+            - delivery_customer_charge
+            - delivery_system_benefit_cost
+            - delivery_processing_charge
+            - delivery_taxes
+            - delivery_total_charge
+            - sales_tax
+            - electric_charge
+            properties:
+              supply_energy_kwh:
+                type: number
+                nullable: true
+              supply_energy_cost:
+                description: The energy supply cost, in dollars.
+                type: number
+                nullable: true
+              supply_demand_kw:
+                type: number
+                nullable: true
+              supply_demand_cost:
+                description: The demand supply cost, in dollars.
+                type: number
+                nullable: true
+              supply_customer_charge:
+                description: The customer charge for energy supply, in dollars.
+                type: number
+                nullable: true
+              supply_merchant_function_charge:
+                description: The charge for merchant function in energy supply, in dollars.
+                type: number
+                nullable: true
+              supply_taxes:
+                description: Any other charges for taxes on energy supply, in dollars.
+                type: number
+                nullable: true
+              supply_total_charge:
+                description: The total cost of energy supply, in dollars.
+                type: number
+                nullable: true
+              delivery_energy_kwh:
+                type: number
+                nullable: true
+              delivery_energy_cost:
+                description: The energy delivery cost, in dollars.
+                type: number
+                nullable: true
+              delivery_demand_kw:
+                type: number
+                nullable: true
+              delivery_demand_cost:
+                description: The demand delivery cost, in dollars.
+                type: number
+                nullable: true
+              delivery_customer_charge:
+                description: The customer charge for energy delivery, in dollars.
+                type: number
+                nullable: true
+              delivery_system_benefit_cost:
+                description: The delivery system benefit cost, in dollars.
+                type: number
+                nullable: true
+              delivery_processing_charge:
+                description: The delivery processing charge, in dollars.
+                type: number
+                nullable: true
+              delivery_taxes:
+                description: Any other charges for taxes on energy delivery, in dollars.
+                type: number
+                nullable: true
+              delivery_total_charge:
+                description: The total cost of energy delivery, in dollars.
+                type: number
+                nullable: true
+              sales_tax:
+                description: Sales taxes applied to the total bill, in dollars.
+                type: number
+                nullable: true
+              electric_charge:
+                description: The total combined charge for this bill - supply, delivery, and taxes - in dollars.
+                type: number
+                nullable: true
+        billing_flags:
+          type: array
+          description: These flags may be of interest if the corresponding Utility Account is enrolled in Bundle.
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                description: The 'possible_rebill' flag indicates that this Utility Statement may be a duplicate or variation of a previous Utility Statement
+                enum:
+                - possible_rebill
+              details:
+                type: object
+                properties:
+                  conflicting_utility_statment_id:
+                    type: integer
+      additionalProperties: false
+    UtilityIntervalsPerStatementDataResponse:
+      required:
+      - client_user_id
+      - utility_account_id
+      - utility_meter_ids
+      - data
+      properties:
+        client_user_id:
+          type: string
+          example: fff57dc7-3a2b-4395-8a62-e3486d46dabe
+        utility_account_id:
+          type: integer
+        utility_meter_ids:
+          type: array
+          items:
+            type: integer
+        batch_start_time:
+          description: The starting timestamp for the interval data included in this response
+          type: string
+          format: date-time
+        batch_end_time:
+          description: The ending timestamp for the interval data included in this response
+          type: string
+          format: date-time
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UtilityIntervalItem'
+      additionalProperties: false
+    UtilityIntervalsAmbiguousMeterError:
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - description
+          - type
+          properties:
+            description:
+              type: string
+              enum:
+              - This utility account is associated with multiple meters. You must filter interval data by utility_meter_id instead of utility_account_id when the utility account is associated with multiple meters.
+            type:
+              type: string
+              enum:
+              - BAD_REQUEST
+      additionalProperties: false
+  headers:
+    ArcVersion:
+      description: The Arcadia-Version for the response
+      schema:
+        type: string
+      example: '2022-10-13'
+      required: true
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+x-readme:
+  proxy-enabled: false
+  headers:
+  - key: from-readme
+    value: true
+x-tagGroups:
+- name: General
+  tags:
+  - Auth
+  - Webhooks
+  - Webhook Events
+- name: Connections
+  tags:
+  - Utility Credentials
+  - Utility Accounts
+  - Utility Meters (Beta)
+  - Users
+- name: Products
+  tags:
+  - Plug
+  - Spark
