@@ -13,7 +13,20 @@ description: >-
   Signal for tariff rate calculation, Switch for plan recommendations, and
   DataHub for warehouse-native SQL access to aggregated energy datasets.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/arcadia.png
 url: https://raw.githubusercontent.com/api-evangelist/arcadia/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -28,80 +41,163 @@ tags:
   - Solar
   - Tariff
 apis:
-  - name: Arcadia Plug API
-    description: >-
-      The Plug API provides programmatic access to utility account data including
-      billing statements, meter listings, and granular interval usage readings.
-      Developers can connect end users to their utility accounts via the Arc
-      Connect component, then retrieve normalized billing and consumption data
-      across thousands of US utility providers.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://docs.arcadia.com/
-    baseURL: https://api.arcadia.com
-    tags:
-      - Utility Data
-      - Billing Statements
-      - Meter Data
-      - Interval Data
-    properties:
-      - type: Documentation
-        url: https://docs.arcadia.com/
-      - type: OpenAPI
-        url: https://api.arcadia.com/openapi.yaml
-      - type: OpenAPI
-        url: openapi/arcadia-plug-openapi.yml
-  - name: Arcadia Signal API
-    description: >-
-      Signal provides a tariff and energy rate calculation engine that allows
-      developers to model the cost of any energy usage scenario against North
-      American utility tariffs. It supports cost-benefit analysis, bill auditing,
-      and energy procurement optimization by exposing the most comprehensive
-      tariff rate database available.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://docs.arcadia.com/
-    baseURL: https://api.arcadia.com
-    tags:
-      - Tariff
-      - Energy Rates
-      - Cost Modeling
-      - Utility Rates
-    properties:
-      - type: Documentation
-        url: https://docs.arcadia.com/
-  - name: Arcadia Switch API
-    description: >-
-      Switch enables rate plan optimization by identifying the best utility rate
-      plan for a customer based on their actual usage patterns. It supports
-      customer-facing energy plan recommendation workflows for utilities, brokers,
-      and energy management platforms.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://docs.arcadia.com/
-    baseURL: https://api.arcadia.com
-    tags:
-      - Rate Plans
-      - Energy Optimization
-      - Utility Switching
-    properties:
-      - type: Documentation
-        url: https://docs.arcadia.com/
-  - name: Arcadia Utility Cloud API
-    description: >-
-      The Utility Cloud API provides enterprise-grade access to Arcadia's full
-      energy data warehouse, enabling clients to extract structured data on
-      business entities at scale. It supports integration with data platforms
-      such as Snowflake and offers SQL-based access through DataHub for
-      warehouse-native energy analytics.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://docs.arcadia.com/v1.0-Utility-Cloud/docs/api-quick-start-guide
-    baseURL: https://api.arcadia.com
-    tags:
-      - Enterprise
-      - Data Warehouse
-      - Utility Cloud
-      - Snowflake
-    properties:
-      - type: Documentation
-        url: https://docs.arcadia.com/v1.0-Utility-Cloud/docs/api-quick-start-guide
+- name: Arcadia Signal API
+  description: >-
+    Signal provides a tariff and energy rate calculation engine that allows developers to model the cost
+    of any energy usage scenario against North American utility tariffs. It supports cost-benefit analysis,
+    bill auditing, and energy procurement optimization by exposing the most comprehensive tariff rate
+    database available.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.arcadia.com/
+  baseURL: https://api.arcadia.com
+  tags:
+  - Tariff
+  - Energy Rates
+  - Cost Modeling
+  - Utility Rates
+  properties:
+  - type: Documentation
+    url: https://docs.arcadia.com/
+- name: Arcadia Switch API
+  description: >-
+    Switch enables rate plan optimization by identifying the best utility rate plan for a customer based
+    on their actual usage patterns. It supports customer-facing energy plan recommendation workflows for
+    utilities, brokers, and energy management platforms.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.arcadia.com/
+  baseURL: https://api.arcadia.com
+  tags:
+  - Rate Plans
+  - Energy Optimization
+  - Utility Switching
+  properties:
+  - type: Documentation
+    url: https://docs.arcadia.com/
+- name: Arcadia Utility Cloud API
+  description: >-
+    The Utility Cloud API provides enterprise-grade access to Arcadia's full energy data warehouse, enabling
+    clients to extract structured data on business entities at scale. It supports integration with data
+    platforms such as Snowflake and offers SQL-based access through DataHub for warehouse-native energy
+    analytics.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.arcadia.com/v1.0-Utility-Cloud/docs/api-quick-start-guide
+  baseURL: https://api.arcadia.com
+  tags:
+  - Enterprise
+  - Data Warehouse
+  - Utility Cloud
+  - Snowflake
+  properties:
+  - type: Documentation
+    url: https://docs.arcadia.com/v1.0-Utility-Cloud/docs/api-quick-start-guide
+- aid: arcadia:arcadia-auth-api
+  name: Arcadia Auth API
+  description: The Auth API from Arcadia — 4 operation(s) for auth.
+  humanURL: https://docs.arcadia.com/
+  baseURL: https://api.arcadia.com
+  tags:
+  - Auth
+  properties:
+  - type: OpenAPI
+    url: openapi/arcadia-auth-api-openapi.yml
+  - type: Documentation
+    url: https://docs.arcadia.com/
+- aid: arcadia:arcadia-bundle-beta-api
+  name: Arcadia Bundle (Beta) API
+  description: The Bundle (Beta) API from Arcadia — 8 operation(s) for bundle (beta).
+  humanURL: https://docs.arcadia.com/
+  baseURL: https://api.arcadia.com
+  tags:
+  - Bundle (Beta)
+  properties:
+  - type: OpenAPI
+    url: openapi/arcadia-bundle-beta-api-openapi.yml
+  - type: Documentation
+    url: https://docs.arcadia.com/
+- aid: arcadia:arcadia-plug-api
+  name: Arcadia Plug API
+  description: The Plug API from Arcadia — 5 operation(s) for plug.
+  humanURL: https://docs.arcadia.com/
+  baseURL: https://api.arcadia.com
+  tags:
+  - Plug
+  properties:
+  - type: OpenAPI
+    url: openapi/arcadia-plug-api-openapi.yml
+  - type: Documentation
+    url: https://docs.arcadia.com/
+- aid: arcadia:arcadia-spark-api
+  name: Arcadia Spark API
+  description: The Spark API from Arcadia — 8 operation(s) for spark.
+  humanURL: https://docs.arcadia.com/
+  baseURL: https://api.arcadia.com
+  tags:
+  - Spark
+  properties:
+  - type: OpenAPI
+    url: openapi/arcadia-spark-api-openapi.yml
+  - type: Documentation
+    url: https://docs.arcadia.com/
+- aid: arcadia:arcadia-users-api
+  name: Arcadia Users API
+  description: The Users API from Arcadia — 2 operation(s) for users.
+  humanURL: https://docs.arcadia.com/
+  baseURL: https://api.arcadia.com
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/arcadia-users-api-openapi.yml
+  - type: Documentation
+    url: https://docs.arcadia.com/
+- aid: arcadia:arcadia-utility-accounts-api
+  name: Arcadia Utility Accounts API
+  description: The Utility Accounts API from Arcadia — 2 operation(s) for utility accounts.
+  humanURL: https://docs.arcadia.com/
+  baseURL: https://api.arcadia.com
+  tags:
+  - Utility Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/arcadia-utility-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.arcadia.com/
+- aid: arcadia:arcadia-utility-credentials-api
+  name: Arcadia Utility Credentials API
+  description: The Utility Credentials API from Arcadia — 3 operation(s) for utility credentials.
+  humanURL: https://docs.arcadia.com/
+  baseURL: https://api.arcadia.com
+  tags:
+  - Utility Credentials
+  properties:
+  - type: OpenAPI
+    url: openapi/arcadia-utility-credentials-api-openapi.yml
+  - type: Documentation
+    url: https://docs.arcadia.com/
+- aid: arcadia:arcadia-utility-meters-beta-api
+  name: Arcadia Utility Meters (Beta) API
+  description: The Utility Meters (Beta) API from Arcadia — 2 operation(s) for utility meters (beta).
+  humanURL: https://docs.arcadia.com/
+  baseURL: https://api.arcadia.com
+  tags:
+  - Utility Meters (Beta)
+  properties:
+  - type: OpenAPI
+    url: openapi/arcadia-utility-meters-beta-api-openapi.yml
+  - type: Documentation
+    url: https://docs.arcadia.com/
+- aid: arcadia:arcadia-webhooks-api
+  name: Arcadia Webhooks API
+  description: The Webhooks API from Arcadia — 8 operation(s) for webhooks.
+  humanURL: https://docs.arcadia.com/
+  baseURL: https://api.arcadia.com
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/arcadia-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.arcadia.com/
 common:
   - type: AgenticAccess
     url: agentic-access/arcadia-agentic-access.yml
