@@ -1,0 +1,30 @@
+{
+  "provider": "arcadia",
+  "sources": [
+    "arcadia-auth-api-openapi.yml",
+    "arcadia-bundle-beta-api-openapi.yml",
+    "arcadia-plug-api-openapi.yml",
+    "arcadia-spark-api-openapi.yml",
+    "arcadia-users-api-openapi.yml",
+    "arcadia-utility-accounts-api-openapi.yml",
+    "arcadia-utility-credentials-api-openapi.yml",
+    "arcadia-utility-meters-beta-api-openapi.yml",
+    "arcadia-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "arcadia-auth-api-openapi.yml",
+    "arcadia-bundle-beta-api-openapi.yml",
+    "arcadia-plug-api-openapi.yml",
+    "arcadia-spark-api-openapi.yml",
+    "arcadia-users-api-openapi.yml",
+    "arcadia-utility-accounts-api-openapi.yml",
+    "arcadia-utility-credentials-api-openapi.yml",
+    "arcadia-utility-meters-beta-api-openapi.yml",
+    "arcadia-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
