@@ -1,0 +1,212 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Arcadia API Reference Auth Spark API",
+    "version": "0.3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Spark",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Calculate Charge Cost",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.arcadia.com/spark/charge_curve/cost",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Provided a charge curve starting at a particular time of day, calculates the electricity cost of that charge curve for a particular `UtilityAccount` or [Genability tariff](https://developer.genability.com/api-reference/tariff-api/tariff/)."
+        },
+        {
+          "info": {
+            "name": "Calculate Smart Charging Schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.arcadia.com/spark/charge_curve/schedule",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Provided details around charging duration and a prospective charging window, returns a charging schedule that minimizes costs for a particular `UtilityAccount`."
+        },
+        {
+          "info": {
+            "name": "Calculate Tariff Rate ($/kWh)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.arcadia.com/spark/tariff_rates",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Calculates marginal rate ($/kWh) for a short-term time period on the electric tariff a given utility account is subscribed to. This endpoint will report appropriate costs for TOU periods (daily peak/off-peak hours, weekend schedules, seasonal changes).\nThis endpoint is not recommended for monthly bill reproduction. Marginal rates generally do not include monthly adjustments or charges such as tiering (costs are generally reported at the base tier), fixed charges, monthly discounts, special event"
+        },
+        {
+          "info": {
+            "name": "Tariff Optimize - Search for Load Serving Entities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.arcadia.com/spark/optimized_tariffs/load_serving_entities",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "params": [
+              {
+                "name": "zip_code",
+                "value": "94105",
+                "type": "query",
+                "description": "United States zip code."
+              }
+            ]
+          },
+          "docs": "Returns a list of Genability load serving entities (LSEs) for a given zip code, for use in tariff searches."
+        },
+        {
+          "info": {
+            "name": "Tariff Optimize - Get Tariff Applicability Questions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.arcadia.com/spark/optimized_tariffs/applicabilities",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "params": [
+              {
+                "name": "utility_account_id",
+                "value": "12345",
+                "type": "query",
+                "description": "The unique ID of the Utility Account for this tariff search. Optional if searching for tariffs by Genability `lse_id`/`zip_code`."
+              },
+              {
+                "name": "zip_code",
+                "value": "94706",
+                "type": "query",
+                "description": "The zip code of the site inside the LSE's territory. Must be provided if searching for tariffs by Genability `lse_id`/`zip_code`."
+              },
+              {
+                "name": "lse_id",
+                "value": "gen_lse_734",
+                "type": "query",
+                "description": "The ID of the Genability [load serving entity](https://developer.genability.com/api-reference/tariff-api/load-serving-entity/) prefixed with `gen_lse_`. Must be provided if searching for tariffs by Genability `lse_id`/`zip_code`."
+              }
+            ]
+          },
+          "docs": "Gets the list of applicability questions for all potential tariffs. Tariffs sometimes have eligibility conditions to sign up for them (\"applicabilities\"). For example, signing up for an EV tariff often requires an electric car registered to the account holder at the account's address. Answers to the returned applicability questions can be passed to the recommendations endpoint to get the most relevant tariffs.\n\nThe set of potential tariffs can be specified either by an Arcadia Utility Account ID"
+        },
+        {
+          "info": {
+            "name": "Tariff Optimize - Search for Recommended Applicable Tariffs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.arcadia.com/spark/optimized_tariffs/recommendations",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns a list of applicable tariffs to use in a Tariff-Scenario Cost Calculation given the answers to the submitted Applicability Questions.\n\nThe set of recommended tariffs can be specified either by an Arcadia Utility Account ID, or by considering all tariffs in a given zip code served by a specific [Genability Load Serving Entity (LSE)](https://developer.genability.com/api-reference/tariff-api/load-serving-entity/).\n\n__Either utility_account_id or both the zip_code/lse_id must be specified.__"
+        },
+        {
+          "info": {
+            "name": "Tariff Optimize - Calculate Tariff-Scenario Cost",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.arcadia.com/spark/optimized_tariffs/scenario_cost",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Calculates the “what-if” cost of a single tariff-scenario, or combination of tariff, load curve and qualifying criteria. A tariff-scenario can simulate additional devices with various operational schedules. For example, we can simulate the cost of adding an EV with basic charging, and we can compare that to another tariff-scenario where the cost on the same tariff is simulated with an EV using smart charging.\n\n__Either utility_account_id or zip_code/main_tariff_id must be specified.__"
+        },
+        {
+          "info": {
+            "name": "Optimize Storage Dispatch Schedules (Beta)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.arcadia.com/spark/storage_optimization/schedules",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Optimize energy flows into and out of a storage system to minimize cost, given a corresponding tariff, consumption profile, solar generation profile, and storage specifications. Supports a variety of installation configurations and dispatch strategies."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

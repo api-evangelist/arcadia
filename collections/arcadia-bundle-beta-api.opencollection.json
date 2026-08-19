@@ -1,0 +1,232 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Arcadia API Reference Auth Bundle (Beta) API",
+    "version": "0.3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Bundle (Beta)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Utility Remittance - Enroll into Utility Remittance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.arcadia.com/bundle/utility_remittance/utility_credentials/:utility_credential_id/enroll",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "params": [
+              {
+                "name": "utility_credential_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enroll all Utility Accounts associated with the provided Utility Credential into Utility Remittance.\nEnrollment is an asynchronous process. Track status changes through the associated [Bundle Enrollment](showutilityremittanceenrollment)."
+        },
+        {
+          "info": {
+            "name": "Utility Remittance - Remove from Utility Remittance",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.arcadia.com/bundle/utility_remittance/utility_credentials/:utility_credential_id/remove",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "params": [
+              {
+                "name": "utility_credential_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove all Utility Accounts associated with the provided Utility Credential from Utility Remittance.\nRemoval is an asynchronous process. Track status changes through the associated [Bundle Enrollment](showutilityremittanceenrollment). Removal will trigger the `utility_remittance_removed` Webhook Event."
+        },
+        {
+          "info": {
+            "name": "Utility Remittance - Create a Utility Remittance Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.arcadia.com/bundle/utility_remittance/utility_statements/:utility_statement_id/utility_remittance_items",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "params": [
+              {
+                "name": "utility_statement_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates and schedules a Utility Remittance Item for a Utility Statement.\nYou can specify a date for remittance using `scheduled_at`. Note that `scheduled_at` must be a date in the future. If the date you specify falls on a weekend or a banking holiday, remittance will be scheduled for the next business day. If `scheduled_at` is omitted, remittance will be scheduled for the next business day.\nWhen creating a Utility Remittance Item, you can specify how much to remit for the corresponding Utility "
+        },
+        {
+          "info": {
+            "name": "Utility Remittance - Get a Utility Remittance Item.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.arcadia.com/bundle/utility_remittance/utility_remittance_items/:utility_remittance_item_id",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "params": [
+              {
+                "name": "utility_remittance_item_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a single Utility Remittance Item specified by ID."
+        },
+        {
+          "info": {
+            "name": "Utility Remittance - Get a Bundle Enrollment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.arcadia.com/bundle/utility_remittance/utility_account/:utility_account_id/enrollment",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "params": [
+              {
+                "name": "utility_account_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the Bundle Enrollment for a Utility Account."
+        },
+        {
+          "info": {
+            "name": "Sandboxed Only, Utility Remittance - Accept pending Utility Remittance enrollment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.arcadia.com/sandbox/bundle/utility_remittance/utility_credentials/:utility_credential_id/accept",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "params": [
+              {
+                "name": "utility_credential_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Only available when using sandboxed API keys.\nUpdates the Bundle Enrollments [created by the enroll into Utility Remittance endpoint](enrollutilityremittance) for each Utility Account associated with this Utility Credential. The status will change from `pending_enrollment` to `enrolled` and trigger the `utility_remittance_enrolled` Webhook Event.\n"
+        },
+        {
+          "info": {
+            "name": "Sandboxed Only, Utility Remittance - Reject pending Utility Remittance enrollment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.arcadia.com/sandbox/bundle/utility_remittance/utility_credentials/:utility_credential_id/reject",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "params": [
+              {
+                "name": "utility_credential_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Only available when using sandboxed API keys.\nUpdates the Bundle Enrollments [created by the enroll into Utility Remittance endpoint](enrollutilityremittance) for each Utility Account associated with this Utility Credential. The status will change from `pending_enrollment` to `ineligible` and trigger the `utility_remittance_not_available` Webhook Event.\n"
+        },
+        {
+          "info": {
+            "name": "Sandboxed Only, Utility Remittance - Remove active or pending removal Utility Remittance enrollment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.arcadia.com/sandbox/bundle/utility_remittance/utility_credentials/:utility_credential_id/remove",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "params": [
+              {
+                "name": "utility_credential_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Only available when using sandboxed API keys.\nUpdates the Bundle Enrollments [created by the enroll into Utility Remittance endpoint](enrollutilityremittance) for each Utility Account associated with this Utility Credential. The status will change from `enrolled` or `pending_removal` to `removed` and trigger the `utility_remittance_removed` Webhook Event.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

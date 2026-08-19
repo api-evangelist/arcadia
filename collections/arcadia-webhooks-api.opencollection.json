@@ -1,0 +1,309 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Arcadia API Reference Auth Webhooks API",
+    "version": "0.3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List webhook endpoints",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.arcadia.com/webhook/endpoints",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "updated_after",
+                "value": "",
+                "type": "query",
+                "description": "ISO8601 datetime, used to traverse paginated responses. Use of this parameter is mutually exclusive with `updated_before`."
+              },
+              {
+                "name": "updated_before",
+                "value": "",
+                "type": "query",
+                "description": "ISO8601 datetime, used to traverse paginated responses. Use of this parameter is mutually exclusive with `updated_after`."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Used to specify the order in which records should be returned. Currently ordered by `updated_at` timestamp."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of webhook endpoints."
+        },
+        {
+          "info": {
+            "name": "Create a webhook endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.arcadia.com/webhook/endpoints",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "After creating a webhook endpoint, we will POST to the webhook URL whenever certain events happen in our system."
+        },
+        {
+          "info": {
+            "name": "Get a webhook endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.arcadia.com/webhook/endpoints/:webhook_endpoint_id",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "params": [
+              {
+                "name": "webhook_endpoint_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a single webhook endpoint specified by ID."
+        },
+        {
+          "info": {
+            "name": "Update a webhook endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.arcadia.com/webhook/endpoints/:webhook_endpoint_id",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "params": [
+              {
+                "name": "webhook_endpoint_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a single webhook endpoint specified by ID."
+        },
+        {
+          "info": {
+            "name": "Delete a webhook endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.arcadia.com/webhook/endpoints/:webhook_endpoint_id",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "params": [
+              {
+                "name": "webhook_endpoint_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a webhook endpoint and all associated webhook events and delivery attempt data. This will stop POST requests to the endpoint.\n\n_**Note**: deletion will take place asynchronously and may not be complete when this request returns._\n"
+        },
+        {
+          "info": {
+            "name": "Triggers a test webhook event",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.arcadia.com/webhook/endpoints/:webhook_endpoint_id/test",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "params": [
+              {
+                "name": "webhook_endpoint_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Request a `test` event be sent to this webhook endpoint. Useful for debugging webhook implementations."
+        },
+        {
+          "info": {
+            "name": "List webhook events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.arcadia.com/webhook/endpoints/:webhook_endpoint_id/events",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "params": [
+              {
+                "name": "webhook_endpoint_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "delivered",
+                "value": "",
+                "type": "query",
+                "description": "Optionally filter webhook events by whether they were delivered successfully or not."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of webhook events for a particular webhook endpoint.\n\n_**Note**: webhook events are currently retained for 30 days._\n"
+        },
+        {
+          "info": {
+            "name": "Get a single webhook event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.arcadia.com/webhook/endpoints/:webhook_endpoint_id/events/:webhook_event_id",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "params": [
+              {
+                "name": "webhook_endpoint_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "webhook_event_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a full representation of a webhook event, including the `data` payload and delivery attempts.\n\n_**Note**: webhook events are currently retained for 30 days._\n"
+        },
+        {
+          "info": {
+            "name": "Trigger a new_utility_statement_available webhook event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.arcadia.com/sandbox/webhook/trigger/new_utility_statement_available",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint will create a new utility statement for the associated utility account and emit a new_utility_statement_available webhook event.\n\nOnly available in sandbox.\n"
+        },
+        {
+          "info": {
+            "name": "Trigger a new_utility_intervals_available webhook event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.arcadia.com/sandbox/webhook/trigger/new_utility_intervals_available",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint will emit a new_utility_intervals_available webhook event.\n\nNote: While the new_utility_statement_available trigger creates a new utility statement record, the new_utility_intervals_available trigger does not generate new interval data records. Instead, the new_utility_intervals_available trigger simply creates an event for existing interval data. New interval data is added-on to test account interval data records daily.\n\nOnly available for sandboxed UtilityAccounts with test scena"
+        },
+        {
+          "info": {
+            "name": "Trigger a utility_credential_revoked webhook event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.arcadia.com/sandbox/webhook/trigger/utility_credential_revoked",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint will revoke a given utility credential (mimicing the severance of a customer's connection with a utility, typically due to a change in password) and emit a utility_credential_revoked webhook event.\n\nOnly available in sandbox.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

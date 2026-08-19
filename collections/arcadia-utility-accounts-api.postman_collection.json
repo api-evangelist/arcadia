@@ -1,0 +1,302 @@
+{
+  "item": [
+    {
+      "id": "a828d129-abea-4393-a88a-69d65d0269c2",
+      "name": "Utility Accounts",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fcd418b5-cac3-47c0-a9ad-07b20809ca97",
+          "name": "List Utility Accounts",
+          "request": {
+            "name": "List Utility Accounts",
+            "description": {
+              "content": "Returns a paginated list of UtilityAccounts for all users, or filtered by `client_user_id`. Default ordered by descending `updated_at`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "utility_accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "client_user_id",
+                  "value": "<string>",
+                  "description": "A client_user_id to filter the list of returned items by."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_after",
+                  "value": "<dateTime>",
+                  "description": "ISO8601 datetime, used to traverse paginated responses. Use of this parameter is mutually exclusive with `updated_before`."
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_before",
+                  "value": "<dateTime>",
+                  "description": "ISO8601 datetime, used to traverse paginated responses. Use of this parameter is mutually exclusive with `updated_after`."
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "desc",
+                  "description": "Used to specify the order in which records should be returned. Currently ordered by `updated_at` timestamp."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The Arcadia-Version for the request",
+                "key": "Arcadia-Version",
+                "value": "2022-10-13"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5be04548-164d-47a8-ac93-11c850c2fe3a",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "utility_accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "client_user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "updated_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 12345,\n      \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3486d46dabe\",\n      \"utility_name\": \"AEP SWEPCO\",\n      \"utility_long_name\": \"AEP SWEPCO AR\",\n      \"utility_credential_id\": 54321,\n      \"account_number\": \"7626177069\",\n      \"service_address_city\": \"Chicago\",\n      \"service_address_state\": \"IL\",\n      \"service_address_street_one\": \"1060 W Addison\",\n      \"service_address_street_two\": \"Apartment 1\",\n      \"service_address_zip\": \"60613\",\n      \"service_customer_name\": \"Joan Arcadia\",\n      \"status\": null,\n      \"supplier_account_id\": \"123456789\",\n      \"most_recent_tariff\": null,\n      \"flags\": [\n        \"utility_statement_past_due\",\n        \"utility_statement_past_due\"\n      ],\n      \"services\": [\n        \"electric\",\n        \"gas\"\n      ],\n      \"created_at\": \"2025-10-23T05:07:22.080Z\",\n      \"updated_at\": \"1957-12-30T04:29:23.307Z\",\n      \"feature_availability\": {\n        \"charge_cost\": \"NOT_AVAILABLE\",\n        \"hosted_payments\": \"NOT_AVAILABLE\",\n        \"utility_remittance\": \"AVAILABLE\",\n        \"smart_charge\": \"NOT_AVAILABLE\",\n        \"utility_intervals\": \"AVAILABLE\",\n        \"utility_statements\": \"NOT_READY\"\n      },\n      \"utility_meters\": [\n        {\n          \"id\": 12345,\n          \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3486d46dabe\",\n          \"utility_credential_id\": 54321,\n          \"utility_account_id\": 65432,\n          \"meter_number\": \"12300000045 67\",\n          \"service_type\": \"gas\",\n          \"created_at\": \"2007-06-04T21:17:28.605Z\",\n          \"updated_at\": \"1970-03-07T15:55:49.306Z\",\n          \"sandboxed\": false\n        },\n        {\n          \"id\": 12345,\n          \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3486d46dabe\",\n          \"utility_credential_id\": 54321,\n          \"utility_account_id\": 65432,\n          \"meter_number\": \"12300000045 67\",\n          \"service_type\": \"water\",\n          \"created_at\": \"2015-08-02T10:36:41.608Z\",\n          \"updated_at\": \"1989-01-02T13:51:06.032Z\",\n          \"sandboxed\": false\n        }\n      ],\n      \"sandboxed\": false\n    },\n    {\n      \"id\": 12345,\n      \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3486d46dabe\",\n      \"utility_name\": \"AEP SWEPCO\",\n      \"utility_long_name\": \"AEP SWEPCO AR\",\n      \"utility_credential_id\": 54321,\n      \"account_number\": \"7626177069\",\n      \"service_address_city\": \"Chicago\",\n      \"service_address_state\": \"IL\",\n      \"service_address_street_one\": \"1060 W Addison\",\n      \"service_address_street_two\": \"Apartment 1\",\n      \"service_address_zip\": \"60613\",\n      \"service_customer_name\": \"Joan Arcadia\",\n      \"status\": null,\n      \"supplier_account_id\": \"123456789\",\n      \"most_recent_tariff\": null,\n      \"flags\": [\n        \"utility_statement_past_due\",\n        \"utility_statement_past_due\"\n      ],\n      \"services\": [\n        \"electric\",\n        \"gas\"\n      ],\n      \"created_at\": \"2010-09-21T18:09:54.094Z\",\n      \"updated_at\": \"1953-01-22T02:50:20.035Z\",\n      \"feature_availability\": {\n        \"charge_cost\": \"AVAILABLE\",\n        \"hosted_payments\": \"NOT_READY\",\n        \"utility_remittance\": \"AVAILABLE\",\n        \"smart_charge\": \"NOT_AVAILABLE\",\n        \"utility_intervals\": \"AVAILABLE\",\n        \"utility_statements\": \"AVAILABLE\"\n      },\n      \"utility_meters\": [\n        {\n          \"id\": 12345,\n          \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3486d46dabe\",\n          \"utility_credential_id\": 54321,\n          \"utility_account_id\": 65432,\n          \"meter_number\": \"12300000045 67\",\n          \"service_type\": \"gas\",\n          \"created_at\": \"2001-06-06T08:27:18.780Z\",\n          \"updated_at\": \"2024-11-07T23:11:51.574Z\",\n          \"sandboxed\": false\n        },\n        {\n          \"id\": 12345,\n          \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3486d46dabe\",\n          \"utility_credential_id\": 54321,\n          \"utility_account_id\": 65432,\n          \"meter_number\": \"12300000045 67\",\n          \"service_type\": \"electric\",\n          \"created_at\": \"1987-08-13T00:58:13.709Z\",\n          \"updated_at\": \"2022-03-18T09:51:39.120Z\",\n          \"sandboxed\": false\n        }\n      ],\n      \"sandboxed\": false\n    }\n  ],\n  \"total_count\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "08bacfaf-f3fa-49af-b2e1-cd1aa5815b5a",
+          "name": "Get Utility Account",
+          "request": {
+            "name": "Get Utility Account",
+            "description": {
+              "content": "Returns a single UtilityAccount specified by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "utility_accounts",
+                ":utility_account_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "utility_account_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The Arcadia-Version for the request",
+                "key": "Arcadia-Version",
+                "value": "2022-10-13"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2d64d87a-0266-4dd2-b0ab-954e6711dd83",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "utility_accounts",
+                    ":utility_account_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "utility_account_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 12345,\n  \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3486d46dabe\",\n  \"utility_name\": \"AEP SWEPCO\",\n  \"utility_long_name\": \"AEP SWEPCO AR\",\n  \"utility_credential_id\": 54321,\n  \"account_number\": \"7626177069\",\n  \"service_address_city\": \"Chicago\",\n  \"service_address_state\": \"IL\",\n  \"service_address_street_one\": \"1060 W Addison\",\n  \"service_address_street_two\": \"Apartment 1\",\n  \"service_address_zip\": \"60613\",\n  \"service_customer_name\": \"Joan Arcadia\",\n  \"status\": null,\n  \"supplier_account_id\": \"123456789\",\n  \"most_recent_tariff\": null,\n  \"flags\": [\n    \"utility_statement_past_due\",\n    \"utility_statement_past_due\"\n  ],\n  \"services\": [\n    \"gas\",\n    \"electric\"\n  ],\n  \"created_at\": \"2021-09-09T21:03:21.063Z\",\n  \"updated_at\": \"1986-05-28T14:38:38.956Z\",\n  \"feature_availability\": {\n    \"charge_cost\": \"NOT_READY\",\n    \"hosted_payments\": \"NOT_AVAILABLE\",\n    \"utility_remittance\": \"NOT_READY\",\n    \"smart_charge\": \"AVAILABLE\",\n    \"utility_intervals\": \"NOT_READY\",\n    \"utility_statements\": \"NOT_READY\"\n  },\n  \"utility_meters\": [\n    {\n      \"id\": 12345,\n      \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3486d46dabe\",\n      \"utility_credential_id\": 54321,\n      \"utility_account_id\": 65432,\n      \"meter_number\": \"12300000045 67\",\n      \"service_type\": \"electric\",\n      \"created_at\": \"1974-09-02T15:09:11.266Z\",\n      \"updated_at\": \"2013-03-09T10:37:48.416Z\",\n      \"sandboxed\": false\n    },\n    {\n      \"id\": 12345,\n      \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3486d46dabe\",\n      \"utility_credential_id\": 54321,\n      \"utility_account_id\": 65432,\n      \"meter_number\": \"12300000045 67\",\n      \"service_type\": \"gas\",\n      \"created_at\": \"1981-10-06T22:15:05.745Z\",\n      \"updated_at\": \"1998-05-25T01:42:16.256Z\",\n      \"sandboxed\": false\n    }\n  ],\n  \"sandboxed\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.arcadia.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "90aab342-edcb-415c-aa3a-3914e8453da9",
+    "name": "Arcadia API Reference Auth Utility Accounts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Email: platformsupport@arcadia.com",
+      "type": "text/plain"
+    }
+  }
+}

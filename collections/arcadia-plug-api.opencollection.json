@@ -1,0 +1,206 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Arcadia API Reference Auth Plug API",
+    "version": "0.3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Plug",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Utility Statements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.arcadia.com/plug/utility_statements",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "params": [
+              {
+                "name": "client_user_id",
+                "value": "",
+                "type": "query",
+                "description": "A client_user_id to filter the list of returned items by. This field is deprecated, prefer to use `utility_account_id` instead."
+              },
+              {
+                "name": "utility_account_id",
+                "value": "",
+                "type": "query",
+                "description": "A utility account id to filter the list of returned items by."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "updated_after",
+                "value": "",
+                "type": "query",
+                "description": "ISO8601 datetime, used to traverse paginated responses. Use of this parameter is mutually exclusive with `updated_before`."
+              },
+              {
+                "name": "updated_before",
+                "value": "",
+                "type": "query",
+                "description": "ISO8601 datetime, used to traverse paginated responses. Use of this parameter is mutually exclusive with `updated_after`."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Used to specify the order in which records should be returned. Currently ordered by `updated_at` timestamp."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of UtilityStatements for all users, or filtered by `utility_account_id`. Default ordered by descending `updated_at`."
+        },
+        {
+          "info": {
+            "name": "Get Utility Statement",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.arcadia.com/plug/utility_statements/:utility_statement_id",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "params": [
+              {
+                "name": "utility_statement_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a single UtilityStatement specified by ID."
+        },
+        {
+          "info": {
+            "name": "List Utility Intervals For A Utility Statement (Beta)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.arcadia.com/plug/utility_statements/:utility_statement_id/intervals",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "params": [
+              {
+                "name": "utility_statement_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "**This endpoint is in _beta_. Click [here](release-phases) for a description on Arcadia's release phases.**\nReturns the Utility Intervals for the time span of the given Utility Statement. If the Utility Statement contains charges for multiple Utility Meters, this endpoint will aggregate each Utility Meter's Utility Intervals together to create one set of Utility Intervals.\nNote that the Utility Intervals feature is limited to a subset of utilities at this time:\n- SDG&E\n- SCE\n- PG&E\n- ComEd\n- Del"
+        },
+        {
+          "info": {
+            "name": "List Utility Intervals (Beta)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.arcadia.com/plug/utility_intervals",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "params": [
+              {
+                "name": "utility_account_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the utility account to pull interval data from. You must provide this parameter or `utility_meter_id`, but not both."
+              },
+              {
+                "name": "utility_meter_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the utility meter to pull interval data from. You must provide this parameter or `utility_account_id`, but not both."
+              },
+              {
+                "name": "start_time",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve interval data starting from and including this timestamp. If not provided, this will default to a year before the end timestamp."
+              },
+              {
+                "name": "end_time",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve interval data up to and including this timestamp. Defaults to the most recently available interval data's timestamp."
+              },
+              {
+                "name": "utility_statement_id",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve interval data from the service period of a specific utility statement. Cannot be used with start_time or end_time parameters."
+              }
+            ]
+          },
+          "docs": "**This endpoint is in _beta_. Click [here](release-phases) for a description on Arcadia's release phases.**\nReturns up to a year of interval data per request for a Utility Account.\nNote that the Utility Intervals feature is limited to a subset of utilities at this time. Check the [utility coverage page](https://arc.arcadia.com/coverage?first=25&page=1&strictFilters[productAvailability][0]=PLUG_INTERVALS_SUPPORTED) to see which utilities are supported.\n\nNote of the availability of interval data:\n"
+        },
+        {
+          "info": {
+            "name": "Fetch Utility Interval Metadata (Beta)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.arcadia.com/plug/utility_intervals/metadata",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "params": [
+              {
+                "name": "utility_account_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the utility account to pull interval data from. You must provide this parameter or `utility_meter_id`, but not both."
+              },
+              {
+                "name": "utility_meter_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the utility meter to pull interval data from. You must provide this parameter or `utility_account_id`, but not both."
+              }
+            ]
+          },
+          "docs": "**This endpoint is in _beta_. Click [here](release-phases) for a description on Arcadia's release phases.**\nReturns metadata on what utility interval data is available.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,114 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Arcadia API Reference Auth Users API",
+    "version": "0.3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.arcadia.com/users",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "updated_after",
+                "value": "",
+                "type": "query",
+                "description": "ISO8601 datetime, used to traverse paginated responses. Use of this parameter is mutually exclusive with `updated_before`."
+              },
+              {
+                "name": "updated_before",
+                "value": "",
+                "type": "query",
+                "description": "ISO8601 datetime, used to traverse paginated responses. Use of this parameter is mutually exclusive with `updated_after`."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Used to specify the order in which records should be returned. Currently ordered by `updated_at` timestamp."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of Users. Default ordered by descending `updated_at`."
+        },
+        {
+          "info": {
+            "name": "Get User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.arcadia.com/users/:client_user_id",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "params": [
+              {
+                "name": "client_user_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a single User associated with a `client_user_id`"
+        },
+        {
+          "info": {
+            "name": "Delete User",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.arcadia.com/users/:client_user_id",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "params": [
+              {
+                "name": "client_user_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete all data associated with a `client_user_id`. Note that the actual delete happens asynchronously, so data for this User may still be available through the API for a few minutes after a delete request is made."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

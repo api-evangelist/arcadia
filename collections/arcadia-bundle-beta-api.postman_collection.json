@@ -1,0 +1,2122 @@
+{
+  "item": [
+    {
+      "id": "f073abce-e094-4148-a866-a0298c5c6e75",
+      "name": "Bundle (Beta)",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6f27da32-890f-436c-83f3-a63135ec44d6",
+          "name": "Utility Remittance - Enroll into Utility Remittance",
+          "request": {
+            "name": "Utility Remittance - Enroll into Utility Remittance",
+            "description": {
+              "content": "Enroll all Utility Accounts associated with the provided Utility Credential into Utility Remittance.\nEnrollment is an asynchronous process. Track status changes through the associated [Bundle Enrollment](showutilityremittanceenrollment).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bundle",
+                "utility_remittance",
+                "utility_credentials",
+                ":utility_credential_id",
+                "enroll"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "utility_credential_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The Arcadia-Version for the request",
+                "key": "Arcadia-Version",
+                "value": "2022-10-13"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"utility_account_ids\": [\n    \"<number>\",\n    \"<number>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0f72a79f-a707-4377-ba0f-6c103d4715fe",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bundle",
+                    "utility_remittance",
+                    "utility_credentials",
+                    ":utility_credential_id",
+                    "enroll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "utility_credential_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"utility_account_ids\": [\n    12345,\n    67890\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3486d46dabe\",\n    \"utility_account_id\": 1234,\n    \"product_key\": \"hosted_payments\",\n    \"status\": null,\n    \"ineligibility_reasons\": [\n      {\n        \"resolvable\": false,\n        \"reason\": \"ebill_ineligible_third_party\"\n      },\n      {\n        \"resolvable\": false,\n        \"reason\": \"past_due\"\n      }\n    ],\n    \"removal_reason\": null,\n    \"start_date\": \"1991-12-26\",\n    \"override_email\": \"apb0123456@a.arcadiapower.com\",\n    \"sandboxed\": false\n  },\n  {\n    \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3486d46dabe\",\n    \"utility_account_id\": 1234,\n    \"product_key\": \"hosted_payments\",\n    \"status\": null,\n    \"ineligibility_reasons\": [\n      {\n        \"resolvable\": false,\n        \"reason\": \"incomplete_utility_account\"\n      },\n      {\n        \"resolvable\": false,\n        \"reason\": \"missing_payment_method\"\n      }\n    ],\n    \"removal_reason\": null,\n    \"start_date\": \"1979-06-20\",\n    \"override_email\": \"apb0123456@a.arcadiapower.com\",\n    \"sandboxed\": false\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d76f36f-994b-4874-8a32-bcc4bb6822b1",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bundle",
+                    "utility_remittance",
+                    "utility_credentials",
+                    ":utility_credential_id",
+                    "enroll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "utility_credential_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"utility_account_ids\": [\n    12345,\n    67890\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"description\": \"The utility_remittance feature is not available for this UtilityAccount.\",\n    \"type\": \"BAD_REQUEST\",\n    \"details\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cf1dc35c-8734-44dd-80fd-f634a829177e",
+          "name": "Utility Remittance - Remove from Utility Remittance",
+          "request": {
+            "name": "Utility Remittance - Remove from Utility Remittance",
+            "description": {
+              "content": "Remove all Utility Accounts associated with the provided Utility Credential from Utility Remittance.\nRemoval is an asynchronous process. Track status changes through the associated [Bundle Enrollment](showutilityremittanceenrollment). Removal will trigger the `utility_remittance_removed` Webhook Event.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bundle",
+                "utility_remittance",
+                "utility_credentials",
+                ":utility_credential_id",
+                "remove"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "utility_credential_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The Arcadia-Version for the request",
+                "key": "Arcadia-Version",
+                "value": "2022-10-13"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aaf25b80-0984-4b49-bbf0-bcf81b25d516",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bundle",
+                    "utility_remittance",
+                    "utility_credentials",
+                    ":utility_credential_id",
+                    "remove"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "utility_credential_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3486d46dabe\",\n    \"utility_account_id\": 1234,\n    \"product_key\": \"hosted_payments\",\n    \"status\": null,\n    \"ineligibility_reasons\": [\n      {\n        \"resolvable\": false,\n        \"reason\": \"solar_non_approved_utility\"\n      },\n      {\n        \"resolvable\": false,\n        \"reason\": \"solar_non_approved_utility\"\n      }\n    ],\n    \"removal_reason\": null,\n    \"start_date\": \"1977-07-11\",\n    \"override_email\": \"apb0123456@a.arcadiapower.com\",\n    \"sandboxed\": false\n  },\n  {\n    \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3486d46dabe\",\n    \"utility_account_id\": 1234,\n    \"product_key\": \"utility_remittance\",\n    \"status\": null,\n    \"ineligibility_reasons\": [\n      {\n        \"resolvable\": false,\n        \"reason\": \"sdg&e_paperless_gas_account\"\n      },\n      {\n        \"resolvable\": false,\n        \"reason\": \"enrolled_in_mutually_exclusive_bundle_feature\"\n      }\n    ],\n    \"removal_reason\": null,\n    \"start_date\": \"1995-11-23\",\n    \"override_email\": \"apb0123456@a.arcadiapower.com\",\n    \"sandboxed\": false\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bceff4fe-0116-442f-902c-e0345999574c",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bundle",
+                    "utility_remittance",
+                    "utility_credentials",
+                    ":utility_credential_id",
+                    "remove"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "utility_credential_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"description\": \"No Utility Accounts to unenroll for this Utility Credential.\",\n    \"type\": \"BAD_REQUEST\",\n    \"details\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a823ee97-38ea-4972-990a-5bf02b8161e8",
+          "name": "Utility Remittance - Create a Utility Remittance Item",
+          "request": {
+            "name": "Utility Remittance - Create a Utility Remittance Item",
+            "description": {
+              "content": "Creates and schedules a Utility Remittance Item for a Utility Statement.\nYou can specify a date for remittance using `scheduled_at`. Note that `scheduled_at` must be a date in the future. If the date you specify falls on a weekend or a banking holiday, remittance will be scheduled for the next business day. If `scheduled_at` is omitted, remittance will be scheduled for the next business day.\nWhen creating a Utility Remittance Item, you can specify how much to remit for the corresponding Utility Statement by specifying `amount_cents`. In most cases, this should correspond to the `utility_charge` on a Utility Statement. If `amount_cents` is omitted, the Utility Remittance Item will be created using the `utility_charge` on the specified Utility Statement.  At this time, `amount_cents` cannot exceed 3000000 cents ($30,000). Note that overpaying or underpaying the amount on a Utility Statement comes with risk. This field should be used with caution.\nPlease note that this endpoint is rate limited to 200 requests per 10 seconds. You will receive a 429 error if you exceed this limit. Please wait and try again. The `RateLimit-Reset` header will indicate when you can make another request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bundle",
+                "utility_remittance",
+                "utility_statements",
+                ":utility_statement_id",
+                "utility_remittance_items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "utility_statement_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The Arcadia-Version for the request",
+                "key": "Arcadia-Version",
+                "value": "2022-10-13"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"scheduled_at\": \"<date>\",\n  \"amount_cents\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ec533ebb-f77e-46a9-bc21-e3e4379c2768",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bundle",
+                    "utility_remittance",
+                    "utility_statements",
+                    ":utility_statement_id",
+                    "utility_remittance_items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "utility_statement_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"scheduled_at\": \"2021-07-28\",\n  \"amount_cents\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 5376.858839627079,\n  \"utility_statement_id\": 1296.300358410244,\n  \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3486d46dabe\",\n  \"amount_cents\": 7152,\n  \"status\": \"void\",\n  \"created_at\": \"1958-04-04T07:20:43.555Z\",\n  \"updated_at\": \"1999-12-17T22:20:04.170Z\",\n  \"scheduled_at\": \"1987-03-02T13:36:30.691Z\",\n  \"remitted_at\": \"2013-08-04T09:10:26.189Z\",\n  \"sandboxed\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "663ab410-8cd8-4edf-97f1-a27575e908cd",
+              "name": "ForbiddenError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bundle",
+                    "utility_remittance",
+                    "utility_statements",
+                    ":utility_statement_id",
+                    "utility_remittance_items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "utility_statement_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"scheduled_at\": \"2021-07-28\",\n  \"amount_cents\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a7298b89-5fe2-45ab-a674-c162e16fb43b",
+              "name": "UtilityStatementNotFoundError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bundle",
+                    "utility_remittance",
+                    "utility_statements",
+                    ":utility_statement_id",
+                    "utility_remittance_items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "utility_statement_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"scheduled_at\": \"2021-07-28\",\n  \"amount_cents\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Couldn't find UtilityStatement\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7bcfa1eb-9c97-4203-98c2-9074170d1372",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bundle",
+                    "utility_remittance",
+                    "utility_statements",
+                    ":utility_statement_id",
+                    "utility_remittance_items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "utility_statement_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"scheduled_at\": \"2021-07-28\",\n  \"amount_cents\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"description\": \"Utility Statement has already been scheduled for remittance\",\n    \"type\": \"BAD_REQUEST\",\n    \"details\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da9c9ee2-b2b8-4491-81d0-29e570700a97",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bundle",
+                    "utility_remittance",
+                    "utility_statements",
+                    ":utility_statement_id",
+                    "utility_remittance_items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "utility_statement_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"scheduled_at\": \"2021-07-28\",\n  \"amount_cents\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "disabled": false,
+                  "description": "(Required) The number of requests that can be made to the API in the RateLimit Period",
+                  "key": "RateLimit-Limit",
+                  "value": "200"
+                },
+                {
+                  "disabled": false,
+                  "description": "(Required) The number of seconds your application has to perform the number of requests specified by RateLimit Limit",
+                  "key": "RateLimit-Period",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "description": "(Required) The time in which you can retry a request. Given in epoch time.",
+                  "key": "RateLimit-Reset",
+                  "value": "1690895650"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Rate limit exceededY Try again at \"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "86cd3c99-9dc0-45b8-b601-4f953f97af15",
+          "name": "Utility Remittance - Get a Utility Remittance Item.",
+          "request": {
+            "name": "Utility Remittance - Get a Utility Remittance Item.",
+            "description": {
+              "content": "Returns a single Utility Remittance Item specified by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bundle",
+                "utility_remittance",
+                "utility_remittance_items",
+                ":utility_remittance_item_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "utility_remittance_item_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The Arcadia-Version for the request",
+                "key": "Arcadia-Version",
+                "value": "2022-10-13"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "04f22104-4408-4022-9d7b-b6f3586427e6",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bundle",
+                    "utility_remittance",
+                    "utility_remittance_items",
+                    ":utility_remittance_item_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "utility_remittance_item_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 5376.858839627079,\n  \"utility_statement_id\": 1296.300358410244,\n  \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3486d46dabe\",\n  \"amount_cents\": 7152,\n  \"status\": \"void\",\n  \"created_at\": \"1958-04-04T07:20:43.555Z\",\n  \"updated_at\": \"1999-12-17T22:20:04.170Z\",\n  \"scheduled_at\": \"1987-03-02T13:36:30.691Z\",\n  \"remitted_at\": \"2013-08-04T09:10:26.189Z\",\n  \"sandboxed\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7cccd43-320e-4799-b048-87c5dfa51a90",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bundle",
+                    "utility_remittance",
+                    "utility_remittance_items",
+                    ":utility_remittance_item_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "utility_remittance_item_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"description\": \"The requested resource is not valid\",\n    \"type\": \"BAD_REQUEST\",\n    \"details\": {\n      \"resource\": \"user\",\n      \"resource_id\": 2459\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "262219ea-d66e-4f2e-8960-b4b68644111a",
+          "name": "Utility Remittance - Get a Bundle Enrollment",
+          "request": {
+            "name": "Utility Remittance - Get a Bundle Enrollment",
+            "description": {
+              "content": "Returns the Bundle Enrollment for a Utility Account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bundle",
+                "utility_remittance",
+                "utility_account",
+                ":utility_account_id",
+                "enrollment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "utility_account_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The Arcadia-Version for the request",
+                "key": "Arcadia-Version",
+                "value": "2022-10-13"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f33116ae-99be-4a91-86c4-498865a2e067",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bundle",
+                    "utility_remittance",
+                    "utility_account",
+                    ":utility_account_id",
+                    "enrollment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "utility_account_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3486d46dabe\",\n  \"utility_account_id\": 1234,\n  \"product_key\": \"hosted_payments\",\n  \"status\": null,\n  \"ineligibility_reasons\": [\n    {\n      \"resolvable\": false,\n      \"reason\": \"ebill_ineligible_third_party\"\n    },\n    {\n      \"resolvable\": false,\n      \"reason\": \"enrolled_in_mutually_exclusive_bundle_feature\"\n    }\n  ],\n  \"removal_reason\": null,\n  \"start_date\": \"1950-05-04\",\n  \"override_email\": \"apb0123456@a.arcadiapower.com\",\n  \"sandboxed\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b215875-5b46-4549-a0cd-80db1179705a",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bundle",
+                    "utility_remittance",
+                    "utility_account",
+                    ":utility_account_id",
+                    "enrollment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "utility_account_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"description\": \"The requested resource is not valid\",\n    \"type\": \"BAD_REQUEST\",\n    \"details\": {\n      \"resource\": \"user\",\n      \"resource_id\": 2459\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a5e65fcf-4b65-4cc8-80f0-ff508b01ebc0",
+          "name": "Sandboxed Only, Utility Remittance - Accept pending Utility Remittance enrollment",
+          "request": {
+            "name": "Sandboxed Only, Utility Remittance - Accept pending Utility Remittance enrollment",
+            "description": {
+              "content": "Only available when using sandboxed API keys.\nUpdates the Bundle Enrollments [created by the enroll into Utility Remittance endpoint](enrollutilityremittance) for each Utility Account associated with this Utility Credential. The status will change from `pending_enrollment` to `enrolled` and trigger the `utility_remittance_enrolled` Webhook Event.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sandbox",
+                "bundle",
+                "utility_remittance",
+                "utility_credentials",
+                ":utility_credential_id",
+                "accept"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "utility_credential_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The Arcadia-Version for the request",
+                "key": "Arcadia-Version",
+                "value": "2022-10-13"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "22c606da-50cf-4a9f-8254-0056fe10f316",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sandbox",
+                    "bundle",
+                    "utility_remittance",
+                    "utility_credentials",
+                    ":utility_credential_id",
+                    "accept"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "utility_credential_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3486d46dabe\",\n    \"utility_account_id\": 1234,\n    \"product_key\": \"hosted_payments\",\n    \"status\": null,\n    \"ineligibility_reasons\": [\n      {\n        \"resolvable\": false,\n        \"reason\": \"solar_non_approved_utility\"\n      },\n      {\n        \"resolvable\": false,\n        \"reason\": \"solar_non_approved_utility\"\n      }\n    ],\n    \"removal_reason\": null,\n    \"start_date\": \"1977-07-11\",\n    \"override_email\": \"apb0123456@a.arcadiapower.com\",\n    \"sandboxed\": false\n  },\n  {\n    \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3486d46dabe\",\n    \"utility_account_id\": 1234,\n    \"product_key\": \"utility_remittance\",\n    \"status\": null,\n    \"ineligibility_reasons\": [\n      {\n        \"resolvable\": false,\n        \"reason\": \"sdg&e_paperless_gas_account\"\n      },\n      {\n        \"resolvable\": false,\n        \"reason\": \"enrolled_in_mutually_exclusive_bundle_feature\"\n      }\n    ],\n    \"removal_reason\": null,\n    \"start_date\": \"1995-11-23\",\n    \"override_email\": \"apb0123456@a.arcadiapower.com\",\n    \"sandboxed\": false\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "704f69ac-8026-4317-a094-60c788091e74",
+              "name": "ForbiddenError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sandbox",
+                    "bundle",
+                    "utility_remittance",
+                    "utility_credentials",
+                    ":utility_credential_id",
+                    "accept"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "utility_credential_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "09bf2102-6c50-43c6-99fc-2384e21db81e",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sandbox",
+                    "bundle",
+                    "utility_remittance",
+                    "utility_credentials",
+                    ":utility_credential_id",
+                    "accept"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "utility_credential_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"description\": \"No Utility Accounts to accept for this Utility Credential.\",\n    \"type\": \"BAD_REQUEST\",\n    \"details\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "113ba0b7-ae6d-4bd3-9928-c0aea609b2c5",
+          "name": "Sandboxed Only, Utility Remittance - Reject pending Utility Remittance enrollment",
+          "request": {
+            "name": "Sandboxed Only, Utility Remittance - Reject pending Utility Remittance enrollment",
+            "description": {
+              "content": "Only available when using sandboxed API keys.\nUpdates the Bundle Enrollments [created by the enroll into Utility Remittance endpoint](enrollutilityremittance) for each Utility Account associated with this Utility Credential. The status will change from `pending_enrollment` to `ineligible` and trigger the `utility_remittance_not_available` Webhook Event.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sandbox",
+                "bundle",
+                "utility_remittance",
+                "utility_credentials",
+                ":utility_credential_id",
+                "reject"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "utility_credential_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The Arcadia-Version for the request",
+                "key": "Arcadia-Version",
+                "value": "2022-10-13"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ineligibility_reasons\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "df8e68ee-e4d9-436e-af16-e060dea79d02",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sandbox",
+                    "bundle",
+                    "utility_remittance",
+                    "utility_credentials",
+                    ":utility_credential_id",
+                    "reject"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "utility_credential_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ineligibility_reasons\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3486d46dabe\",\n    \"utility_account_id\": 1234,\n    \"product_key\": \"utility_remittance\",\n    \"status\": null,\n    \"ineligibility_reasons\": [\n      {\n        \"resolvable\": false,\n        \"reason\": \"<string>\"\n      },\n      {\n        \"resolvable\": false,\n        \"reason\": \"<string>\"\n      }\n    ],\n    \"removal_reason\": null,\n    \"start_date\": \"1969-04-12\",\n    \"override_email\": \"apb0123456@a.arcadiapower.com\",\n    \"sandboxed\": false\n  },\n  {\n    \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3486d46dabe\",\n    \"utility_account_id\": 1234,\n    \"product_key\": \"utility_remittance\",\n    \"status\": null,\n    \"ineligibility_reasons\": [\n      {\n        \"resolvable\": false,\n        \"reason\": \"<string>\"\n      },\n      {\n        \"resolvable\": false,\n        \"reason\": \"<string>\"\n      }\n    ],\n    \"removal_reason\": null,\n    \"start_date\": \"1965-08-27\",\n    \"override_email\": \"apb0123456@a.arcadiapower.com\",\n    \"sandboxed\": false\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "073d57d6-6957-47ef-9138-ee877e5f6d5c",
+              "name": "ForbiddenError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sandbox",
+                    "bundle",
+                    "utility_remittance",
+                    "utility_credentials",
+                    ":utility_credential_id",
+                    "reject"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "utility_credential_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ineligibility_reasons\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4bebefaf-7226-41ec-8a8f-b2e749dda77d",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sandbox",
+                    "bundle",
+                    "utility_remittance",
+                    "utility_credentials",
+                    ":utility_credential_id",
+                    "reject"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "utility_credential_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ineligibility_reasons\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"description\": \"One or more unsupported reasons provided.\",\n    \"type\": \"BAD_REQUEST\",\n    \"details\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "69e36bf6-8c35-41fb-a98a-8e4d25137e56",
+          "name": "Sandboxed Only, Utility Remittance - Remove active or pending removal Utility Remittance enrollment",
+          "request": {
+            "name": "Sandboxed Only, Utility Remittance - Remove active or pending removal Utility Remittance enrollment",
+            "description": {
+              "content": "Only available when using sandboxed API keys.\nUpdates the Bundle Enrollments [created by the enroll into Utility Remittance endpoint](enrollutilityremittance) for each Utility Account associated with this Utility Credential. The status will change from `enrolled` or `pending_removal` to `removed` and trigger the `utility_remittance_removed` Webhook Event.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sandbox",
+                "bundle",
+                "utility_remittance",
+                "utility_credentials",
+                ":utility_credential_id",
+                "remove"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "utility_credential_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The Arcadia-Version for the request",
+                "key": "Arcadia-Version",
+                "value": "2022-10-13"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"removal_reason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bdd85b9f-0f8e-4654-a30d-e9d403dc9386",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sandbox",
+                    "bundle",
+                    "utility_remittance",
+                    "utility_credentials",
+                    ":utility_credential_id",
+                    "remove"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "utility_credential_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"removal_reason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3486d46dabe\",\n    \"utility_account_id\": 1234,\n    \"product_key\": \"utility_remittance\",\n    \"status\": null,\n    \"ineligibility_reasons\": [\n      {\n        \"resolvable\": false,\n        \"reason\": \"<string>\"\n      },\n      {\n        \"resolvable\": false,\n        \"reason\": \"<string>\"\n      }\n    ],\n    \"removal_reason\": null,\n    \"start_date\": \"1969-04-12\",\n    \"override_email\": \"apb0123456@a.arcadiapower.com\",\n    \"sandboxed\": false\n  },\n  {\n    \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3486d46dabe\",\n    \"utility_account_id\": 1234,\n    \"product_key\": \"utility_remittance\",\n    \"status\": null,\n    \"ineligibility_reasons\": [\n      {\n        \"resolvable\": false,\n        \"reason\": \"<string>\"\n      },\n      {\n        \"resolvable\": false,\n        \"reason\": \"<string>\"\n      }\n    ],\n    \"removal_reason\": null,\n    \"start_date\": \"1965-08-27\",\n    \"override_email\": \"apb0123456@a.arcadiapower.com\",\n    \"sandboxed\": false\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac904189-682a-4f2e-84ba-c57dc6a38b6d",
+              "name": "ForbiddenError",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sandbox",
+                    "bundle",
+                    "utility_remittance",
+                    "utility_credentials",
+                    ":utility_credential_id",
+                    "remove"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "utility_credential_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"removal_reason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "15f35e9f-2536-4f2c-8c5f-82d4b32a0aca",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sandbox",
+                    "bundle",
+                    "utility_remittance",
+                    "utility_credentials",
+                    ":utility_credential_id",
+                    "remove"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "utility_credential_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"removal_reason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"description\": \"Unsupported reason parameter provided.\",\n    \"type\": \"BAD_REQUEST\",\n    \"details\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.arcadia.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4c532854-74c1-48ce-8a73-13dc0aeac1cc",
+    "name": "Arcadia API Reference Auth Bundle (Beta) API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Email: platformsupport@arcadia.com",
+      "type": "text/plain"
+    }
+  }
+}

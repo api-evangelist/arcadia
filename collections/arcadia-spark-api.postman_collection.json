@@ -1,0 +1,1587 @@
+{
+  "item": [
+    {
+      "id": "8ac1d8e6-5a5a-43c5-94ab-4b490f3c10fb",
+      "name": "Spark",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d592ab72-ceca-4cad-b222-02b7815199d3",
+          "name": "Calculate Charge Cost",
+          "request": {
+            "name": "Calculate Charge Cost",
+            "description": {
+              "content": "Provided a charge curve starting at a particular time of day, calculates the electricity cost of that charge curve for a particular `UtilityAccount` or [Genability tariff](https://developer.genability.com/api-reference/tariff-api/tariff/).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "spark",
+                "charge_curve",
+                "cost"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The Arcadia-Version for the request",
+                "key": "Arcadia-Version",
+                "value": "2022-10-13"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"start_time\": \"<dateTime>\",\n  \"energy_usage_kwh\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"utility_account_id\": \"<integer>\",\n  \"main_tariff_id\": \"<string>\",\n  \"charge_block_resolution\": \"1h\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4d85ca58-cf59-490d-9d5d-e08f57400619",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "spark",
+                    "charge_curve",
+                    "cost"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"start_time\": \"2021-03-18T22:00:00-07:00\",\n  \"energy_usage_kwh\": [\n    0,\n    0,\n    7.2,\n    0,\n    7.2,\n    2.9\n  ],\n  \"utility_account_id\": \"<integer>\",\n  \"main_tariff_id\": \"gen_mtid_3331108\",\n  \"charge_block_resolution\": \"1h\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tariff\": {\n    \"main_tariff_id\": \"gen_mtid_3331108\",\n    \"tariff_as_of_date\": \"2021-03-01\",\n    \"tariff_code\": \"EV-2A-TOU\",\n    \"tariff_name\": \"Residential - Time of Use - Plug-In Electric Vehicle 2\",\n    \"utility_name\": \"Pacific Gas & Electric\",\n    \"property_inputs\": [\n      {\n        \"id\": \"territoryId\",\n        \"value\": true\n      },\n      {\n        \"id\": \"territoryId\",\n        \"value\": true\n      }\n    ],\n    \"supplier_name\": \"East Bay Community Energy\"\n  },\n  \"normalized_start_time\": \"2021-03-18T22:00:00-07:00\",\n  \"normalized_consumption_kwh\": [\n    0,\n    0,\n    7.2,\n    0,\n    7.2,\n    2.9\n  ],\n  \"cost_cents\": 525,\n  \"utility_account_id\": 12345\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f070c67f-f3f5-4dbe-a0af-3fc0d48b03a9",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "spark",
+                    "charge_curve",
+                    "cost"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"start_time\": \"2021-03-18T22:00:00-07:00\",\n  \"energy_usage_kwh\": [\n    0,\n    0,\n    7.2,\n    0,\n    7.2,\n    2.9\n  ],\n  \"utility_account_id\": \"<integer>\",\n  \"main_tariff_id\": \"gen_mtid_3331108\",\n  \"charge_block_resolution\": \"1h\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"description\": \"Tariff information is not yet available for this utility account\",\n    \"type\": \"BAD_REQUEST\",\n    \"details\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fc0f69cf-e070-4c9f-9d2d-6657c744d822",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "spark",
+                    "charge_curve",
+                    "cost"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"start_time\": \"2021-03-18T22:00:00-07:00\",\n  \"energy_usage_kwh\": [\n    0,\n    0,\n    7.2,\n    0,\n    7.2,\n    2.9\n  ],\n  \"utility_account_id\": \"<integer>\",\n  \"main_tariff_id\": \"gen_mtid_3331108\",\n  \"charge_block_resolution\": \"1h\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Couldn't find UtilityAccount\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d43edca9-4015-47cc-90ae-8201934e082d",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "spark",
+                    "charge_curve",
+                    "cost"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"start_time\": \"2021-03-18T22:00:00-07:00\",\n  \"energy_usage_kwh\": [\n    0,\n    0,\n    7.2,\n    0,\n    7.2,\n    2.9\n  ],\n  \"utility_account_id\": \"<integer>\",\n  \"main_tariff_id\": \"gen_mtid_3331108\",\n  \"charge_block_resolution\": \"1h\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"description\": \"The charge_cost feature is not ready yet. Please refer to UtilityAccount#FeatureAvailability for updates.\",\n    \"type\": \"BAD_REQUEST\",\n    \"details\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8bca41e6-da02-426d-a3f7-5d359d8b5da6",
+          "name": "Calculate Smart Charging Schedule",
+          "request": {
+            "name": "Calculate Smart Charging Schedule",
+            "description": {
+              "content": "Provided details around charging duration and a prospective charging window, returns a charging schedule that minimizes costs for a particular `UtilityAccount`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "spark",
+                "charge_curve",
+                "schedule"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The Arcadia-Version for the request",
+                "key": "Arcadia-Version",
+                "value": "2022-10-13"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"start_time\": \"<dateTime>\",\n  \"end_time\": \"<dateTime>\",\n  \"minutes_to_charge_complete\": \"<integer>\",\n  \"utility_account_id\": \"<integer>\",\n  \"main_tariff_id\": \"<string>\",\n  \"charge_block_resolution\": \"1h\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bcf24de8-216b-4257-85a2-7f6702ad8c8a",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "spark",
+                    "charge_curve",
+                    "schedule"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"start_time\": \"2021-03-18T22:00:00-07:00\",\n  \"end_time\": \"2021-03-19T08:00:00-07:00\",\n  \"minutes_to_charge_complete\": 330,\n  \"utility_account_id\": \"<integer>\",\n  \"main_tariff_id\": \"gen_mtid_3331108\",\n  \"charge_block_resolution\": \"1h\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"start_time\": \"2021-03-18T22:00:00-07:00\",\n  \"charge_block_active\": {\n    \"frequency\": \"1h\",\n    \"data\": [\n      {\n        \"timestamp\": \"1951-09-04T10:28:02.256Z\",\n        \"value\": 7591.217862503366\n      },\n      {\n        \"timestamp\": \"1993-09-24T09:43:14.605Z\",\n        \"value\": 2120.6182651265794\n      }\n    ]\n  },\n  \"charge_block_resolution\": \"1h\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "95ad3903-7b12-4d84-9fa1-10dc0ea2f37f",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "spark",
+                    "charge_curve",
+                    "schedule"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"start_time\": \"2021-03-18T22:00:00-07:00\",\n  \"end_time\": \"2021-03-19T08:00:00-07:00\",\n  \"minutes_to_charge_complete\": 330,\n  \"utility_account_id\": \"<integer>\",\n  \"main_tariff_id\": \"gen_mtid_3331108\",\n  \"charge_block_resolution\": \"1h\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"description\": \"Tariff information is not yet available for this utility account\",\n    \"type\": \"BAD_REQUEST\",\n    \"details\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dc7025e6-6878-44cb-9ee4-8a9e4cd94a6e",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "spark",
+                    "charge_curve",
+                    "schedule"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"start_time\": \"2021-03-18T22:00:00-07:00\",\n  \"end_time\": \"2021-03-19T08:00:00-07:00\",\n  \"minutes_to_charge_complete\": 330,\n  \"utility_account_id\": \"<integer>\",\n  \"main_tariff_id\": \"gen_mtid_3331108\",\n  \"charge_block_resolution\": \"1h\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Couldn't find UtilityAccount\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f0e13b75-c243-4db9-8d90-5da8fa598aab",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "spark",
+                    "charge_curve",
+                    "schedule"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"start_time\": \"2021-03-18T22:00:00-07:00\",\n  \"end_time\": \"2021-03-19T08:00:00-07:00\",\n  \"minutes_to_charge_complete\": 330,\n  \"utility_account_id\": \"<integer>\",\n  \"main_tariff_id\": \"gen_mtid_3331108\",\n  \"charge_block_resolution\": \"1h\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"description\": \"The smart_charge feature is not available for this UtilityAccount.\",\n    \"type\": \"BAD_REQUEST\",\n    \"details\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ca4839fb-840e-48b6-a572-120566d64614",
+          "name": "Calculate Tariff Rate ($/kWh)",
+          "request": {
+            "name": "Calculate Tariff Rate ($/kWh)",
+            "description": {
+              "content": "Calculates marginal rate ($/kWh) for a short-term time period on the electric tariff a given utility account is subscribed to. This endpoint will report appropriate costs for TOU periods (daily peak/off-peak hours, weekend schedules, seasonal changes).\nThis endpoint is not recommended for monthly bill reproduction. Marginal rates generally do not include monthly adjustments or charges such as tiering (costs are generally reported at the base tier), fixed charges, monthly discounts, special event days, etc.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "spark",
+                "tariff_rates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The Arcadia-Version for the request",
+                "key": "Arcadia-Version",
+                "value": "2022-10-13"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"start_time\": \"<dateTime>\",\n  \"utility_account_id\": \"<integer>\",\n  \"main_tariff_id\": \"<string>\",\n  \"end_time\": \"<dateTime>\",\n  \"time_block_resolution\": \"1h\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c6e7a251-ec50-4a3b-8234-28a3d238a103",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "spark",
+                    "tariff_rates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"start_time\": \"2021-03-18T22:00:00-07:00\",\n  \"utility_account_id\": \"<integer>\",\n  \"main_tariff_id\": \"gen_mtid_3331108\",\n  \"end_time\": \"2021-03-19T08:00:00-07:00\",\n  \"time_block_resolution\": \"1h\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tariff\": {\n    \"main_tariff_id\": \"gen_mtid_3331108\",\n    \"tariff_code\": \"EV-2A-TOU\",\n    \"tariff_name\": \"Residential - Time of Use - Plug-In Electric Vehicle 2\",\n    \"utility_name\": \"Pacific Gas & Electric\",\n    \"property_inputs\": [\n      {\n        \"id\": \"territoryId\",\n        \"value\": true\n      },\n      {\n        \"id\": \"territoryId\",\n        \"value\": false\n      }\n    ],\n    \"supplier_name\": \"East Bay Community Energy\"\n  },\n  \"rates_cost_per_kwh\": {\n    \"data\": [\n      {\n        \"timestamp\": \"1956-04-07T16:02:44.917Z\",\n        \"value\": 2606.5433063361897\n      },\n      {\n        \"timestamp\": \"1962-12-13T22:02:41.652Z\",\n        \"value\": 1822.9519708115572\n      }\n    ],\n    \"freq\": \"15m\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aa72ddd4-f988-4085-9798-41cdde3e2449",
+          "name": "Tariff Optimize - Search for Load Serving Entities",
+          "request": {
+            "name": "Tariff Optimize - Search for Load Serving Entities",
+            "description": {
+              "content": "Returns a list of Genability load serving entities (LSEs) for a given zip code, for use in tariff searches.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "spark",
+                "optimized_tariffs",
+                "load_serving_entities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "zip_code",
+                  "value": "<string>",
+                  "description": "(Required) United States zip code."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The Arcadia-Version for the request",
+                "key": "Arcadia-Version",
+                "value": "2022-10-13"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "42aa4428-15ff-445a-a81d-2abc22050686",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "spark",
+                    "optimized_tariffs",
+                    "load_serving_entities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "zip_code",
+                      "value": "94105"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"lse_id\": \"gen_lse_734\",\n      \"name\": \"Pacific Gas & Electric\",\n      \"code\": \"14328\",\n      \"num_customers\": 5069189\n    },\n    {\n      \"lse_id\": \"gen_lse_1074\",\n      \"name\": \"San Francisco City & County of\",\n      \"code\": \"16612\",\n      \"num_customers\": 2173\n    }\n  ],\n  \"total_count\": 2\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2875c9dc-bd63-4c83-b0c3-12055ec29ed5",
+          "name": "Tariff Optimize - Get Tariff Applicability Questions",
+          "request": {
+            "name": "Tariff Optimize - Get Tariff Applicability Questions",
+            "description": {
+              "content": "Gets the list of applicability questions for all potential tariffs. Tariffs sometimes have eligibility conditions to sign up for them (\"applicabilities\"). For example, signing up for an EV tariff often requires an electric car registered to the account holder at the account's address. Answers to the returned applicability questions can be passed to the recommendations endpoint to get the most relevant tariffs.\n\nThe set of potential tariffs can be specified either by an Arcadia Utility Account ID, or by considering all tariffs in a given zip code served by a specific [Genability Load Serving Entity (LSE)](https://developer.genability.com/api-reference/tariff-api/load-serving-entity/).\n\n__Either utility_account_id or both the zip_code/lse_id must be specified.__\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "spark",
+                "optimized_tariffs",
+                "applicabilities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "utility_account_id",
+                  "value": "<integer>",
+                  "description": "The unique ID of the Utility Account for this tariff search. Optional if searching for tariffs by Genability `lse_id`/`zip_code`."
+                },
+                {
+                  "disabled": false,
+                  "key": "zip_code",
+                  "value": "<string>",
+                  "description": "The zip code of the site inside the LSE's territory. Must be provided if searching for tariffs by Genability `lse_id`/`zip_code`."
+                },
+                {
+                  "disabled": false,
+                  "key": "lse_id",
+                  "value": "<string>",
+                  "description": "The ID of the Genability [load serving entity](https://developer.genability.com/api-reference/tariff-api/load-serving-entity/) prefixed with `gen_lse_`. Must be provided if searching for tariffs by Genability `lse_id`/`zip_code`."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The Arcadia-Version for the request",
+                "key": "Arcadia-Version",
+                "value": "2022-10-13"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7ef882fd-2e3a-43c9-8a17-0a5544b0aa93",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "spark",
+                    "optimized_tariffs",
+                    "applicabilities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utility_account_id",
+                      "value": "12345"
+                    },
+                    {
+                      "key": "zip_code",
+                      "value": "94706"
+                    },
+                    {
+                      "key": "lse_id",
+                      "value": "gen_lse_734"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"country\": \"US\",\n  \"lse_id\": \"gen_lse_734\",\n  \"zip_code\": \"94706\",\n  \"applicability_questions\": [\n    {\n      \"id\": \"LOW_INCOME\",\n      \"user_question\": \"Do you qualify for your utility's low income assistance program?\",\n      \"answer_data_type\": \"YES_NO\",\n      \"user_question_details\": \"Contact your utility for specific qualifications, but common criteria include Supplemental Security Income, Temporary Assistance to Needy Persons/Families, Safety Net Assistance, Food Stamps, or receiving a Home Energy Assistance Program grant in the preceding 12 months.\"\n    },\n    {\n      \"id\": \"LOW_INCOME\",\n      \"user_question\": \"Do you qualify for your utility's low income assistance program?\",\n      \"answer_data_type\": \"YES_NO\",\n      \"user_question_details\": \"Contact your utility for specific qualifications, but common criteria include Supplemental Security Income, Temporary Assistance to Needy Persons/Families, Safety Net Assistance, Food Stamps, or receiving a Home Energy Assistance Program grant in the preceding 12 months.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60dbe6d1-5c1a-4dfa-ac8a-d033233f08fd",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "spark",
+                    "optimized_tariffs",
+                    "applicabilities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utility_account_id",
+                      "value": "12345"
+                    },
+                    {
+                      "key": "zip_code",
+                      "value": "94706"
+                    },
+                    {
+                      "key": "lse_id",
+                      "value": "gen_lse_734"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"description\": \"Either utility_account_id or zip_code/lse_id must be specified\",\n    \"type\": \"BAD_REQUEST\",\n    \"details\": null\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "61bfb1df-0793-461f-808b-a47e2db84687",
+          "name": "Tariff Optimize - Search for Recommended Applicable Tariffs",
+          "request": {
+            "name": "Tariff Optimize - Search for Recommended Applicable Tariffs",
+            "description": {
+              "content": "Returns a list of applicable tariffs to use in a Tariff-Scenario Cost Calculation given the answers to the submitted Applicability Questions.\n\nThe set of recommended tariffs can be specified either by an Arcadia Utility Account ID, or by considering all tariffs in a given zip code served by a specific [Genability Load Serving Entity (LSE)](https://developer.genability.com/api-reference/tariff-api/load-serving-entity/).\n\n__Either utility_account_id or both the zip_code/lse_id must be specified.__",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "spark",
+                "optimized_tariffs",
+                "recommendations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The Arcadia-Version for the request",
+                "key": "Arcadia-Version",
+                "value": "2022-10-13"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"utility_account_id\": \"<integer>\",\n  \"zip_code\": \"<string>\",\n  \"lse_id\": \"<string>\",\n  \"applicability_answers\": [\n    {\n      \"question_id\": \"<string>\",\n      \"value\": \"<boolean>\",\n      \"data_type\": \"<string>\"\n    },\n    {\n      \"question_id\": \"<string>\",\n      \"value\": \"<boolean>\",\n      \"data_type\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d7f0af3a-7ced-4064-81ac-51a62278238f",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "spark",
+                    "optimized_tariffs",
+                    "recommendations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"utility_account_id\": 12345,\n  \"zip_code\": \"94706\",\n  \"lse_id\": \"gen_lse_734\",\n  \"applicability_answers\": [\n    {\n      \"question_id\": \"EV\",\n      \"value\": true,\n      \"data_type\": \"YES_NO\"\n    },\n    {\n      \"question_id\": \"SOLAR\",\n      \"value\": true,\n      \"data_type\": \"YES_NO\"\n    },\n    {\n      \"question_id\": \"ELECTRIC_HEAT\",\n      \"value\": false,\n      \"data_type\": \"YES_NO\"\n    },\n    {\n      \"question_id\": \"ELECTRIC_WATER\",\n      \"value\": false,\n      \"data_type\": \"YES_NO\"\n    },\n    {\n      \"question_id\": \"HEAT_PUMP\",\n      \"value\": false,\n      \"data_type\": \"YES_NO\"\n    },\n    {\n      \"question_id\": \"SENIOR_CITIZEN\",\n      \"value\": false,\n      \"data_type\": \"YES_NO\"\n    },\n    {\n      \"question_id\": \"LOW_INCOME\",\n      \"value\": false,\n      \"data_type\": \"YES_NO\"\n    },\n    {\n      \"question_id\": \"CA_CARE_CUSTOMER\",\n      \"value\": false,\n      \"data_type\": \"YES_NO\"\n    },\n    {\n      \"question_id\": \"CA_FERA\",\n      \"value\": false,\n      \"data_type\": \"YES_NO\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"country\": \"US\",\n  \"lse_id\": \"gen_lse_734\",\n  \"zip_code\": \"94706\",\n  \"recommendations\": [\n    {\n      \"main_tariff_id\": \"gen_mtid_3331108\",\n      \"tariff_code\": \"EV-2A-TOU\",\n      \"tariff_name\": \"Residential - Time of Use - Plug-In Electric Vehicle 2\",\n      \"utility_name\": \"Pacific Gas & Electric\",\n      \"property_inputs\": [\n        {\n          \"id\": \"territoryId\",\n          \"value\": true\n        },\n        {\n          \"id\": \"territoryId\",\n          \"value\": false\n        }\n      ],\n      \"supplier_name\": \"East Bay Community Energy\"\n    },\n    {\n      \"main_tariff_id\": \"gen_mtid_3331108\",\n      \"tariff_code\": \"EV-2A-TOU\",\n      \"tariff_name\": \"Residential - Time of Use - Plug-In Electric Vehicle 2\",\n      \"utility_name\": \"Pacific Gas & Electric\",\n      \"property_inputs\": [\n        {\n          \"id\": \"territoryId\",\n          \"value\": true\n        },\n        {\n          \"id\": \"territoryId\",\n          \"value\": false\n        }\n      ],\n      \"supplier_name\": \"East Bay Community Energy\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e20be8a2-a88e-4a92-98ff-807fc2519449",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "spark",
+                    "optimized_tariffs",
+                    "recommendations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"utility_account_id\": 12345,\n  \"zip_code\": \"94706\",\n  \"lse_id\": \"gen_lse_734\",\n  \"applicability_answers\": [\n    {\n      \"question_id\": \"EV\",\n      \"value\": true,\n      \"data_type\": \"YES_NO\"\n    },\n    {\n      \"question_id\": \"SOLAR\",\n      \"value\": true,\n      \"data_type\": \"YES_NO\"\n    },\n    {\n      \"question_id\": \"ELECTRIC_HEAT\",\n      \"value\": false,\n      \"data_type\": \"YES_NO\"\n    },\n    {\n      \"question_id\": \"ELECTRIC_WATER\",\n      \"value\": false,\n      \"data_type\": \"YES_NO\"\n    },\n    {\n      \"question_id\": \"HEAT_PUMP\",\n      \"value\": false,\n      \"data_type\": \"YES_NO\"\n    },\n    {\n      \"question_id\": \"SENIOR_CITIZEN\",\n      \"value\": false,\n      \"data_type\": \"YES_NO\"\n    },\n    {\n      \"question_id\": \"LOW_INCOME\",\n      \"value\": false,\n      \"data_type\": \"YES_NO\"\n    },\n    {\n      \"question_id\": \"CA_CARE_CUSTOMER\",\n      \"value\": false,\n      \"data_type\": \"YES_NO\"\n    },\n    {\n      \"question_id\": \"CA_FERA\",\n      \"value\": false,\n      \"data_type\": \"YES_NO\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"description\": \"Either utility_account_id or zip_code/lse_id must be specified\",\n    \"type\": \"BAD_REQUEST\",\n    \"details\": null\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eeeb09bd-41f7-48b9-b78e-76a2425d85bc",
+          "name": "Tariff Optimize - Calculate Tariff-Scenario Cost",
+          "request": {
+            "name": "Tariff Optimize - Calculate Tariff-Scenario Cost",
+            "description": {
+              "content": "Calculates the “what-if” cost of a single tariff-scenario, or combination of tariff, load curve and qualifying criteria. A tariff-scenario can simulate additional devices with various operational schedules. For example, we can simulate the cost of adding an EV with basic charging, and we can compare that to another tariff-scenario where the cost on the same tariff is simulated with an EV using smart charging.\n\n__Either utility_account_id or zip_code/main_tariff_id must be specified.__",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "spark",
+                "optimized_tariffs",
+                "scenario_cost"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The Arcadia-Version for the request",
+                "key": "Arcadia-Version",
+                "value": "2022-10-13"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"baseline_load\": \"TYPICALS\",\n  \"device_loads\": [\n    {\n      \"device\": \"<string>\",\n      \"solar_system_kw\": \"<number>\"\n    },\n    {\n      \"device\": \"<string>\",\n      \"solar_system_kw\": \"<number>\"\n    }\n  ],\n  \"utility_account_id\": \"<integer>\",\n  \"main_tariff_id\": \"<string>\",\n  \"zip_code\": \"<string>\",\n  \"applicability_answers\": [\n    {\n      \"question_id\": \"<string>\",\n      \"value\": \"<boolean>\",\n      \"data_type\": \"<string>\"\n    },\n    {\n      \"question_id\": \"<string>\",\n      \"value\": \"<boolean>\",\n      \"data_type\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "51ba2c56-3d0b-4551-ac87-3fb8e506ce6a",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "spark",
+                    "optimized_tariffs",
+                    "scenario_cost"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"baseline_load\": \"TYPICALS\",\n  \"device_loads\": [\n    {\n      \"device\": \"SOLAR\",\n      \"solar_system_kw\": 5\n    },\n    {\n      \"device\": \"SOLAR\",\n      \"solar_system_kw\": 5\n    }\n  ],\n  \"utility_account_id\": \"<integer>\",\n  \"main_tariff_id\": \"gen_mtid_3331108\",\n  \"zip_code\": \"94105\",\n  \"applicability_answers\": [\n    {\n      \"question_id\": \"EV\",\n      \"value\": true,\n      \"data_type\": \"YES_NO\"\n    },\n    {\n      \"question_id\": \"SOLAR\",\n      \"value\": true,\n      \"data_type\": \"YES_NO\"\n    },\n    {\n      \"question_id\": \"ELECTRIC_HEAT\",\n      \"value\": false,\n      \"data_type\": \"YES_NO\"\n    },\n    {\n      \"question_id\": \"ELECTRIC_WATER\",\n      \"value\": false,\n      \"data_type\": \"YES_NO\"\n    },\n    {\n      \"question_id\": \"HEAT_PUMP\",\n      \"value\": false,\n      \"data_type\": \"YES_NO\"\n    },\n    {\n      \"question_id\": \"SENIOR_CITIZEN\",\n      \"value\": false,\n      \"data_type\": \"YES_NO\"\n    },\n    {\n      \"question_id\": \"LOW_INCOME\",\n      \"value\": false,\n      \"data_type\": \"YES_NO\"\n    },\n    {\n      \"question_id\": \"CA_CARE_CUSTOMER\",\n      \"value\": false,\n      \"data_type\": \"YES_NO\"\n    },\n    {\n      \"question_id\": \"CA_FERA\",\n      \"value\": false,\n      \"data_type\": \"YES_NO\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cost\": 150,\n  \"start_date\": \"2021-02-03\",\n  \"end_date\": \"2022-02-03\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "27dcc0bd-fa0c-4929-bcbc-4e90dbf15f69",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "spark",
+                    "optimized_tariffs",
+                    "scenario_cost"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"baseline_load\": \"TYPICALS\",\n  \"device_loads\": [\n    {\n      \"device\": \"SOLAR\",\n      \"solar_system_kw\": 5\n    },\n    {\n      \"device\": \"SOLAR\",\n      \"solar_system_kw\": 5\n    }\n  ],\n  \"utility_account_id\": \"<integer>\",\n  \"main_tariff_id\": \"gen_mtid_3331108\",\n  \"zip_code\": \"94105\",\n  \"applicability_answers\": [\n    {\n      \"question_id\": \"EV\",\n      \"value\": true,\n      \"data_type\": \"YES_NO\"\n    },\n    {\n      \"question_id\": \"SOLAR\",\n      \"value\": true,\n      \"data_type\": \"YES_NO\"\n    },\n    {\n      \"question_id\": \"ELECTRIC_HEAT\",\n      \"value\": false,\n      \"data_type\": \"YES_NO\"\n    },\n    {\n      \"question_id\": \"ELECTRIC_WATER\",\n      \"value\": false,\n      \"data_type\": \"YES_NO\"\n    },\n    {\n      \"question_id\": \"HEAT_PUMP\",\n      \"value\": false,\n      \"data_type\": \"YES_NO\"\n    },\n    {\n      \"question_id\": \"SENIOR_CITIZEN\",\n      \"value\": false,\n      \"data_type\": \"YES_NO\"\n    },\n    {\n      \"question_id\": \"LOW_INCOME\",\n      \"value\": false,\n      \"data_type\": \"YES_NO\"\n    },\n    {\n      \"question_id\": \"CA_CARE_CUSTOMER\",\n      \"value\": false,\n      \"data_type\": \"YES_NO\"\n    },\n    {\n      \"question_id\": \"CA_FERA\",\n      \"value\": false,\n      \"data_type\": \"YES_NO\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"description\": \"Either utility_account_id or zip_code/main_tariff_id must be specified\",\n    \"type\": \"BAD_REQUEST\",\n    \"details\": null\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b60798d8-1133-4e59-98db-f3f5bc89afc3",
+          "name": "Optimize Storage Dispatch Schedules (Beta)",
+          "request": {
+            "name": "Optimize Storage Dispatch Schedules (Beta)",
+            "description": {
+              "content": "Optimize energy flows into and out of a storage system to minimize cost, given a corresponding tariff, consumption profile, solar generation profile, and storage specifications. Supports a variety of installation configurations and dispatch strategies.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "spark",
+                "storage_optimization",
+                "schedules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The Arcadia-Version for the request",
+                "key": "Arcadia-Version",
+                "value": "2022-10-13"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"main_tariff_id\": \"<string>\",\n  \"from_date_time\": \"<dateTime>\",\n  \"consumption_curve_kwh_ac\": [\n    \"<number>\"\n  ],\n  \"tariff_property_inputs\": [\n    {\n      \"keyName\": \"<string>\",\n      \"dataValue\": \"<boolean>\"\n    },\n    {\n      \"keyName\": \"<string>\",\n      \"dataValue\": \"<boolean>\"\n    }\n  ],\n  \"solar_generation_curve_kwh_dc\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"dispatch_strategy\": {\n    \"optimize\": \"<boolean>\",\n    \"chargeOnSurplus\": \"<boolean>\",\n    \"fixedSchedule\": {\n      \"chargeTous\": [\n        {\n          \"touPeriods\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"season\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"touPeriods\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"season\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"dischargeTous\": [\n        {\n          \"touPeriods\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"season\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"touPeriods\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"season\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"timezone\": \"<string>\"\n    }\n  },\n  \"solar_dc_to_ac_efficiency\": 0.96,\n  \"allow_grid_to_battery\": true,\n  \"allow_solar_to_battery\": true,\n  \"allow_solar_to_grid\": true,\n  \"allow_battery_to_grid\": true,\n  \"battery_dc_coupled\": true,\n  \"battery_ac_to_dc_efficiency\": 0.96,\n  \"battery_dc_to_ac_efficiency\": 0.96,\n  \"battery_input_efficiency\": 0.975,\n  \"battery_nameplate_power\": 3,\n  \"battery_nameplate_capacity\": 6,\n  \"battery_min_soc\": 0.1,\n  \"battery_max_soc\": 1,\n  \"battery_initial_soc\": 0.5,\n  \"battery_degradation_cost_per_discharge_kwh\": 0,\n  \"export_limit_kwh_ac\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "14e8f794-3db8-4c4e-a496-c7aaded99b55",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "spark",
+                    "storage_optimization",
+                    "schedules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"main_tariff_id\": \"gen_mtid_3424821\",\n  \"from_date_time\": \"2021-03-18T00:00:00-07:00\",\n  \"consumption_curve_kwh_ac\": [\n    0.8,\n    1,\n    1.2,\n    1\n  ],\n  \"tariff_property_inputs\": [\n    {\n      \"keyName\": \"accPlusAdderCustomerType\",\n      \"dataValue\": \"<boolean>\"\n    },\n    {\n      \"keyName\": \"accPlusAdderCustomerType\",\n      \"dataValue\": \"<boolean>\"\n    }\n  ],\n  \"solar_generation_curve_kwh_dc\": [\n    0.5,\n    2.4,\n    1.3,\n    0.4\n  ],\n  \"dispatch_strategy\": {\n    \"optimize\": \"<boolean>\",\n    \"chargeOnSurplus\": \"<boolean>\",\n    \"fixedSchedule\": {\n      \"chargeTous\": [\n        {\n          \"touPeriods\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"season\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"touPeriods\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"season\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"dischargeTous\": [\n        {\n          \"touPeriods\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"season\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"touPeriods\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"season\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"timezone\": \"<string>\"\n    }\n  },\n  \"solar_dc_to_ac_efficiency\": 0.96,\n  \"allow_grid_to_battery\": true,\n  \"allow_solar_to_battery\": true,\n  \"allow_solar_to_grid\": true,\n  \"allow_battery_to_grid\": true,\n  \"battery_dc_coupled\": true,\n  \"battery_ac_to_dc_efficiency\": 0.96,\n  \"battery_dc_to_ac_efficiency\": 0.96,\n  \"battery_input_efficiency\": 0.975,\n  \"battery_nameplate_power\": 3,\n  \"battery_nameplate_capacity\": 6,\n  \"battery_min_soc\": 0.1,\n  \"battery_max_soc\": 1,\n  \"battery_initial_soc\": 0.5,\n  \"battery_degradation_cost_per_discharge_kwh\": 0,\n  \"export_limit_kwh_ac\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"from_date_time\": \"2021-03-18T00:00:00-07:00\",\n  \"grid_to_site_kwh_ac\": [\n    1.3,\n    1.1,\n    0,\n    0\n  ],\n  \"grid_to_battery_kwh_ac\": [\n    1.56,\n    0,\n    0,\n    0\n  ],\n  \"solar_to_battery_kwh_dc\": [\n    0,\n    1.5,\n    0,\n    0\n  ],\n  \"solar_to_site_kwh_ac\": [\n    0,\n    0.1,\n    1.3,\n    1.5\n  ],\n  \"solar_to_grid_kwh_ac\": [\n    0,\n    0,\n    0.4,\n    1.4\n  ],\n  \"solar_curtailed_kwh_dc\": [\n    0,\n    0,\n    0,\n    0\n  ],\n  \"battery_to_site_kwh_ac\": [\n    0,\n    0,\n    0.1,\n    0.2\n  ],\n  \"battery_to_grid_kwh_ac\": [\n    0,\n    0,\n    0.1,\n    0.2\n  ],\n  \"battery_soc\": [\n    0.75,\n    1,\n    0.8,\n    0.4\n  ],\n  \"net_load_kwh_ac\": [\n    1.86,\n    1.1,\n    -0.5,\n    -1.6\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.arcadia.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c47b4997-bb63-4fc4-927e-8799b8eff38c",
+    "name": "Arcadia API Reference Auth Spark API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Email: platformsupport@arcadia.com",
+      "type": "text/plain"
+    }
+  }
+}

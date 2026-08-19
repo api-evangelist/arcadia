@@ -1,0 +1,1286 @@
+{
+  "item": [
+    {
+      "id": "621dfc97-b6f7-4025-964a-c19430106b9e",
+      "name": "Plug",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c007ba2b-ebdf-4a93-b819-1834b0d3ca2d",
+          "name": "List Utility Statements",
+          "request": {
+            "name": "List Utility Statements",
+            "description": {
+              "content": "Returns a paginated list of UtilityStatements for all users, or filtered by `utility_account_id`. Default ordered by descending `updated_at`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "plug",
+                "utility_statements"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "client_user_id",
+                  "value": "<string>",
+                  "description": "A client_user_id to filter the list of returned items by. This field is deprecated, prefer to use `utility_account_id` instead."
+                },
+                {
+                  "disabled": false,
+                  "key": "utility_account_id",
+                  "value": "<integer>",
+                  "description": "A utility account id to filter the list of returned items by."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_after",
+                  "value": "<dateTime>",
+                  "description": "ISO8601 datetime, used to traverse paginated responses. Use of this parameter is mutually exclusive with `updated_before`."
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_before",
+                  "value": "<dateTime>",
+                  "description": "ISO8601 datetime, used to traverse paginated responses. Use of this parameter is mutually exclusive with `updated_after`."
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "desc",
+                  "description": "Used to specify the order in which records should be returned. Currently ordered by `updated_at` timestamp."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The Arcadia-Version for the request",
+                "key": "Arcadia-Version",
+                "value": "2022-10-13"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "56293d98-0751-4ef3-8fdb-14d0eede070e",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plug",
+                    "utility_statements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "client_user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "utility_account_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "updated_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3486d46dabe\",\n      \"created_at\": \"1989-02-03T09:49:50.966Z\",\n      \"due_date\": \"2019-09-24\",\n      \"final_bill\": false,\n      \"gas_charge\": 23.32,\n      \"id\": 123,\n      \"kwh\": 100,\n      \"past_due\": false,\n      \"pdf_url\": \"https://qoioIZNmBswveSdssAhOXQHJb.mlwdNFCcB,ZIBwJnp2VxTR8KsUqlcbR4j\",\n      \"sandboxed\": false,\n      \"service_end_date\": \"2019-09-24\",\n      \"service_start_date\": \"2019-08-24\",\n      \"statement_date\": \"2019-08-24\",\n      \"supplier_charge\": 41.54,\n      \"tariff\": null,\n      \"updated_at\": \"1986-11-19T20:20:51.155Z\",\n      \"utility_account_id\": 2243,\n      \"utility_charge\": 90.33,\n      \"utility_name\": \"AEP SWEPCO\",\n      \"utility_long_name\": \"AEP SWEPCO AR\",\n      \"service_window_inclusive_of_end_date\": true,\n      \"commercial_line_items_detail\": null,\n      \"billing_flags\": [\n        {\n          \"type\": \"possible_rebill\",\n          \"details\": {\n            \"conflicting_utility_statment_id\": 9793\n          }\n        },\n        {\n          \"type\": \"possible_rebill\",\n          \"details\": {\n            \"conflicting_utility_statment_id\": 5471\n          }\n        }\n      ],\n      \"virtual_net_metering\": null,\n      \"most_recent_payment_detail\": null,\n      \"net_metering\": null\n    },\n    {\n      \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3486d46dabe\",\n      \"created_at\": \"1955-08-03T07:25:22.119Z\",\n      \"due_date\": \"2019-09-24\",\n      \"final_bill\": false,\n      \"gas_charge\": 23.32,\n      \"id\": 123,\n      \"kwh\": 100,\n      \"past_due\": false,\n      \"pdf_url\": \"https://PByVjJp.joszLyq1HdDXKsuPJuSn3zmepskhVniQZR8mvJfgBs\",\n      \"sandboxed\": false,\n      \"service_end_date\": \"2019-09-24\",\n      \"service_start_date\": \"2019-08-24\",\n      \"statement_date\": \"2019-08-24\",\n      \"supplier_charge\": 41.54,\n      \"tariff\": null,\n      \"updated_at\": \"1994-12-07T09:52:34.784Z\",\n      \"utility_account_id\": 2243,\n      \"utility_charge\": 90.33,\n      \"utility_name\": \"AEP SWEPCO\",\n      \"utility_long_name\": \"AEP SWEPCO AR\",\n      \"service_window_inclusive_of_end_date\": true,\n      \"commercial_line_items_detail\": null,\n      \"billing_flags\": [\n        {\n          \"type\": \"possible_rebill\",\n          \"details\": {\n            \"conflicting_utility_statment_id\": 1516\n          }\n        },\n        {\n          \"type\": \"possible_rebill\",\n          \"details\": {\n            \"conflicting_utility_statment_id\": 7392\n          }\n        }\n      ],\n      \"virtual_net_metering\": null,\n      \"most_recent_payment_detail\": null,\n      \"net_metering\": null\n    }\n  ],\n  \"total_count\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "006e051f-e831-45e3-9a38-3045bf8bf7f9",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plug",
+                    "utility_statements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "client_user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "utility_account_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "updated_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Couldn't find UtilityAccount\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c2987d1f-f525-4e9c-a83b-40f0069dda40",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plug",
+                    "utility_statements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "client_user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "utility_account_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "updated_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"description\": \"The utility_statements feature is not available for this UtilityAccount.\",\n    \"type\": \"BAD_REQUEST\",\n    \"details\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1eaf00ba-389d-4e8a-ab28-299232f707a9",
+          "name": "Get Utility Statement",
+          "request": {
+            "name": "Get Utility Statement",
+            "description": {
+              "content": "Returns a single UtilityStatement specified by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "plug",
+                "utility_statements",
+                ":utility_statement_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "utility_statement_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The Arcadia-Version for the request",
+                "key": "Arcadia-Version",
+                "value": "2022-10-13"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "196d64cd-14a3-4b93-b267-2192eff233fc",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plug",
+                    "utility_statements",
+                    ":utility_statement_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "utility_statement_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3486d46dabe\",\n  \"created_at\": \"1963-06-05T13:58:35.771Z\",\n  \"due_date\": \"2019-09-24\",\n  \"final_bill\": false,\n  \"gas_charge\": 23.32,\n  \"id\": 123,\n  \"kwh\": 100,\n  \"past_due\": false,\n  \"pdf_url\": \"http://GFeVsETkMbDGvcfJZcGbZPzpgeyO.kbkpyXlcMQ2eccNKi1o33O7tDb1Mdcq6T8d8A3\",\n  \"sandboxed\": false,\n  \"service_end_date\": \"2019-09-24\",\n  \"service_start_date\": \"2019-08-24\",\n  \"statement_date\": \"2019-08-24\",\n  \"supplier_charge\": 41.54,\n  \"tariff\": null,\n  \"updated_at\": \"1995-12-11T12:19:45.973Z\",\n  \"utility_account_id\": 2243,\n  \"utility_charge\": 90.33,\n  \"utility_name\": \"AEP SWEPCO\",\n  \"utility_long_name\": \"AEP SWEPCO AR\",\n  \"service_window_inclusive_of_end_date\": true,\n  \"commercial_line_items_detail\": null,\n  \"billing_flags\": [\n    {\n      \"type\": \"possible_rebill\",\n      \"details\": {\n        \"conflicting_utility_statment_id\": 3033\n      }\n    },\n    {\n      \"type\": \"possible_rebill\",\n      \"details\": {\n        \"conflicting_utility_statment_id\": 5414\n      }\n    }\n  ],\n  \"virtual_net_metering\": null,\n  \"most_recent_payment_detail\": null,\n  \"net_metering\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "27ac0e81-5c29-4e4c-ae3b-6cd38b00cdd0",
+          "name": "List Utility Intervals For A Utility Statement (Beta)",
+          "request": {
+            "name": "List Utility Intervals For A Utility Statement (Beta)",
+            "description": {
+              "content": "**This endpoint is in _beta_. Click [here](release-phases) for a description on Arcadia's release phases.**\nReturns the Utility Intervals for the time span of the given Utility Statement. If the Utility Statement contains charges for multiple Utility Meters, this endpoint will aggregate each Utility Meter's Utility Intervals together to create one set of Utility Intervals.\nNote that the Utility Intervals feature is limited to a subset of utilities at this time:\n- SDG&E\n- SCE\n- PG&E\n- ComEd\n- Delmarva (DE & MD)\n- BG&E\n- PPL\n- Southern Company\n- PEPCO (DC and MD)\n- PECO\n- National Grid NY\n- Florida Power and Light\n- Duke Energy (IN, KY, NC, OH, Progress FL, Progress NC, Progress SC, SC)\n\nNote of the availability of interval data:\n- When an account is first enrolled we retrieve interval data from the utility if available\n- We will retrieve new utility interval data whenever a new utility statement is discovered\n\nTo test Utility Intervals using a [test account scenario](ref:testing):\n* Select one of the utilities supported above\n* Enter a [test username](ref:testing) that has at least one electric account\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "plug",
+                "utility_statements",
+                ":utility_statement_id",
+                "intervals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "utility_statement_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The Arcadia-Version for the request",
+                "key": "Arcadia-Version",
+                "value": "2022-10-13"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3987744d-ae02-4111-84c8-a70edf9173b6",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plug",
+                    "utility_statements",
+                    ":utility_statement_id",
+                    "intervals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "utility_statement_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3486d46dabe\",\n  \"utility_account_id\": 6146,\n  \"utility_meter_ids\": [\n    5978,\n    4070\n  ],\n  \"data\": [\n    {\n      \"start_time\": \"2021-03-18T22:00:00Z\",\n      \"end_time\": \"2021-03-18T22:00:00Z\",\n      \"kwh\": 7735.129594891586,\n      \"is_null_kwh\": false,\n      \"consumption_kwh\": 2628.4152478242095,\n      \"generation_kwh\": 6612.066136682285,\n      \"net_kwh\": 8250.7395540307\n    },\n    {\n      \"start_time\": \"2021-03-18T22:00:00Z\",\n      \"end_time\": \"2021-03-18T22:00:00Z\",\n      \"kwh\": 6939.17353148088,\n      \"is_null_kwh\": false,\n      \"consumption_kwh\": 8873.532909117956,\n      \"generation_kwh\": 2897.6081965823887,\n      \"net_kwh\": 1306.4876145539595\n    }\n  ],\n  \"batch_start_time\": \"1979-05-07T18:12:24.363Z\",\n  \"batch_end_time\": \"2011-08-28T07:46:03.086Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "82896cdc-8dbe-43a4-a30f-b63fa916821c",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plug",
+                    "utility_statements",
+                    ":utility_statement_id",
+                    "intervals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "utility_statement_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"description\": \"We do not yet have utility intervals covering the entirety of this utility statement's time range. Please see details for which utility meter's data is incomplete.\",\n    \"type\": \"NOT_FOUND\",\n    \"details\": {\n      \"intervals_earliest_time\": \"2021-03-19T08:00:00-07:00\",\n      \"intervals_latest_time\": \"2022-03-19T08:00:00-07:00\",\n      \"utility_meter_id\": 7278.704913950202\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e38d825-388e-48af-8801-ce2f533710b1",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plug",
+                    "utility_statements",
+                    ":utility_statement_id",
+                    "intervals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "utility_statement_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"description\": \"Parameter(s) start_time and/or end_time cannot be used with utility_statement_id parameter.\",\n    \"type\": \"BAD_REQUEST\",\n    \"details\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ec8ded1-1386-440a-b191-6f333e384bc9",
+          "name": "List Utility Intervals (Beta)",
+          "request": {
+            "name": "List Utility Intervals (Beta)",
+            "description": {
+              "content": "**This endpoint is in _beta_. Click [here](release-phases) for a description on Arcadia's release phases.**\nReturns up to a year of interval data per request for a Utility Account.\nNote that the Utility Intervals feature is limited to a subset of utilities at this time. Check the [utility coverage page](https://arc.arcadia.com/coverage?first=25&page=1&strictFilters[productAvailability][0]=PLUG_INTERVALS_SUPPORTED) to see which utilities are supported.\n\nNote of the availability of interval data:\n- When an account is first enrolled we retrieve interval data from the utility if available\n- We will retrieve new utility interval data whenever a new utility statement is discovered\n\nTo test Utility Intervals using a [test account scenario](ref:testing):\n* Select one of the utilities supported above\n* Enter a [test username](ref:testing) that has at least one electric account\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "plug",
+                "utility_intervals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "utility_account_id",
+                  "value": "<integer>",
+                  "description": "ID of the utility account to pull interval data from. You must provide this parameter or `utility_meter_id`, but not both."
+                },
+                {
+                  "disabled": false,
+                  "key": "utility_meter_id",
+                  "value": "<integer>",
+                  "description": "ID of the utility meter to pull interval data from. You must provide this parameter or `utility_account_id`, but not both."
+                },
+                {
+                  "disabled": false,
+                  "key": "start_time",
+                  "value": "<dateTime>",
+                  "description": "Retrieve interval data starting from and including this timestamp. If not provided, this will default to a year before the end timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "end_time",
+                  "value": "<dateTime>",
+                  "description": "Retrieve interval data up to and including this timestamp. Defaults to the most recently available interval data's timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "utility_statement_id",
+                  "value": "<integer>",
+                  "description": "Retrieve interval data from the service period of a specific utility statement. Cannot be used with start_time or end_time parameters."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The Arcadia-Version for the request",
+                "key": "Arcadia-Version",
+                "value": "2022-10-13"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "caa6d6e2-8051-4d13-a6d1-fd49f0b3fe1a",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plug",
+                    "utility_intervals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utility_account_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "utility_meter_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "2020-03-18T22:00:00-07:00"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "2021-03-18T22:00:00-07:00"
+                    },
+                    {
+                      "key": "utility_statement_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3486d46dabe\",\n  \"utility_account_id\": 2412,\n  \"intervals_earliest_time\": \"2015-08-10T22:11:34.084Z\",\n  \"intervals_latest_time\": \"1991-09-12T21:25:25.610Z\",\n  \"utility_meter_id\": 1234,\n  \"data\": [\n    {\n      \"start_time\": \"2021-03-18T22:00:00Z\",\n      \"end_time\": \"2021-03-18T22:00:00Z\",\n      \"kwh\": 1137.5654663997382,\n      \"is_null_kwh\": true,\n      \"consumption_kwh\": 6361.844154847898,\n      \"generation_kwh\": 1453.2795045079506,\n      \"net_kwh\": 3662.446057204509\n    },\n    {\n      \"start_time\": \"2021-03-18T22:00:00Z\",\n      \"end_time\": \"2021-03-18T22:00:00Z\",\n      \"kwh\": 9337.232481372603,\n      \"is_null_kwh\": true,\n      \"consumption_kwh\": 8789.780028457237,\n      \"generation_kwh\": 7392.072593590892,\n      \"net_kwh\": 3270.1492168338377\n    }\n  ],\n  \"batch_start_time\": \"1963-01-10T00:44:44.135Z\",\n  \"batch_end_time\": \"1983-08-05T15:00:15.257Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "addd4db4-6a6f-496c-9545-826f5d0dfcd6",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plug",
+                    "utility_intervals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utility_account_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "utility_meter_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "2020-03-18T22:00:00-07:00"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "2021-03-18T22:00:00-07:00"
+                    },
+                    {
+                      "key": "utility_statement_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"description\": \"There are no utility intervals available for this utility meter.\",\n    \"type\": \"NOT_FOUND\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7b120a6-4d30-4f1a-b652-866d3c189567",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plug",
+                    "utility_intervals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utility_account_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "utility_meter_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "2020-03-18T22:00:00-07:00"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "2021-03-18T22:00:00-07:00"
+                    },
+                    {
+                      "key": "utility_statement_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"description\": \"Parameter(s) start_time and/or end_time cannot be used with utility_statement_id parameter.\",\n    \"type\": \"BAD_REQUEST\",\n    \"details\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5a2d2c14-6dc3-40cb-88a5-0e43267a6c39",
+          "name": "Fetch Utility Interval Metadata (Beta)",
+          "request": {
+            "name": "Fetch Utility Interval Metadata (Beta)",
+            "description": {
+              "content": "**This endpoint is in _beta_. Click [here](release-phases) for a description on Arcadia's release phases.**\nReturns metadata on what utility interval data is available.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "plug",
+                "utility_intervals",
+                "metadata"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "utility_account_id",
+                  "value": "<integer>",
+                  "description": "ID of the utility account to pull interval data from. You must provide this parameter or `utility_meter_id`, but not both."
+                },
+                {
+                  "disabled": false,
+                  "key": "utility_meter_id",
+                  "value": "<integer>",
+                  "description": "ID of the utility meter to pull interval data from. You must provide this parameter or `utility_account_id`, but not both."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The Arcadia-Version for the request",
+                "key": "Arcadia-Version",
+                "value": "2022-10-13"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fbb705be-d983-46c6-a5ec-9e3bb6c35b8f",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plug",
+                    "utility_intervals",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utility_account_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "utility_meter_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"intervals_earliest_time\": \"1981-08-27T09:19:15.982Z\",\n  \"intervals_latest_time\": \"2009-03-24T00:59:53.937Z\",\n  \"utility_meter_id\": 1234\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee5b0892-ffe7-4e63-9227-323f33b52429",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plug",
+                    "utility_intervals",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utility_account_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "utility_meter_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"description\": \"There are no utility intervals available for this utility meter.\",\n    \"type\": \"NOT_FOUND\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7df1293a-ba9d-4899-9267-18a9c8b865ea",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "plug",
+                    "utility_intervals",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "utility_account_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "utility_meter_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"description\": \"Parameter(s) start_time and/or end_time cannot be used with utility_statement_id parameter.\",\n    \"type\": \"BAD_REQUEST\",\n    \"details\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.arcadia.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ea45366d-c84b-48c4-b237-44f70e34d0c3",
+    "name": "Arcadia API Reference Auth Plug API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Email: platformsupport@arcadia.com",
+      "type": "text/plain"
+    }
+  }
+}

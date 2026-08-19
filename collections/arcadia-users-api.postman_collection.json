@@ -1,0 +1,658 @@
+{
+  "item": [
+    {
+      "id": "14e1e17d-034b-46b5-baac-1ace8a99c48f",
+      "name": "Users",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "23cbd35b-251b-4e70-a687-4b49a4223012",
+          "name": "List Users",
+          "request": {
+            "name": "List Users",
+            "description": {
+              "content": "Returns a paginated list of Users. Default ordered by descending `updated_at`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_after",
+                  "value": "<dateTime>",
+                  "description": "ISO8601 datetime, used to traverse paginated responses. Use of this parameter is mutually exclusive with `updated_before`."
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_before",
+                  "value": "<dateTime>",
+                  "description": "ISO8601 datetime, used to traverse paginated responses. Use of this parameter is mutually exclusive with `updated_after`."
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "desc",
+                  "description": "Used to specify the order in which records should be returned. Currently ordered by `updated_at` timestamp."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The Arcadia-Version for the request",
+                "key": "Arcadia-Version",
+                "value": "2022-10-13"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "68491156-2e9e-4048-b8ff-a177a5df4f4c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "updated_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3712d46dafl\",\n      \"created_at\": \"1984-12-24T02:08:14.721Z\",\n      \"updated_at\": \"1956-09-05T03:47:13.501Z\"\n    },\n    {\n      \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3712d46dafl\",\n      \"created_at\": \"1965-03-10T17:06:04.971Z\",\n      \"updated_at\": \"2005-11-02T23:25:28.174Z\"\n    }\n  ],\n  \"total_count\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a236dfb0-86fb-4ed3-b483-1a89d5e93dd3",
+          "name": "Get User",
+          "request": {
+            "name": "Get User",
+            "description": {
+              "content": "Get a single User associated with a `client_user_id`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                ":client_user_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "client_user_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The Arcadia-Version for the request",
+                "key": "Arcadia-Version",
+                "value": "2022-10-13"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "784e20c4-fbcb-4b1d-a47f-c19fe89f47a5",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":client_user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3712d46dafl\",\n  \"created_at\": \"2011-08-05T16:39:04.247Z\",\n  \"utility_credentials\": [\n    {\n      \"accounts_load_in_progress\": false,\n      \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3486d46dabe\",\n      \"created_at\": \"2018-12-19T18:55:25.958Z\",\n      \"id\": 12345,\n      \"sandboxed\": false,\n      \"updated_at\": \"1970-10-06T08:15:39.893Z\",\n      \"username\": \"great_customer\",\n      \"uses_test_scenario\": false,\n      \"utility_accounts\": [\n        {\n          \"id\": 12345,\n          \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3486d46dabe\",\n          \"utility_name\": \"AEP SWEPCO\",\n          \"utility_long_name\": \"AEP SWEPCO AR\",\n          \"utility_credential_id\": 54321,\n          \"account_number\": \"7626177069\",\n          \"service_address_city\": \"Chicago\",\n          \"service_address_state\": \"IL\",\n          \"service_address_street_one\": \"1060 W Addison\",\n          \"service_address_street_two\": \"Apartment 1\",\n          \"service_address_zip\": \"60613\",\n          \"service_customer_name\": \"Joan Arcadia\",\n          \"status\": null,\n          \"supplier_account_id\": \"123456789\",\n          \"most_recent_tariff\": null,\n          \"flags\": [\n            \"utility_statement_past_due\",\n            \"utility_statement_past_due\"\n          ],\n          \"services\": [\n            \"water\",\n            \"water\"\n          ],\n          \"created_at\": \"1962-12-18T21:01:31.606Z\",\n          \"updated_at\": \"2003-12-12T03:59:21.948Z\",\n          \"feature_availability\": {\n            \"charge_cost\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hosted_payments\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"utility_remittance\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"smart_charge\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"utility_intervals\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"utility_statements\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"utility_meters\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_user_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"utility_credential_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"utility_account_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"meter_number\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"service_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"created_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"updated_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"sandboxed\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_user_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"utility_credential_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"utility_account_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"meter_number\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"service_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"created_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"updated_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"sandboxed\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"sandboxed\": false\n        },\n        {\n          \"id\": 12345,\n          \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3486d46dabe\",\n          \"utility_name\": \"AEP SWEPCO\",\n          \"utility_long_name\": \"AEP SWEPCO AR\",\n          \"utility_credential_id\": 54321,\n          \"account_number\": \"7626177069\",\n          \"service_address_city\": \"Chicago\",\n          \"service_address_state\": \"IL\",\n          \"service_address_street_one\": \"1060 W Addison\",\n          \"service_address_street_two\": \"Apartment 1\",\n          \"service_address_zip\": \"60613\",\n          \"service_customer_name\": \"Joan Arcadia\",\n          \"status\": null,\n          \"supplier_account_id\": \"123456789\",\n          \"most_recent_tariff\": null,\n          \"flags\": [\n            \"utility_statement_past_due\",\n            \"utility_statement_past_due\"\n          ],\n          \"services\": [\n            \"electric\",\n            \"gas\"\n          ],\n          \"created_at\": \"1961-04-14T14:28:14.314Z\",\n          \"updated_at\": \"2015-09-25T08:17:17.609Z\",\n          \"feature_availability\": {\n            \"charge_cost\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hosted_payments\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"utility_remittance\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"smart_charge\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"utility_intervals\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"utility_statements\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"utility_meters\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_user_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"utility_credential_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"utility_account_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"meter_number\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"service_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"created_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"updated_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"sandboxed\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_user_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"utility_credential_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"utility_account_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"meter_number\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"service_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"created_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"updated_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"sandboxed\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"sandboxed\": false\n        }\n      ],\n      \"utility_long_name\": \"AEP SWEPCO AR\",\n      \"utility_name\": \"AEP SWEPCO\",\n      \"verification_status\": \"error\",\n      \"verification_updated_at\": \"1953-08-25T05:13:15.210Z\"\n    },\n    {\n      \"accounts_load_in_progress\": false,\n      \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3486d46dabe\",\n      \"created_at\": \"2000-05-12T05:38:35.902Z\",\n      \"id\": 12345,\n      \"sandboxed\": false,\n      \"updated_at\": \"1990-03-28T14:03:39.127Z\",\n      \"username\": \"great_customer\",\n      \"uses_test_scenario\": false,\n      \"utility_accounts\": [\n        {\n          \"id\": 12345,\n          \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3486d46dabe\",\n          \"utility_name\": \"AEP SWEPCO\",\n          \"utility_long_name\": \"AEP SWEPCO AR\",\n          \"utility_credential_id\": 54321,\n          \"account_number\": \"7626177069\",\n          \"service_address_city\": \"Chicago\",\n          \"service_address_state\": \"IL\",\n          \"service_address_street_one\": \"1060 W Addison\",\n          \"service_address_street_two\": \"Apartment 1\",\n          \"service_address_zip\": \"60613\",\n          \"service_customer_name\": \"Joan Arcadia\",\n          \"status\": null,\n          \"supplier_account_id\": \"123456789\",\n          \"most_recent_tariff\": null,\n          \"flags\": [\n            \"utility_statement_past_due\",\n            \"utility_statement_past_due\"\n          ],\n          \"services\": [\n            \"electric\",\n            \"water\"\n          ],\n          \"created_at\": \"1985-08-13T04:03:52.725Z\",\n          \"updated_at\": \"1969-05-21T18:40:45.081Z\",\n          \"feature_availability\": {\n            \"charge_cost\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hosted_payments\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"utility_remittance\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"smart_charge\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"utility_intervals\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"utility_statements\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"utility_meters\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_user_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"utility_credential_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"utility_account_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"meter_number\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"service_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"created_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"updated_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"sandboxed\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_user_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"utility_credential_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"utility_account_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"meter_number\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"service_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"created_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"updated_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"sandboxed\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"sandboxed\": false\n        },\n        {\n          \"id\": 12345,\n          \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3486d46dabe\",\n          \"utility_name\": \"AEP SWEPCO\",\n          \"utility_long_name\": \"AEP SWEPCO AR\",\n          \"utility_credential_id\": 54321,\n          \"account_number\": \"7626177069\",\n          \"service_address_city\": \"Chicago\",\n          \"service_address_state\": \"IL\",\n          \"service_address_street_one\": \"1060 W Addison\",\n          \"service_address_street_two\": \"Apartment 1\",\n          \"service_address_zip\": \"60613\",\n          \"service_customer_name\": \"Joan Arcadia\",\n          \"status\": null,\n          \"supplier_account_id\": \"123456789\",\n          \"most_recent_tariff\": null,\n          \"flags\": [\n            \"utility_statement_past_due\",\n            \"utility_statement_past_due\"\n          ],\n          \"services\": [\n            \"electric\",\n            \"water\"\n          ],\n          \"created_at\": \"1965-07-26T22:16:47.191Z\",\n          \"updated_at\": \"2017-06-27T20:27:02.391Z\",\n          \"feature_availability\": {\n            \"charge_cost\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hosted_payments\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"utility_remittance\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"smart_charge\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"utility_intervals\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"utility_statements\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"utility_meters\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_user_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"utility_credential_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"utility_account_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"meter_number\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"service_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"created_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"updated_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"sandboxed\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"client_user_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"utility_credential_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"utility_account_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"meter_number\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"service_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"created_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"updated_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"sandboxed\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"sandboxed\": false\n        }\n      ],\n      \"utility_long_name\": \"AEP SWEPCO AR\",\n      \"utility_name\": \"AEP SWEPCO\",\n      \"verification_status\": \"rejected\",\n      \"verification_updated_at\": \"2012-10-05T00:35:28.938Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7d03f74e-b24a-4ba7-b96e-5c76bbfa2bf3",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":client_user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"description\": \"string\",\n    \"type\": \"BAD_REQUEST\",\n    \"details\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1739bf74-8bde-4cd2-b7ea-dd10ff94a3f8",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":client_user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Couldn't find User\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "316f7fd8-2fc2-45f6-a830-088fb5837749",
+          "name": "Delete User",
+          "request": {
+            "name": "Delete User",
+            "description": {
+              "content": "Delete all data associated with a `client_user_id`. Note that the actual delete happens asynchronously, so data for this User may still be available through the API for a few minutes after a delete request is made.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                ":client_user_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "client_user_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The Arcadia-Version for the request",
+                "key": "Arcadia-Version",
+                "value": "2022-10-13"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a020a11b-d2c7-4ca7-aba2-c3f65fdad07e",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":client_user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "06159279-06bb-4377-8e08-dc760c2b995c",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":client_user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Couldn't find User\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a2b2858-fc6a-4924-b00a-64b6c9bb5146",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    ":client_user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "client_user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"description\": \"Cannot delete a User who is pending_enrollment, enrolled, or pending unenrollment in a Bundle Product\",\n    \"type\": \"BAD_REQUEST\",\n    \"details\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.arcadia.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8c606a8d-32c2-40ff-851f-51f4dc501393",
+    "name": "Arcadia API Reference Auth Users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Email: platformsupport@arcadia.com",
+      "type": "text/plain"
+    }
+  }
+}

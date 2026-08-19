@@ -1,0 +1,104 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Arcadia API Reference Auth API",
+    "version": "0.3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Auth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an Access Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.arcadia.com/auth/access_token",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use your API credentials to create an Access Token that has permission to use all Arcadia API endpoints.\n\nAPI access tokens are valid for 2 hours.\n"
+        },
+        {
+          "info": {
+            "name": "Create a Connect Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.arcadia.com/auth/connect_token",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The Connect front-end component must be initialized with a Connect Token scoped to the user entering the *Connect* flow.\n\nFor new users, or users creating an additional utility credential, post with a unique `client_user_id` parameter. For users editing an existing utility credential, post with the `utility_credential_id` parameter corresponding to the utility credential to be updated. Make sure the `Authorization` header is set to `Bearer ${ACCESS_TOKEN}`.\n\nTokens expire after two hours."
+        },
+        {
+          "info": {
+            "name": "Create a Connect URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.arcadia.com/auth/connect_url",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "You can also send your users through the *Connect* flow by linking them to a unique Connect URL (provided by this endpoint).\n\nJust like [the Connect Token](ref:createconnecttoken), you need to provide either a `client_user_id` or a`utility credential_id` to get a URL that will initialize Connect in ‘create mode’ or ‘update mode’ respectively. [See this page for a guide on the difference between those two modes.](https://docs.arcadia.com/docs/connect-guide) This endpoint will provide a URL in a r"
+        },
+        {
+          "info": {
+            "name": "Ping",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.arcadia.com/ping",
+            "headers": [
+              {
+                "name": "Arcadia-Version",
+                "value": "2022-10-13"
+              }
+            ]
+          },
+          "docs": "No-op authorization test endpoint. Returns a 200 if requested with a valid Bearer auth token.\nAny valid authorization token with any scope will be able to get a 200 from this endpoint.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

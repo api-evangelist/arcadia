@@ -1,0 +1,420 @@
+{
+  "item": [
+    {
+      "id": "a73764f5-0eb3-4262-bcae-b3e3da022092",
+      "name": "Utility Meters (Beta)",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "53fcf2c5-417e-4309-9743-2654c5ba0099",
+          "name": "List Utility Meters",
+          "request": {
+            "name": "List Utility Meters",
+            "description": {
+              "content": "Returns a paginated list of utility meters for all users, utility accounts, and service types. May be filtered by `client_user_id`, `utility_account_id`, and/or `service_types` to further refine results. Default ordered by descending `updated_at`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "utility_meters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "client_user_id",
+                  "value": "<string>",
+                  "description": "A client_user_id to filter the list of returned items by."
+                },
+                {
+                  "disabled": false,
+                  "key": "utility_account_id",
+                  "value": "<integer>",
+                  "description": "A utility account id to filter the list of returned items by."
+                },
+                {
+                  "disabled": false,
+                  "key": "service_types",
+                  "value": "<string>",
+                  "description": "A list of service types to filter the list of returns items by."
+                },
+                {
+                  "disabled": false,
+                  "key": "service_types",
+                  "value": "<string>",
+                  "description": "A list of service types to filter the list of returns items by."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_after",
+                  "value": "<dateTime>",
+                  "description": "ISO8601 datetime, used to traverse paginated responses. Use of this parameter is mutually exclusive with `updated_before`."
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_before",
+                  "value": "<dateTime>",
+                  "description": "ISO8601 datetime, used to traverse paginated responses. Use of this parameter is mutually exclusive with `updated_after`."
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "desc",
+                  "description": "Used to specify the order in which records should be returned. Currently ordered by `updated_at` timestamp."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The Arcadia-Version for the request",
+                "key": "Arcadia-Version",
+                "value": "2022-10-13"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5f85ff03-301d-4335-9a91-78c0c503b8e3",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "utility_meters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "client_user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "utility_account_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "service_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "updated_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 12345,\n      \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3486d46dabe\",\n      \"utility_credential_id\": 54321,\n      \"utility_account_id\": 65432,\n      \"meter_number\": \"12300000045 67\",\n      \"service_type\": \"electric\",\n      \"created_at\": \"1963-06-26T10:52:12.879Z\",\n      \"updated_at\": \"1991-02-07T10:46:22.210Z\",\n      \"sandboxed\": false\n    },\n    {\n      \"id\": 12345,\n      \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3486d46dabe\",\n      \"utility_credential_id\": 54321,\n      \"utility_account_id\": 65432,\n      \"meter_number\": \"12300000045 67\",\n      \"service_type\": \"gas\",\n      \"created_at\": \"1962-01-06T14:45:40.486Z\",\n      \"updated_at\": \"1985-08-23T23:52:06.864Z\",\n      \"sandboxed\": false\n    }\n  ],\n  \"total_count\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d2ae42f-1005-4823-9077-bd4707408157",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "utility_meters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "client_user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "utility_account_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "service_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "updated_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "desc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"description\": \"Request included malformed parameters\",\n    \"type\": \"BAD_REQUEST\",\n    \"details\": {\n      \"service_types\": [\n        \"must be an array\",\n        \"must be an array\"\n      ],\n      \"amount_cents\": [\n        \"must not exceed 3000000 cents\",\n        \"must be an integer\"\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6fd4cb15-3f0a-4e0a-86a1-d4f25ff981b7",
+          "name": "Get Utility Meter",
+          "request": {
+            "name": "Get Utility Meter",
+            "description": {
+              "content": "Returns a single utility meter specified by ID.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "utility_meters",
+                ":utility_meter_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "utility_meter_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The Arcadia-Version for the request",
+                "key": "Arcadia-Version",
+                "value": "2022-10-13"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "79027575-0eec-415d-bb9c-5f3d484dd48c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "utility_meters",
+                    ":utility_meter_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "utility_meter_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The Arcadia-Version for the request",
+                    "key": "Arcadia-Version",
+                    "value": "2022-10-13"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "(Required) The Arcadia-Version for the response",
+                  "key": "Arcadia-Version",
+                  "value": "2022-10-13"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 12345,\n  \"client_user_id\": \"fff57dc7-3a2b-4395-8a62-e3486d46dabe\",\n  \"utility_credential_id\": 54321,\n  \"utility_account_id\": 65432,\n  \"meter_number\": \"12300000045 67\",\n  \"service_type\": \"gas\",\n  \"created_at\": \"2012-09-06T15:48:26.811Z\",\n  \"updated_at\": \"2019-08-12T12:18:01.114Z\",\n  \"sandboxed\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.arcadia.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7368af6a-72c0-42b7-91ea-01cc29862183",
+    "name": "Arcadia API Reference Auth Utility Meters (Beta) API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Email: platformsupport@arcadia.com",
+      "type": "text/plain"
+    }
+  }
+}
