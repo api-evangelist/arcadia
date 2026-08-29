@@ -216,6 +216,26 @@ apis:
     url: openapi/arcadia-webhooks-api-openapi.yml
   - type: Documentation
     url: https://docs.arcadia.com/
+- aid: arcadia:arcadia-bundle-webhook-events-api
+  name: Arcadia Bundle Webhook Events API
+  description: The Bundle Webhook Events API from Arcadia — 0 operation(s) for bundle webhook events.
+  humanURL: https://docs.arcadia.com/
+  baseURL: https://api.arcadia.com
+  tags:
+  - Bundle Webhook Events
+  properties:
+  - type: OpenAPI
+    url: openapi/arcadia-bundle-webhook-events-api-openapi.yml
+- aid: arcadia:arcadia-webhook-events-api
+  name: Arcadia Webhook Events API
+  description: The Webhook Events API from Arcadia — 0 operation(s) for webhook events.
+  humanURL: https://docs.arcadia.com/
+  baseURL: https://api.arcadia.com
+  tags:
+  - Webhook Events
+  properties:
+  - type: OpenAPI
+    url: openapi/arcadia-webhook-events-api-openapi.yml
 common:
   - type: AgenticAccess
     url: agentic-access/arcadia-agentic-access.yml

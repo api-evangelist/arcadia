@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Arcadia API Reference Auth Plug API
+  title: Arcadia API Reference Plug API
   version: 0.3.0
   contact:
     email: platformsupport@arcadia.com
@@ -279,21 +279,29 @@ paths:
                 - $ref: '#/components/schemas/UtilityIntervalsAmbiguousMeterError'
 components:
   parameters:
-    utilityStatementIdQueryParam:
+    startTimeQueryParam:
       in: query
+      name: start_time
+      required: false
+      description: Retrieve interval data starting from and including this timestamp. If not provided, this will default to a year before the end timestamp.
+      schema:
+        type: string
+        format: date-time
+        example: '2020-03-18T22:00:00-07:00'
+    utilityStatementIdInPathParam:
       name: utility_statement_id
-      required: false
-      description: Retrieve interval data from the service period of a specific utility statement. Cannot be used with start_time or end_time parameters.
+      in: path
+      required: true
       schema:
         type: integer
-    paginationLimitParam:
+    paginationUpdatedAfterParam:
       in: query
-      name: limit
+      name: updated_after
       required: false
+      description: ISO8601 datetime, used to traverse paginated responses. Use of this parameter is mutually exclusive with `updated_before`.
       schema:
-        type: integer
-        minimum: 1
-        default: 10
+        type: string
+        format: date-time
     paginationOrderParam:
       in: query
       name: order
@@ -305,37 +313,6 @@ components:
         - asc
         - desc
         default: desc
-    intervalDataUtilityMeterIdQueryParam:
-      in: query
-      name: utility_meter_id
-      required: false
-      description: ID of the utility meter to pull interval data from. You must provide this parameter or `utility_account_id`, but not both.
-      schema:
-        type: integer
-    utilityStatementIdInPathParam:
-      name: utility_statement_id
-      in: path
-      required: true
-      schema:
-        type: integer
-    arcVersionInHeaderParam:
-      name: Arcadia-Version
-      in: header
-      example: '2022-10-13'
-      description: The Arcadia-Version for the request
-      required: true
-      schema:
-        type: string
-        default: '2022-10-13'
-    startTimeQueryParam:
-      in: query
-      name: start_time
-      required: false
-      description: Retrieve interval data starting from and including this timestamp. If not provided, this will default to a year before the end timestamp.
-      schema:
-        type: string
-        format: date-time
-        example: '2020-03-18T22:00:00-07:00'
     intervalDataUtilityAccountIdQueryParam:
       in: query
       name: utility_account_id
@@ -343,21 +320,6 @@ components:
       description: ID of the utility account to pull interval data from. You must provide this parameter or `utility_meter_id`, but not both.
       schema:
         type: integer
-    utilityAccountIdQueryParam:
-      in: query
-      name: utility_account_id
-      required: false
-      description: A utility account id to filter the list of returned items by.
-      schema:
-        type: integer
-    deprecatedClientUserIdQueryParam:
-      in: query
-      name: client_user_id
-      required: false
-      deprecated: true
-      description: A client_user_id to filter the list of returned items by. This field is deprecated, prefer to use `utility_account_id` instead.
-      schema:
-        type: string
     paginationUpdatedBeforeParam:
       in: query
       name: updated_before
@@ -375,25 +337,67 @@ components:
         type: string
         format: date-time
         example: '2021-03-18T22:00:00-07:00'
-    paginationUpdatedAfterParam:
+    utilityStatementIdQueryParam:
       in: query
-      name: updated_after
+      name: utility_statement_id
       required: false
-      description: ISO8601 datetime, used to traverse paginated responses. Use of this parameter is mutually exclusive with `updated_before`.
+      description: Retrieve interval data from the service period of a specific utility statement. Cannot be used with start_time or end_time parameters.
+      schema:
+        type: integer
+    arcVersionInHeaderParam:
+      name: Arcadia-Version
+      in: header
+      example: '2022-10-13'
+      description: The Arcadia-Version for the request
+      required: true
       schema:
         type: string
-        format: date-time
+        default: '2022-10-13'
+    intervalDataUtilityMeterIdQueryParam:
+      in: query
+      name: utility_meter_id
+      required: false
+      description: ID of the utility meter to pull interval data from. You must provide this parameter or `utility_account_id`, but not both.
+      schema:
+        type: integer
+    paginationLimitParam:
+      in: query
+      name: limit
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 10
+    deprecatedClientUserIdQueryParam:
+      in: query
+      name: client_user_id
+      required: false
+      deprecated: true
+      description: A client_user_id to filter the list of returned items by. This field is deprecated, prefer to use `utility_account_id` instead.
+      schema:
+        type: string
+    utilityAccountIdQueryParam:
+      in: query
+      name: utility_account_id
+      required: false
+      description: A utility account id to filter the list of returned items by.
+      schema:
+        type: integer
   schemas:
-    UtilityAccountNotFoundError:
+    PaginatedUtilityStatements:
       required:
-      - error
+      - data
+      - total_count
       properties:
-        error:
-          type: string
-          enum:
-          - Couldn't find UtilityAccount
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UtilityStatement'
+        total_count:
+          type: integer
+          example: 1
       additionalProperties: false
-    UtilityIntervalsNoDataForMeterError:
+    UtilityIntervalsAmbiguousMeterError:
       required:
       - error
       properties:
@@ -406,49 +410,30 @@ components:
             description:
               type: string
               enum:
-              - There are no utility intervals available for this utility meter.
+              - This utility account is associated with multiple meters. You must filter interval data by utility_meter_id instead of utility_account_id when the utility account is associated with multiple meters.
             type:
               type: string
               enum:
-              - NOT_FOUND
+              - BAD_REQUEST
       additionalProperties: false
-    UtilityIntervalItem:
+    UtilityIntervalsBothAccountIdAndMeterIdProvided:
       required:
-      - start_time
-      - end_time
-      - kwh
-      - is_null_kwh
-      - consumption_kwh
-      - generation_kwh
-      - net_kwh
+      - error
       properties:
-        start_time:
-          type: string
-          format: date-time
-          example: '2021-03-18T22:00:00Z'
-        end_time:
-          type: string
-          format: date-time
-          example: '2021-03-18T22:00:00Z'
-        consumption_kwh:
-          description: Consumption kilowatt hours usage for this interval. Availability varies by utility.
-          type: number
-          nullable: true
-        generation_kwh:
-          description: Generation kilowatt hours usage for the interval. Availabiltiy varies by utility.
-          type: number
-          nullable: true
-        net_kwh:
-          description: Net kilowatt hours usage for the interval.
-          type: number
-        kwh:
-          description: Prefer net_kwh instead
-          deprecated: true
-          type: number
-        is_null_kwh:
-          description: Indicates whether kwh was unavailable for this interval. When `true` the kwh field should be interpreted as null.
-          deprecated: true
-          type: boolean
+        error:
+          type: object
+          required:
+          - description
+          - type
+          properties:
+            description:
+              type: string
+              enum:
+              - You must provide exactly one of the utility_account_id or utility_meter_id parameters.
+            type:
+              type: string
+              enum:
+              - BAD_REQUEST
       additionalProperties: false
     UtilityIntervalsPerStatementNotFoundError:
       required:
@@ -489,6 +474,25 @@ components:
                   example: '358901'
                   description: Which utility meter did not have full coverage for the time range of this utility statement.
       additionalProperties: false
+    UtilityIntervalsInvalidMeterServiceTypeError:
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - description
+          - type
+          properties:
+            description:
+              type: string
+              enum:
+              - Arcadia does not currently support interval data for non-electric utility meters.
+            type:
+              type: string
+              enum:
+              - BAD_REQUEST
+      additionalProperties: false
     UtilityStatementsFeatureAvailabilityError:
       required:
       - error
@@ -510,117 +514,50 @@ components:
               enum:
               - BAD_REQUEST
             details:
-              type: object
-              nullable: true
+              type:
+              - object
+              - 'null'
       additionalProperties: false
-    UtilityIntervalsFeatureAvailabilityError:
+    UtilityIntervalItem:
       required:
-      - error
+      - start_time
+      - end_time
+      - kwh
+      - is_null_kwh
+      - consumption_kwh
+      - generation_kwh
+      - net_kwh
       properties:
-        error:
-          type: object
-          required:
-          - description
-          - type
-          - details
-          properties:
-            description:
-              type: string
-              enum:
-              - The utility_intervals feature is not available for this UtilityAccount.
-              - The utility_intervals feature is not ready yet. Please refer to UtilityAccount#FeatureAvailability for updates.
-              - Parameter(s) start_time and/or end_time cannot be used with utility_statement_id parameter.
-            type:
-              type: string
-              enum:
-              - BAD_REQUEST
-            details:
-              type: object
-              nullable: true
+        start_time:
+          type: string
+          format: date-time
+          example: '2021-03-18T22:00:00Z'
+        end_time:
+          type: string
+          format: date-time
+          example: '2021-03-18T22:00:00Z'
+        consumption_kwh:
+          description: Consumption kilowatt hours usage for this interval. Availability varies by utility.
+          type:
+          - number
+          - 'null'
+        generation_kwh:
+          description: Generation kilowatt hours usage for the interval. Availabiltiy varies by utility.
+          type:
+          - number
+          - 'null'
+        net_kwh:
+          description: Net kilowatt hours usage for the interval.
+          type: number
+        kwh:
+          description: Prefer net_kwh instead
+          deprecated: true
+          type: number
+        is_null_kwh:
+          description: Indicates whether kwh was unavailable for this interval. When `true` the kwh field should be interpreted as null.
+          deprecated: true
+          type: boolean
       additionalProperties: false
-    UtilityIntervalDataResponse:
-      required:
-      - client_user_id
-      - utility_account_id
-      - intervals_earliest_time
-      - intervals_latest_time
-      - utility_meter_id
-      - data
-      properties:
-        client_user_id:
-          type: string
-          example: fff57dc7-3a2b-4395-8a62-e3486d46dabe
-        utility_account_id:
-          type: integer
-        utility_meter_id:
-          example: 1234
-          type: integer
-          nullable: true
-        intervals_earliest_time:
-          description: The earliest available interval data timestamp
-          type: string
-          format: date-time
-        intervals_latest_time:
-          description: The latest available interval data timestamp
-          type: string
-          format: date-time
-        batch_start_time:
-          description: The starting timestamp for the interval data included in this response
-          type: string
-          format: date-time
-        batch_end_time:
-          description: The ending timestamp for the interval data included in this response
-          type: string
-          format: date-time
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/UtilityIntervalItem'
-      additionalProperties: false
-    Tariff:
-      description: Information about a tariff.
-      required:
-      - main_tariff_id
-      - tariff_code
-      - tariff_name
-      - utility_name
-      properties:
-        main_tariff_id:
-          type: string
-          description: The Genability 'masterTariffId' unique identifier for this tariff. See [Genability documentation](https://developer.genability.com/api-reference/tariff-api/tariff/) for details.
-          example: gen_mtid_3331108
-        property_inputs:
-          description: Properties applied to this tariff which may affect the calculated cost of electricity.
-          type: array
-          items:
-            type: object
-            required:
-            - id
-            - value
-            properties:
-              id:
-                type: string
-                example: territoryId
-              value:
-                type: boolean
-                example: 3
-        supplier_name:
-          description: The name of the retail electricity supplier or the community choice aggregator. If there is no retail electricity supplier or community choice aggregator, this field is null.
-          example: East Bay Community Energy
-          type: string
-          nullable: true
-        tariff_code:
-          type: string
-          description: Abbreviation code of the tariff used for this calculation.
-          example: EV-2A-TOU
-        tariff_name:
-          type: string
-          description: Full name of the tariff used for this calculation.
-          example: Residential - Time of Use - Plug-In Electric Vehicle 2
-        utility_name:
-          type: string
-          description: Name of the utility associated with this tariff
-          example: Pacific Gas & Electric
     UtilityIntervalsStatementRangeUnavailableError:
       required:
       - error
@@ -635,111 +572,6 @@ components:
               type: string
               enum:
               - Unable to determine service window for the given utility statement.
-            type:
-              type: string
-              enum:
-              - BAD_REQUEST
-      additionalProperties: false
-    PaginatedUtilityStatements:
-      required:
-      - data
-      - total_count
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/UtilityStatement'
-        total_count:
-          type: integer
-          example: 1
-      additionalProperties: false
-    UtilityIntervalsBothAccountIdAndMeterIdProvided:
-      required:
-      - error
-      properties:
-        error:
-          type: object
-          required:
-          - description
-          - type
-          properties:
-            description:
-              type: string
-              enum:
-              - You must provide exactly one of the utility_account_id or utility_meter_id parameters.
-            type:
-              type: string
-              enum:
-              - BAD_REQUEST
-      additionalProperties: false
-    UtilityIntervalMetadataResponse:
-      required:
-      - intervals_earliest_time
-      - intervals_latest_time
-      properties:
-        intervals_earliest_time:
-          description: The earliest available interval data timestamp
-          type: string
-          format: date-time
-        intervals_latest_time:
-          description: The latest available interval data timestamp
-          type: string
-          format: date-time
-        utility_meter_id:
-          example: 1234
-          type: integer
-          nullable: true
-      additionalProperties: false
-    UtilityIntervalsInvalidTimeRange:
-      required:
-      - error
-      properties:
-        error:
-          type: object
-          required:
-          - description
-          - type
-          - details
-          properties:
-            description:
-              type: string
-              enum:
-              - Provided start_time and/or end_time are outside this account's available utility intervals time range. Please see details for the available time range.
-            type:
-              type: string
-              enum:
-              - BAD_REQUEST
-            details:
-              anyOf:
-              - type: 'null'
-              - type: object
-                required:
-                - intervals_earliest_time
-                - intervals_latest_time
-                properties:
-                  intervals_earliest_time:
-                    type: string
-                    format: date-time
-                    example: '2021-03-19T08:00:00-07:00'
-                  intervals_latest_time:
-                    type: string
-                    format: date-time
-                    example: '2022-03-19T08:00:00-07:00'
-      additionalProperties: false
-    UtilityIntervalsInvalidMeterServiceTypeError:
-      required:
-      - error
-      properties:
-        error:
-          type: object
-          required:
-          - description
-          - type
-          properties:
-            description:
-              type: string
-              enum:
-              - Arcadia does not currently support interval data for non-electric utility meters.
             type:
               type: string
               enum:
@@ -799,10 +631,11 @@ components:
           format: date
           example: '2019-08-24'
         due_date:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date
           example: '2019-09-24'
-          nullable: true
         service_start_date:
           type: string
           format: date
@@ -826,8 +659,9 @@ components:
             **Note**: Not available for all utilities.
 
             '
-          type: number
-          nullable: true
+          type:
+          - number
+          - 'null'
         gas_charge:
           example: 23.32
           description: 'Total dollar amount billed by the utility for natural gas.
@@ -836,12 +670,14 @@ components:
             **Note**: Not available for all utilities that provide gas service.
 
             '
-          type: number
-          nullable: true
+          type:
+          - number
+          - 'null'
         past_due:
-          type: boolean
+          type:
+          - boolean
+          - 'null'
           example: false
-          nullable: true
         created_at:
           type: string
           format: date-time
@@ -854,13 +690,15 @@ components:
         pdf_url:
           format: uri
           description: A url to the utility created PDF bill for this statement. Note that this url will only be valid for 600 seconds.
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         final_bill:
           description: Indicates if this is the final bill that this account will receive before closing.
           example: false
-          type: boolean
-          nullable: true
+          type:
+          - boolean
+          - 'null'
         service_window_inclusive_of_end_date:
           type: boolean
           example: true
@@ -876,8 +714,9 @@ components:
               current_cycle_generated_kwh:
                 description: The kwh generated during the current cycle
                 example: 40.57
-                type: number
-                nullable: true
+                type:
+                - number
+                - 'null'
         virtual_net_metering:
           anyOf:
           - type: 'null'
@@ -899,58 +738,69 @@ components:
               current_cycle_generated_credits:
                 description: The amount of credits generated during the current cycle, in dollars
                 example: 100.15
-                type: number
-                nullable: true
+                type:
+                - number
+                - 'null'
               current_cycle_applied_credits:
                 description: The amount of credits applied during the current cycle, in dollars
                 example: 90.33
-                type: number
-                nullable: true
+                type:
+                - number
+                - 'null'
               last_cycle_carry_over_credits:
                 description: The amount of credits carried over from the last cycle, in dollars
                 example: 3.83
-                type: number
-                nullable: true
+                type:
+                - number
+                - 'null'
               next_cycle_carry_over_credits:
                 description: The amount of credits carried over to the next cycle, in dollars
                 example: 5.99
-                type: number
-                nullable: true
+                type:
+                - number
+                - 'null'
               current_cycle_generated_kwh:
                 description: The kwh generated during the current cycle
                 example: 40
-                type: number
-                nullable: true
+                type:
+                - number
+                - 'null'
               current_cycle_applied_kwh:
                 description: The kwh applied during the current cycle
                 example: 30
-                type: number
-                nullable: true
+                type:
+                - number
+                - 'null'
               last_cycle_carry_over_kwh:
                 description: The kwh carried over to the next cycle
                 example: 5
-                type: number
-                nullable: true
+                type:
+                - number
+                - 'null'
               next_cycle_carry_over_kwh:
                 description: The kwh carried over to the next cycle
                 example: 10
-                type: number
-                nullable: true
+                type:
+                - number
+                - 'null'
               current_cycle_expiring_kwh:
                 description: the kwh that are expiring during the current cycle
                 example: 5
-                type: number
-                nullable: true
+                type:
+                - number
+                - 'null'
               current_cycle_allocation_percentage:
                 description: the fixed allocation percentage during the current cycle
                 example: '0.05'
-                type: string
-                nullable: true
+                type:
+                - string
+                - 'null'
               cdg_net_credit:
                 description: The net credit from the community solar project, in dollars
                 example: 10
-                type: number
-                nullable: true
+                type:
+                - number
+                - 'null'
         most_recent_payment_detail:
           anyOf:
           - type: 'null'
@@ -963,14 +813,16 @@ components:
               most_recent_payment_received_amount:
                 example: 50.5
                 description: Total dollar amount received on the most recent payment.
-                type: number
-                nullable: true
+                type:
+                - number
+                - 'null'
               most_recent_payment_received_date:
-                type: string
+                type:
+                - string
+                - 'null'
                 format: date
                 description: The date of the most recent payment.
                 example: '2023-08-24'
-                nullable: true
         commercial_line_items_detail:
           anyOf:
           - type: 'null'
@@ -998,77 +850,96 @@ components:
             - electric_charge
             properties:
               supply_energy_kwh:
-                type: number
-                nullable: true
+                type:
+                - number
+                - 'null'
               supply_energy_cost:
                 description: The energy supply cost, in dollars.
-                type: number
-                nullable: true
+                type:
+                - number
+                - 'null'
               supply_demand_kw:
-                type: number
-                nullable: true
+                type:
+                - number
+                - 'null'
               supply_demand_cost:
                 description: The demand supply cost, in dollars.
-                type: number
-                nullable: true
+                type:
+                - number
+                - 'null'
               supply_customer_charge:
                 description: The customer charge for energy supply, in dollars.
-                type: number
-                nullable: true
+                type:
+                - number
+                - 'null'
               supply_merchant_function_charge:
                 description: The charge for merchant function in energy supply, in dollars.
-                type: number
-                nullable: true
+                type:
+                - number
+                - 'null'
               supply_taxes:
                 description: Any other charges for taxes on energy supply, in dollars.
-                type: number
-                nullable: true
+                type:
+                - number
+                - 'null'
               supply_total_charge:
                 description: The total cost of energy supply, in dollars.
-                type: number
-                nullable: true
+                type:
+                - number
+                - 'null'
               delivery_energy_kwh:
-                type: number
-                nullable: true
+                type:
+                - number
+                - 'null'
               delivery_energy_cost:
                 description: The energy delivery cost, in dollars.
-                type: number
-                nullable: true
+                type:
+                - number
+                - 'null'
               delivery_demand_kw:
-                type: number
-                nullable: true
+                type:
+                - number
+                - 'null'
               delivery_demand_cost:
                 description: The demand delivery cost, in dollars.
-                type: number
-                nullable: true
+                type:
+                - number
+                - 'null'
               delivery_customer_charge:
                 description: The customer charge for energy delivery, in dollars.
-                type: number
-                nullable: true
+                type:
+                - number
+                - 'null'
               delivery_system_benefit_cost:
                 description: The delivery system benefit cost, in dollars.
-                type: number
-                nullable: true
+                type:
+                - number
+                - 'null'
               delivery_processing_charge:
                 description: The delivery processing charge, in dollars.
-                type: number
-                nullable: true
+                type:
+                - number
+                - 'null'
               delivery_taxes:
                 description: Any other charges for taxes on energy delivery, in dollars.
-                type: number
-                nullable: true
+                type:
+                - number
+                - 'null'
               delivery_total_charge:
                 description: The total cost of energy delivery, in dollars.
-                type: number
-                nullable: true
+                type:
+                - number
+                - 'null'
               sales_tax:
                 description: Sales taxes applied to the total bill, in dollars.
-                type: number
-                nullable: true
+                type:
+                - number
+                - 'null'
               electric_charge:
                 description: The total combined charge for this bill - supply, delivery, and taxes - in dollars.
-                type: number
-                nullable: true
+                type:
+                - number
+                - 'null'
         billing_flags:
           type: array
           description: These flags may be of interest if the corresponding Utility Account is enrolled in Bundle.
@@ -1085,6 +956,51 @@ components:
                 properties:
                   conflicting_utility_statment_id:
                     type: integer
+      additionalProperties: false
+    UtilityIntervalsInvalidTimeRange:
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - description
+          - type
+          - details
+          properties:
+            description:
+              type: string
+              enum:
+              - Provided start_time and/or end_time are outside this account's available utility intervals time range. Please see details for the available time range.
+            type:
+              type: string
+              enum:
+              - BAD_REQUEST
+            details:
+              anyOf:
+              - type: 'null'
+              - type: object
+                required:
+                - intervals_earliest_time
+                - intervals_latest_time
+                properties:
+                  intervals_earliest_time:
+                    type: string
+                    format: date-time
+                    example: '2021-03-19T08:00:00-07:00'
+                  intervals_latest_time:
+                    type: string
+                    format: date-time
+                    example: '2022-03-19T08:00:00-07:00'
+      additionalProperties: false
+    UtilityAccountNotFoundError:
+      required:
+      - error
+      properties:
+        error:
+          type: string
+          enum:
+          - Couldn't find UtilityAccount
       additionalProperties: false
     UtilityIntervalsPerStatementDataResponse:
       required:
@@ -1115,7 +1031,118 @@ components:
           items:
             $ref: '#/components/schemas/UtilityIntervalItem'
       additionalProperties: false
-    UtilityIntervalsAmbiguousMeterError:
+    Tariff:
+      description: Information about a tariff.
+      required:
+      - main_tariff_id
+      - tariff_code
+      - tariff_name
+      - utility_name
+      properties:
+        main_tariff_id:
+          type: string
+          description: The Genability 'masterTariffId' unique identifier for this tariff. See [Genability documentation](https://developer.genability.com/api-reference/tariff-api/tariff/) for details.
+          example: gen_mtid_3331108
+        property_inputs:
+          description: Properties applied to this tariff which may affect the calculated cost of electricity.
+          type: array
+          items:
+            type: object
+            required:
+            - id
+            - value
+            properties:
+              id:
+                type: string
+                example: territoryId
+              value:
+                type: boolean
+                example: 3
+        supplier_name:
+          description: The name of the retail electricity supplier or the community choice aggregator. If there is no retail electricity supplier or community choice aggregator, this field is null.
+          example: East Bay Community Energy
+          type:
+          - string
+          - 'null'
+        tariff_code:
+          type: string
+          description: Abbreviation code of the tariff used for this calculation.
+          example: EV-2A-TOU
+        tariff_name:
+          type: string
+          description: Full name of the tariff used for this calculation.
+          example: Residential - Time of Use - Plug-In Electric Vehicle 2
+        utility_name:
+          type: string
+          description: Name of the utility associated with this tariff
+          example: Pacific Gas & Electric
+    UtilityIntervalDataResponse:
+      required:
+      - client_user_id
+      - utility_account_id
+      - intervals_earliest_time
+      - intervals_latest_time
+      - utility_meter_id
+      - data
+      properties:
+        client_user_id:
+          type: string
+          example: fff57dc7-3a2b-4395-8a62-e3486d46dabe
+        utility_account_id:
+          type: integer
+        utility_meter_id:
+          example: 1234
+          type:
+          - integer
+          - 'null'
+        intervals_earliest_time:
+          description: The earliest available interval data timestamp
+          type: string
+          format: date-time
+        intervals_latest_time:
+          description: The latest available interval data timestamp
+          type: string
+          format: date-time
+        batch_start_time:
+          description: The starting timestamp for the interval data included in this response
+          type: string
+          format: date-time
+        batch_end_time:
+          description: The ending timestamp for the interval data included in this response
+          type: string
+          format: date-time
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UtilityIntervalItem'
+      additionalProperties: false
+    UtilityIntervalsFeatureAvailabilityError:
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - description
+          - type
+          - details
+          properties:
+            description:
+              type: string
+              enum:
+              - The utility_intervals feature is not available for this UtilityAccount.
+              - The utility_intervals feature is not ready yet. Please refer to UtilityAccount#FeatureAvailability for updates.
+              - Parameter(s) start_time and/or end_time cannot be used with utility_statement_id parameter.
+            type:
+              type: string
+              enum:
+              - BAD_REQUEST
+            details:
+              type:
+              - object
+              - 'null'
+      additionalProperties: false
+    UtilityIntervalsNoDataForMeterError:
       required:
       - error
       properties:
@@ -1128,11 +1155,30 @@ components:
             description:
               type: string
               enum:
-              - This utility account is associated with multiple meters. You must filter interval data by utility_meter_id instead of utility_account_id when the utility account is associated with multiple meters.
+              - There are no utility intervals available for this utility meter.
             type:
               type: string
               enum:
-              - BAD_REQUEST
+              - NOT_FOUND
+      additionalProperties: false
+    UtilityIntervalMetadataResponse:
+      required:
+      - intervals_earliest_time
+      - intervals_latest_time
+      properties:
+        intervals_earliest_time:
+          description: The earliest available interval data timestamp
+          type: string
+          format: date-time
+        intervals_latest_time:
+          description: The latest available interval data timestamp
+          type: string
+          format: date-time
+        utility_meter_id:
+          example: 1234
+          type:
+          - integer
+          - 'null'
       additionalProperties: false
   headers:
     ArcVersion:

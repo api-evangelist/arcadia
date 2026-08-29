@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Arcadia API Reference Auth Users API
+  title: Arcadia API Reference Users API
   version: 0.3.0
   contact:
     email: platformsupport@arcadia.com
@@ -106,205 +106,58 @@ paths:
               schema:
                 $ref: '#/components/schemas/DeleteUserError'
 components:
+  parameters:
+    clientUserIdInPathParam:
+      name: client_user_id
+      in: path
+      required: true
+      schema:
+        type: string
+    paginationUpdatedAfterParam:
+      in: query
+      name: updated_after
+      required: false
+      description: ISO8601 datetime, used to traverse paginated responses. Use of this parameter is mutually exclusive with `updated_before`.
+      schema:
+        type: string
+        format: date-time
+    paginationOrderParam:
+      in: query
+      name: order
+      required: false
+      description: Used to specify the order in which records should be returned. Currently ordered by `updated_at` timestamp.
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+        default: desc
+    paginationUpdatedBeforeParam:
+      in: query
+      name: updated_before
+      required: false
+      description: ISO8601 datetime, used to traverse paginated responses. Use of this parameter is mutually exclusive with `updated_after`.
+      schema:
+        type: string
+        format: date-time
+    arcVersionInHeaderParam:
+      name: Arcadia-Version
+      in: header
+      example: '2022-10-13'
+      description: The Arcadia-Version for the request
+      required: true
+      schema:
+        type: string
+        default: '2022-10-13'
+    paginationLimitParam:
+      in: query
+      name: limit
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 10
   schemas:
-    DeleteUserError:
-      required:
-      - error
-      properties:
-        error:
-          type: object
-          required:
-          - description
-          - type
-          - details
-          properties:
-            description:
-              type: string
-              enum:
-              - Cannot delete a User who is pending_enrollment, enrolled, or pending unenrollment in a Bundle Product
-            type:
-              type: string
-              enum:
-              - BAD_REQUEST
-            details:
-              type: object
-              nullable: true
-      additionalProperties: false
-    FeatureAvailability:
-      required:
-      - charge_cost
-      - hosted_payments
-      - utility_remittance
-      - smart_charge
-      - utility_intervals
-      - utility_statements
-      properties:
-        charge_cost:
-          $ref: '#/components/schemas/Availability'
-        smart_charge:
-          $ref: '#/components/schemas/Availability'
-        utility_intervals:
-          $ref: '#/components/schemas/Availability'
-        utility_statements:
-          $ref: '#/components/schemas/Availability'
-        hosted_payments:
-          $ref: '#/components/schemas/Availability'
-        utility_remittance:
-          $ref: '#/components/schemas/Availability'
-      additionalProperties: false
-    PaginatedUsers:
-      required:
-      - data
-      - total_count
-      properties:
-        data:
-          type: array
-          items:
-            type: object
-            required:
-            - client_user_id
-            - created_at
-            - updated_at
-            properties:
-              client_user_id:
-                type: string
-                example: fff57dc7-3a2b-4395-8a62-e3712d46dafl
-              created_at:
-                type: string
-                format: date-time
-              updated_at:
-                type: string
-                format: date-time
-        total_count:
-          type: integer
-          example: 1
-      additionalProperties: false
-    Tariff:
-      description: Information about a tariff.
-      required:
-      - main_tariff_id
-      - tariff_code
-      - tariff_name
-      - utility_name
-      properties:
-        main_tariff_id:
-          type: string
-          description: The Genability 'masterTariffId' unique identifier for this tariff. See [Genability documentation](https://developer.genability.com/api-reference/tariff-api/tariff/) for details.
-          example: gen_mtid_3331108
-        property_inputs:
-          description: Properties applied to this tariff which may affect the calculated cost of electricity.
-          type: array
-          items:
-            type: object
-            required:
-            - id
-            - value
-            properties:
-              id:
-                type: string
-                example: territoryId
-              value:
-                type: boolean
-                example: 3
-        supplier_name:
-          description: The name of the retail electricity supplier or the community choice aggregator. If there is no retail electricity supplier or community choice aggregator, this field is null.
-          example: East Bay Community Energy
-          type: string
-          nullable: true
-        tariff_code:
-          type: string
-          description: Abbreviation code of the tariff used for this calculation.
-          example: EV-2A-TOU
-        tariff_name:
-          type: string
-          description: Full name of the tariff used for this calculation.
-          example: Residential - Time of Use - Plug-In Electric Vehicle 2
-        utility_name:
-          type: string
-          description: Name of the utility associated with this tariff
-          example: Pacific Gas & Electric
-    UtilityCredential:
-      required:
-      - created_at
-      - id
-      - updated_at
-      - client_user_id
-      - username
-      - utility_name
-      - utility_long_name
-      - verification_status
-      - accounts_load_in_progress
-      - verification_updated_at
-      - sandboxed
-      - uses_test_scenario
-      properties:
-        id:
-          type: integer
-          example: 12345
-        client_user_id:
-          type: string
-          example: fff57dc7-3a2b-4395-8a62-e3486d46dabe
-        utility_name:
-          type: string
-          example: AEP SWEPCO
-          description: The list of supported Arcadia utilities can be found [here](https://arc.arcadia.com/coverage?first=25&page=1).
-        utility_long_name:
-          type: string
-          example: AEP SWEPCO AR
-          description: Provides greater detail than `utility_name`. The list of supported Arcadia utilities can be found [here](https://arc.arcadia.com/coverage?first=25&page=1).
-        username:
-          type: string
-          example: great_customer
-          nullable: true
-        verification_status:
-          type: string
-          enum:
-          - pending
-          - verified
-          - rejected
-          - error
-          description: 'The verification status of the Utility Credential.
-
-
-            * `pending`: Credential verification is pending
-
-            * `verified`: The credentials were found to be correct
-
-            * `rejected`: The credentials were found to be incorrect
-
-            * `error`: There was an error attempting to verify the credentials. This status _may_ be transient, as Arcadia will continue to retry verification in the background.
-
-            '
-        accounts_load_in_progress:
-          type: boolean
-          example: false
-          description: 'Indicates if Arcadia is in the process of verifying a utility credential or loading associated utility accounts. The combination of `verification_status: verified` and `account_load_in_progress: false` will indicate that utility accounts are available in the API. Alternatively, the `utility_accounts_discovered` webhook will alert you when utility accounts are available in the API.'
-        verification_updated_at:
-          format: date-time
-          type: string
-          nullable: true
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        sandboxed:
-          type: boolean
-          example: false
-        uses_test_scenario:
-          type: boolean
-          example: false
-          description: Indicates if the utility credential was created using a designated test username and password.
-    UserNotFoundError:
-      required:
-      - error
-      properties:
-        error:
-          type: string
-          enum:
-          - Couldn't find User
-      additionalProperties: false
     UtilityMeter:
       required:
       - id
@@ -347,6 +200,45 @@ components:
         sandboxed:
           type: boolean
           example: false
+      additionalProperties: false
+    Availability:
+      type: string
+      enum:
+      - AVAILABLE
+      - NOT_AVAILABLE
+      - NOT_READY
+    DeleteUserError:
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - description
+          - type
+          - details
+          properties:
+            description:
+              type: string
+              enum:
+              - Cannot delete a User who is pending_enrollment, enrolled, or pending unenrollment in a Bundle Product
+            type:
+              type: string
+              enum:
+              - BAD_REQUEST
+            details:
+              type:
+              - object
+              - 'null'
+      additionalProperties: false
+    UserNotFoundError:
+      required:
+      - error
+      properties:
+        error:
+          type: string
+          enum:
+          - Couldn't find User
       additionalProperties: false
     UtilityAccount:
       required:
@@ -391,41 +283,49 @@ components:
           type: integer
           example: 54321
         account_number:
-          type: string
+          type:
+          - string
+          - 'null'
           example: '7626177069'
           description: The account number used by the utility to identify this UtilityAccount
-          nullable: true
         service_address_street_one:
           example: 1060 W Addison
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         service_address_street_two:
           example: Apartment 1
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         service_address_city:
           example: Chicago
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         service_address_state:
           example: IL
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         service_address_zip:
           example: '60613'
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         service_customer_name:
           example: Joan Arcadia
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         supplier_account_id:
           example: '123456789'
           description: 'Utility specific account identifier for energy suppliers.
 
             '
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         status:
           anyOf:
           - type: 'null'
@@ -470,26 +370,77 @@ components:
           type: boolean
           example: false
       additionalProperties: false
-    UserDataExceedsLimitsError:
+    Tariff:
+      description: Information about a tariff.
       required:
-      - error
+      - main_tariff_id
+      - tariff_code
+      - tariff_name
+      - utility_name
       properties:
-        error:
-          type: object
-          required:
-          - description
-          - type
-          - details
-          properties:
-            description:
-              type: string
-            type:
-              type: string
-              enum:
-              - BAD_REQUEST
-            details:
-              type: object
-              nullable: true
+        main_tariff_id:
+          type: string
+          description: The Genability 'masterTariffId' unique identifier for this tariff. See [Genability documentation](https://developer.genability.com/api-reference/tariff-api/tariff/) for details.
+          example: gen_mtid_3331108
+        property_inputs:
+          description: Properties applied to this tariff which may affect the calculated cost of electricity.
+          type: array
+          items:
+            type: object
+            required:
+            - id
+            - value
+            properties:
+              id:
+                type: string
+                example: territoryId
+              value:
+                type: boolean
+                example: 3
+        supplier_name:
+          description: The name of the retail electricity supplier or the community choice aggregator. If there is no retail electricity supplier or community choice aggregator, this field is null.
+          example: East Bay Community Energy
+          type:
+          - string
+          - 'null'
+        tariff_code:
+          type: string
+          description: Abbreviation code of the tariff used for this calculation.
+          example: EV-2A-TOU
+        tariff_name:
+          type: string
+          description: Full name of the tariff used for this calculation.
+          example: Residential - Time of Use - Plug-In Electric Vehicle 2
+        utility_name:
+          type: string
+          description: Name of the utility associated with this tariff
+          example: Pacific Gas & Electric
+    PaginatedUsers:
+      required:
+      - data
+      - total_count
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            required:
+            - client_user_id
+            - created_at
+            - updated_at
+            properties:
+              client_user_id:
+                type: string
+                example: fff57dc7-3a2b-4395-8a62-e3712d46dafl
+              created_at:
+                type: string
+                format: date-time
+              updated_at:
+                type: string
+                format: date-time
+        total_count:
+          type: integer
+          example: 1
       additionalProperties: false
     User:
       required:
@@ -516,6 +467,125 @@ components:
                   type: array
                   items:
                     $ref: '#/components/schemas/UtilityAccount'
+    UserDataExceedsLimitsError:
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - description
+          - type
+          - details
+          properties:
+            description:
+              type: string
+            type:
+              type: string
+              enum:
+              - BAD_REQUEST
+            details:
+              type:
+              - object
+              - 'null'
+      additionalProperties: false
+    UtilityCredential:
+      required:
+      - created_at
+      - id
+      - updated_at
+      - client_user_id
+      - username
+      - utility_name
+      - utility_long_name
+      - verification_status
+      - accounts_load_in_progress
+      - verification_updated_at
+      - sandboxed
+      - uses_test_scenario
+      properties:
+        id:
+          type: integer
+          example: 12345
+        client_user_id:
+          type: string
+          example: fff57dc7-3a2b-4395-8a62-e3486d46dabe
+        utility_name:
+          type: string
+          example: AEP SWEPCO
+          description: The list of supported Arcadia utilities can be found [here](https://arc.arcadia.com/coverage?first=25&page=1).
+        utility_long_name:
+          type: string
+          example: AEP SWEPCO AR
+          description: Provides greater detail than `utility_name`. The list of supported Arcadia utilities can be found [here](https://arc.arcadia.com/coverage?first=25&page=1).
+        username:
+          type:
+          - string
+          - 'null'
+          example: great_customer
+        verification_status:
+          type: string
+          enum:
+          - pending
+          - verified
+          - rejected
+          - error
+          description: 'The verification status of the Utility Credential.
+
+
+            * `pending`: Credential verification is pending
+
+            * `verified`: The credentials were found to be correct
+
+            * `rejected`: The credentials were found to be incorrect
+
+            * `error`: There was an error attempting to verify the credentials. This status _may_ be transient, as Arcadia will continue to retry verification in the background.
+
+            '
+        accounts_load_in_progress:
+          type: boolean
+          example: false
+          description: 'Indicates if Arcadia is in the process of verifying a utility credential or loading associated utility accounts. The combination of `verification_status: verified` and `account_load_in_progress: false` will indicate that utility accounts are available in the API. Alternatively, the `utility_accounts_discovered` webhook will alert you when utility accounts are available in the API.'
+        verification_updated_at:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        sandboxed:
+          type: boolean
+          example: false
+        uses_test_scenario:
+          type: boolean
+          example: false
+          description: Indicates if the utility credential was created using a designated test username and password.
+    FeatureAvailability:
+      required:
+      - charge_cost
+      - hosted_payments
+      - utility_remittance
+      - smart_charge
+      - utility_intervals
+      - utility_statements
+      properties:
+        charge_cost:
+          $ref: '#/components/schemas/Availability'
+        smart_charge:
+          $ref: '#/components/schemas/Availability'
+        utility_intervals:
+          $ref: '#/components/schemas/Availability'
+        utility_statements:
+          $ref: '#/components/schemas/Availability'
+        hosted_payments:
+          $ref: '#/components/schemas/Availability'
+        utility_remittance:
+          $ref: '#/components/schemas/Availability'
+      additionalProperties: false
     MostRecentTariff:
       allOf:
       - $ref: '#/components/schemas/Tariff'
@@ -524,68 +594,12 @@ components:
         - tariff_as_of_date
         properties:
           tariff_as_of_date:
-            type: string
+            type:
+            - string
+            - 'null'
             format: date
             description: The statement date of the utility statement that reported use of this tariff.
             example: '2021-03-01'
-            nullable: true
-    Availability:
-      type: string
-      enum:
-      - AVAILABLE
-      - NOT_AVAILABLE
-      - NOT_READY
-  parameters:
-    paginationLimitParam:
-      in: query
-      name: limit
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        default: 10
-    paginationOrderParam:
-      in: query
-      name: order
-      required: false
-      description: Used to specify the order in which records should be returned. Currently ordered by `updated_at` timestamp.
-      schema:
-        type: string
-        enum:
-        - asc
-        - desc
-        default: desc
-    clientUserIdInPathParam:
-      name: client_user_id
-      in: path
-      required: true
-      schema:
-        type: string
-    arcVersionInHeaderParam:
-      name: Arcadia-Version
-      in: header
-      example: '2022-10-13'
-      description: The Arcadia-Version for the request
-      required: true
-      schema:
-        type: string
-        default: '2022-10-13'
-    paginationUpdatedBeforeParam:
-      in: query
-      name: updated_before
-      required: false
-      description: ISO8601 datetime, used to traverse paginated responses. Use of this parameter is mutually exclusive with `updated_after`.
-      schema:
-        type: string
-        format: date-time
-    paginationUpdatedAfterParam:
-      in: query
-      name: updated_after
-      required: false
-      description: ISO8601 datetime, used to traverse paginated responses. Use of this parameter is mutually exclusive with `updated_before`.
-      schema:
-        type: string
-        format: date-time
   headers:
     ArcVersion:
       description: The Arcadia-Version for the response

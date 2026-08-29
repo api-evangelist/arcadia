@@ -1,30 +1,43 @@
 {
   "provider": "arcadia",
   "sources": [
-    "arcadia-auth-api-openapi.yml",
-    "arcadia-bundle-beta-api-openapi.yml",
-    "arcadia-plug-api-openapi.yml",
-    "arcadia-spark-api-openapi.yml",
-    "arcadia-users-api-openapi.yml",
-    "arcadia-utility-accounts-api-openapi.yml",
-    "arcadia-utility-credentials-api-openapi.yml",
-    "arcadia-utility-meters-beta-api-openapi.yml",
-    "arcadia-webhooks-api-openapi.yml"
+    "_original/arcadia-plug-openapi.yml"
   ],
   "outputs": [
     "arcadia-auth-api-openapi.yml",
     "arcadia-bundle-beta-api-openapi.yml",
+    "arcadia-bundle-webhook-events-api-openapi.yml",
     "arcadia-plug-api-openapi.yml",
     "arcadia-spark-api-openapi.yml",
     "arcadia-users-api-openapi.yml",
     "arcadia-utility-accounts-api-openapi.yml",
     "arcadia-utility-credentials-api-openapi.yml",
     "arcadia-utility-meters-beta-api-openapi.yml",
+    "arcadia-webhook-events-api-openapi.yml",
     "arcadia-webhooks-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "arcadia-plug-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "arcadia-plug-openapi.yml: declared missing tag: Bundle Webhook Events",
+    "arcadia-plug-openapi.yml: declared missing tag: Users",
+    "arcadia-plug-openapi.yml: declared missing tag: Utility Accounts",
+    "arcadia-plug-openapi.yml: declared missing tag: Utility Credentials",
+    "arcadia-plug-openapi.yml: declared missing tag: Utility Meters (Beta)",
+    "arcadia-plug-openapi.yml: declared missing tag: Webhook Events"
+  ],
+  "skipped": [
+    "arcadia-auth-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "arcadia-bundle-beta-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "arcadia-plug-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "arcadia-spark-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "arcadia-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "arcadia-utility-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "arcadia-utility-credentials-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "arcadia-utility-meters-beta-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "arcadia-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

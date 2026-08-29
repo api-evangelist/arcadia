@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Arcadia API Reference Auth API
   version: 0.3.0
@@ -250,7 +250,110 @@ paths:
               schema:
                 $ref: '#/components/schemas/PingUnauthorizedError'
 components:
+  parameters:
+    arcVersionInHeaderParam:
+      name: Arcadia-Version
+      in: header
+      example: '2022-10-13'
+      description: The Arcadia-Version for the request
+      required: true
+      schema:
+        type: string
+        default: '2022-10-13'
   schemas:
+    ConnectTokenTooManyParametersError:
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - description
+          - type
+          - details
+          properties:
+            description:
+              type: string
+              enum:
+              - You cannot pass both client_user_id and utility_credential_id. Please only pass one
+            type:
+              type: string
+              enum:
+              - INVALID_PARAMATERS
+            details:
+              type:
+              - object
+              - 'null'
+      additionalProperties: false
+    ConnectTokenUnauthorizedError:
+      required:
+      - error
+      properties:
+        error:
+          type: string
+          enum:
+          - Unknown or invalid access token
+      additionalProperties: false
+    ConnectTokenUnprocessableEntityError:
+      required:
+      - error
+      properties:
+        error:
+          type: string
+          enum:
+          - 'Param is missing or the value is empty: client_user_id or utility_credential_id'
+      additionalProperties: false
+    ConnectUrlVariantError:
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - description
+          - type
+          - details
+          properties:
+            description:
+              type: string
+              enum:
+              - You can only pass in 'connect' or 'tariff' as the variant.
+            type:
+              type: string
+              enum:
+              - INVALID_VARIANT
+            details:
+              type:
+              - object
+              - 'null'
+      additionalProperties: false
+    AccessTokenUnauthorizedError:
+      required:
+      - error
+      properties:
+        error:
+          type: string
+          enum:
+          - The supplied credentials are invalid.
+      additionalProperties: false
+    UtilityCredentialNotFoundError:
+      required:
+      - error
+      properties:
+        error:
+          type: string
+          enum:
+          - Couldn't find UtilityCredential
+      additionalProperties: false
+    ConnectUrlResponse:
+      required:
+      - connect_url
+      properties:
+        connect_url:
+          type: string
+          description: The url to be used for initializing standalone Connect.
+          example: https://connect.arcadia.com?token=QYEPoBOJWc4bV_XpIzJdr8BLG4RdK6h68AP672nab4f
+      additionalProperties: false
     AccessTokenResponse:
       required:
       - access_token
@@ -294,97 +397,6 @@ components:
           enum:
           - Unknown or invalid access token
       additionalProperties: false
-    AccessTokenUnauthorizedError:
-      required:
-      - error
-      properties:
-        error:
-          type: string
-          enum:
-          - The supplied credentials are invalid.
-      additionalProperties: false
-    UtilityCredentialNotFoundError:
-      required:
-      - error
-      properties:
-        error:
-          type: string
-          enum:
-          - Couldn't find UtilityCredential
-      additionalProperties: false
-    ConnectTokenUnauthorizedError:
-      required:
-      - error
-      properties:
-        error:
-          type: string
-          enum:
-          - Unknown or invalid access token
-      additionalProperties: false
-    ConnectTokenUnprocessableEntityError:
-      required:
-      - error
-      properties:
-        error:
-          type: string
-          enum:
-          - 'Param is missing or the value is empty: client_user_id or utility_credential_id'
-      additionalProperties: false
-    ConnectUrlVariantError:
-      required:
-      - error
-      properties:
-        error:
-          type: object
-          required:
-          - description
-          - type
-          - details
-          properties:
-            description:
-              type: string
-              enum:
-              - You can only pass in 'connect' or 'tariff' as the variant.
-            type:
-              type: string
-              enum:
-              - INVALID_VARIANT
-            details:
-              type: object
-              nullable: true
-      additionalProperties: false
-    ConnectUrlResponse:
-      required:
-      - connect_url
-      properties:
-        connect_url:
-          type: string
-          description: The url to be used for initializing standalone Connect.
-          example: https://connect.arcadia.com?token=QYEPoBOJWc4bV_XpIzJdr8BLG4RdK6h68AP672nab4f
-      additionalProperties: false
-    ConnectTokenTooManyParametersError:
-      required:
-      - error
-      properties:
-        error:
-          type: object
-          required:
-          - description
-          - type
-          - details
-          properties:
-            description:
-              type: string
-              enum:
-              - You cannot pass both client_user_id and utility_credential_id. Please only pass one
-            type:
-              type: string
-              enum:
-              - INVALID_PARAMATERS
-            details:
-              type: object
-              nullable: true
-      additionalProperties: false
     PingResponse:
       required:
       - pong
@@ -394,16 +406,6 @@ components:
           description: Always true
           example: true
       additionalProperties: false
-  parameters:
-    arcVersionInHeaderParam:
-      name: Arcadia-Version
-      in: header
-      example: '2022-10-13'
-      description: The Arcadia-Version for the request
-      required: true
-      schema:
-        type: string
-        default: '2022-10-13'
   headers:
     ArcVersion:
       description: The Arcadia-Version for the response
