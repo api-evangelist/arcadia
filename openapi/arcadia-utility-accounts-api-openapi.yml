@@ -57,6 +57,69 @@ paths:
                 $ref: '#/components/schemas/UtilityAccount'
 components:
   schemas:
+    MostRecentTariff:
+      allOf:
+      - $ref: '#/components/schemas/Tariff'
+      - description: The most recent Tariff seen on this utility account.
+        required:
+        - tariff_as_of_date
+        properties:
+          tariff_as_of_date:
+            type:
+            - string
+            - 'null'
+            format: date
+            description: The statement date of the utility statement that reported use of this tariff.
+            example: '2021-03-01'
+    UtilityMeter:
+      required:
+      - id
+      - client_user_id
+      - utility_credential_id
+      - utility_account_id
+      - meter_number
+      - service_type
+      - created_at
+      - updated_at
+      - sandboxed
+      properties:
+        id:
+          type: integer
+          example: 12345
+        client_user_id:
+          type: string
+          example: fff57dc7-3a2b-4395-8a62-e3486d46dabe
+        utility_credential_id:
+          type: integer
+          example: 54321
+        utility_account_id:
+          type: integer
+          example: 65432
+        meter_number:
+          type: string
+          example: 12300000045 67
+        service_type:
+          type: string
+          enum:
+          - electric
+          - gas
+          - water
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        sandboxed:
+          type: boolean
+          example: false
+      additionalProperties: false
+    Availability:
+      type: string
+      enum:
+      - AVAILABLE
+      - NOT_AVAILABLE
+      - NOT_READY
     Tariff:
       description: Information about a tariff.
       required:
@@ -102,91 +165,6 @@ components:
           type: string
           description: Name of the utility associated with this tariff
           example: Pacific Gas & Electric
-    UtilityMeter:
-      required:
-      - id
-      - client_user_id
-      - utility_credential_id
-      - utility_account_id
-      - meter_number
-      - service_type
-      - created_at
-      - updated_at
-      - sandboxed
-      properties:
-        id:
-          type: integer
-          example: 12345
-        client_user_id:
-          type: string
-          example: fff57dc7-3a2b-4395-8a62-e3486d46dabe
-        utility_credential_id:
-          type: integer
-          example: 54321
-        utility_account_id:
-          type: integer
-          example: 65432
-        meter_number:
-          type: string
-          example: 12300000045 67
-        service_type:
-          type: string
-          enum:
-          - electric
-          - gas
-          - water
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        sandboxed:
-          type: boolean
-          example: false
-      additionalProperties: false
-    FeatureAvailability:
-      required:
-      - charge_cost
-      - hosted_payments
-      - utility_remittance
-      - smart_charge
-      - utility_intervals
-      - utility_statements
-      properties:
-        charge_cost:
-          $ref: '#/components/schemas/Availability'
-        smart_charge:
-          $ref: '#/components/schemas/Availability'
-        utility_intervals:
-          $ref: '#/components/schemas/Availability'
-        utility_statements:
-          $ref: '#/components/schemas/Availability'
-        hosted_payments:
-          $ref: '#/components/schemas/Availability'
-        utility_remittance:
-          $ref: '#/components/schemas/Availability'
-      additionalProperties: false
-    MostRecentTariff:
-      allOf:
-      - $ref: '#/components/schemas/Tariff'
-      - description: The most recent Tariff seen on this utility account.
-        required:
-        - tariff_as_of_date
-        properties:
-          tariff_as_of_date:
-            type:
-            - string
-            - 'null'
-            format: date
-            description: The statement date of the utility statement that reported use of this tariff.
-            example: '2021-03-01'
-    Availability:
-      type: string
-      enum:
-      - AVAILABLE
-      - NOT_AVAILABLE
-      - NOT_READY
     UtilityAccount:
       required:
       - id
@@ -317,6 +295,28 @@ components:
           type: boolean
           example: false
       additionalProperties: false
+    FeatureAvailability:
+      required:
+      - charge_cost
+      - hosted_payments
+      - utility_remittance
+      - smart_charge
+      - utility_intervals
+      - utility_statements
+      properties:
+        charge_cost:
+          $ref: '#/components/schemas/Availability'
+        smart_charge:
+          $ref: '#/components/schemas/Availability'
+        utility_intervals:
+          $ref: '#/components/schemas/Availability'
+        utility_statements:
+          $ref: '#/components/schemas/Availability'
+        hosted_payments:
+          $ref: '#/components/schemas/Availability'
+        utility_remittance:
+          $ref: '#/components/schemas/Availability'
+      additionalProperties: false
     PaginatedUtilityAccounts:
       required:
       - data
@@ -331,6 +331,23 @@ components:
           example: 1
       additionalProperties: false
   parameters:
+    arcVersionInHeaderParam:
+      name: Arcadia-Version
+      in: header
+      example: '2022-10-13'
+      description: The Arcadia-Version for the request
+      required: true
+      schema:
+        type: string
+        default: '2022-10-13'
+    paginationUpdatedAfterParam:
+      in: query
+      name: updated_after
+      required: false
+      description: ISO8601 datetime, used to traverse paginated responses. Use of this parameter is mutually exclusive with `updated_before`.
+      schema:
+        type: string
+        format: date-time
     clientUserIdQueryParam:
       in: query
       name: client_user_id
@@ -338,6 +355,28 @@ components:
       description: A client_user_id to filter the list of returned items by.
       schema:
         type: string
+    paginationLimitParam:
+      in: query
+      name: limit
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 10
+    utilityAccountIdInPathParam:
+      name: utility_account_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    paginationUpdatedBeforeParam:
+      in: query
+      name: updated_before
+      required: false
+      description: ISO8601 datetime, used to traverse paginated responses. Use of this parameter is mutually exclusive with `updated_after`.
+      schema:
+        type: string
+        format: date-time
     paginationOrderParam:
       in: query
       name: order
@@ -349,45 +388,6 @@ components:
         - asc
         - desc
         default: desc
-    paginationUpdatedAfterParam:
-      in: query
-      name: updated_after
-      required: false
-      description: ISO8601 datetime, used to traverse paginated responses. Use of this parameter is mutually exclusive with `updated_before`.
-      schema:
-        type: string
-        format: date-time
-    paginationUpdatedBeforeParam:
-      in: query
-      name: updated_before
-      required: false
-      description: ISO8601 datetime, used to traverse paginated responses. Use of this parameter is mutually exclusive with `updated_after`.
-      schema:
-        type: string
-        format: date-time
-    paginationLimitParam:
-      in: query
-      name: limit
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        default: 10
-    arcVersionInHeaderParam:
-      name: Arcadia-Version
-      in: header
-      example: '2022-10-13'
-      description: The Arcadia-Version for the request
-      required: true
-      schema:
-        type: string
-        default: '2022-10-13'
-    utilityAccountIdInPathParam:
-      name: utility_account_id
-      in: path
-      required: true
-      schema:
-        type: integer
   headers:
     ArcVersion:
       description: The Arcadia-Version for the response

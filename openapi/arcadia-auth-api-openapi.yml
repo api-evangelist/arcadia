@@ -20,9 +20,7 @@ paths:
       description: 'Use your API credentials to create an Access Token that has permission to use all Arcadia API endpoints.
 
 
-        API access tokens are valid for 2 hours.
-
-        '
+        API access tokens are valid for 2 hours.'
       operationId: createApiAccessToken
       parameters:
       - $ref: '#/components/parameters/arcVersionInHeaderParam'
@@ -141,7 +139,7 @@ paths:
       description: 'You can also send your users through the *Connect* flow by linking them to a unique Connect URL (provided by this endpoint).
 
 
-        Just like [the Connect Token](ref:createconnecttoken), you need to provide either a `client_user_id` or a`utility credential_id` to get a URL that will initialize Connect in ‘create mode’ or ‘update mode’ respectively. [See this page for a guide on the difference between those two modes.](https://docs.arcadia.com/docs/connect-guide) This endpoint will provide a URL in a response.
+        Just like the Connect Token, you need to provide either a `client_user_id` or a`utility credential_id` to get a URL that will initialize Connect in ‘create mode’ or ‘update mode’ respectively. See this page for a guide on the difference between those two modes. This endpoint will provide a URL in a response.
 
         Once you have the URL, provide it to the given user for them to complete Connect and give you access to their utility data. The URL will expire after 5 days.
 
@@ -215,9 +213,7 @@ paths:
       summary: Ping
       description: 'No-op authorization test endpoint. Returns a 200 if requested with a valid Bearer auth token.
 
-        Any valid authorization token with any scope will be able to get a 200 from this endpoint.
-
-        '
+        Any valid authorization token with any scope will be able to get a 200 from this endpoint.'
       operationId: ping
       parameters:
       - $ref: '#/components/parameters/arcVersionInHeaderParam'
@@ -250,17 +246,34 @@ paths:
               schema:
                 $ref: '#/components/schemas/PingUnauthorizedError'
 components:
-  parameters:
-    arcVersionInHeaderParam:
-      name: Arcadia-Version
-      in: header
-      example: '2022-10-13'
-      description: The Arcadia-Version for the request
-      required: true
-      schema:
-        type: string
-        default: '2022-10-13'
   schemas:
+    PingUnauthorizedError:
+      required:
+      - error
+      properties:
+        error:
+          type: string
+          enum:
+          - Unknown or invalid access token
+      additionalProperties: false
+    ConnectTokenUnauthorizedError:
+      required:
+      - error
+      properties:
+        error:
+          type: string
+          enum:
+          - Unknown or invalid access token
+      additionalProperties: false
+    UtilityCredentialNotFoundError:
+      required:
+      - error
+      properties:
+        error:
+          type: string
+          enum:
+          - Couldn't find UtilityCredential
+      additionalProperties: false
     ConnectTokenTooManyParametersError:
       required:
       - error
@@ -285,65 +298,14 @@ components:
               - object
               - 'null'
       additionalProperties: false
-    ConnectTokenUnauthorizedError:
+    PingResponse:
       required:
-      - error
+      - pong
       properties:
-        error:
-          type: string
-          enum:
-          - Unknown or invalid access token
-      additionalProperties: false
-    ConnectTokenUnprocessableEntityError:
-      required:
-      - error
-      properties:
-        error:
-          type: string
-          enum:
-          - 'Param is missing or the value is empty: client_user_id or utility_credential_id'
-      additionalProperties: false
-    ConnectUrlVariantError:
-      required:
-      - error
-      properties:
-        error:
-          type: object
-          required:
-          - description
-          - type
-          - details
-          properties:
-            description:
-              type: string
-              enum:
-              - You can only pass in 'connect' or 'tariff' as the variant.
-            type:
-              type: string
-              enum:
-              - INVALID_VARIANT
-            details:
-              type:
-              - object
-              - 'null'
-      additionalProperties: false
-    AccessTokenUnauthorizedError:
-      required:
-      - error
-      properties:
-        error:
-          type: string
-          enum:
-          - The supplied credentials are invalid.
-      additionalProperties: false
-    UtilityCredentialNotFoundError:
-      required:
-      - error
-      properties:
-        error:
-          type: string
-          enum:
-          - Couldn't find UtilityCredential
+        pong:
+          type: boolean
+          description: Always true
+          example: true
       additionalProperties: false
     ConnectUrlResponse:
       required:
@@ -388,24 +350,58 @@ components:
           description: When the token was created. Provided in Unix timestamp format.
           example: 1611205026
       additionalProperties: false
-    PingUnauthorizedError:
+    ConnectUrlVariantError:
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - description
+          - type
+          - details
+          properties:
+            description:
+              type: string
+              enum:
+              - You can only pass in 'connect' or 'tariff' as the variant.
+            type:
+              type: string
+              enum:
+              - INVALID_VARIANT
+            details:
+              type:
+              - object
+              - 'null'
+      additionalProperties: false
+    AccessTokenUnauthorizedError:
       required:
       - error
       properties:
         error:
           type: string
           enum:
-          - Unknown or invalid access token
+          - The supplied credentials are invalid.
       additionalProperties: false
-    PingResponse:
+    ConnectTokenUnprocessableEntityError:
       required:
-      - pong
+      - error
       properties:
-        pong:
-          type: boolean
-          description: Always true
-          example: true
+        error:
+          type: string
+          enum:
+          - 'Param is missing or the value is empty: client_user_id or utility_credential_id'
       additionalProperties: false
+  parameters:
+    arcVersionInHeaderParam:
+      name: Arcadia-Version
+      in: header
+      example: '2022-10-13'
+      description: The Arcadia-Version for the request
+      required: true
+      schema:
+        type: string
+        default: '2022-10-13'
   headers:
     ArcVersion:
       description: The Arcadia-Version for the response

@@ -27,17 +27,20 @@
     "arcadia-plug-openapi.yml: declared missing tag: Utility Accounts",
     "arcadia-plug-openapi.yml: declared missing tag: Utility Credentials",
     "arcadia-plug-openapi.yml: declared missing tag: Utility Meters (Beta)",
-    "arcadia-plug-openapi.yml: declared missing tag: Webhook Events"
+    "arcadia-plug-openapi.yml: declared missing tag: Webhook Events",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "arcadia-auth-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "arcadia-bundle-beta-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "arcadia-bundle-webhook-events-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "arcadia-plug-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "arcadia-spark-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "arcadia-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "arcadia-utility-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "arcadia-utility-credentials-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "arcadia-utility-meters-beta-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "arcadia-webhook-events-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "arcadia-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
   ]
 }

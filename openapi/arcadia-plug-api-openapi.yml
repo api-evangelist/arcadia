@@ -79,7 +79,7 @@ paths:
       tags:
       - Plug
       summary: List Utility Intervals For A Utility Statement (Beta)
-      description: '**This endpoint is in _beta_. Click [here](release-phases) for a description on Arcadia''s release phases.**
+      description: '**This endpoint is in _beta_. Click here for a description on Arcadia''s release phases.**
 
         Returns the Utility Intervals for the time span of the given Utility Statement. If the Utility Statement contains charges for multiple Utility Meters, this endpoint will aggregate each Utility Meter''s Utility Intervals together to create one set of Utility Intervals.
 
@@ -119,13 +119,11 @@ paths:
         - We will retrieve new utility interval data whenever a new utility statement is discovered
 
 
-        To test Utility Intervals using a [test account scenario](ref:testing):
+        To test Utility Intervals using a test account scenario:
 
         * Select one of the utilities supported above
 
-        * Enter a [test username](ref:testing) that has at least one electric account
-
-        '
+        * Enter a test username that has at least one electric account'
       operationId: getUtilityStatementIntervals
       parameters:
       - $ref: '#/components/parameters/utilityStatementIdInPathParam'
@@ -165,11 +163,11 @@ paths:
       tags:
       - Plug
       summary: List Utility Intervals (Beta)
-      description: '**This endpoint is in _beta_. Click [here](release-phases) for a description on Arcadia''s release phases.**
+      description: '**This endpoint is in _beta_. Click here for a description on Arcadia''s release phases.**
 
         Returns up to a year of interval data per request for a Utility Account.
 
-        Note that the Utility Intervals feature is limited to a subset of utilities at this time. Check the [utility coverage page](https://arc.arcadia.com/coverage?first=25&page=1&strictFilters[productAvailability][0]=PLUG_INTERVALS_SUPPORTED) to see which utilities are supported.
+        Note that the Utility Intervals feature is limited to a subset of utilities at this time. Check the utility coverage page to see which utilities are supported.
 
 
         Note of the availability of interval data:
@@ -179,13 +177,11 @@ paths:
         - We will retrieve new utility interval data whenever a new utility statement is discovered
 
 
-        To test Utility Intervals using a [test account scenario](ref:testing):
+        To test Utility Intervals using a test account scenario:
 
         * Select one of the utilities supported above
 
-        * Enter a [test username](ref:testing) that has at least one electric account
-
-        '
+        * Enter a test username that has at least one electric account'
       operationId: getUtilityIntervals
       parameters:
       - $ref: '#/components/parameters/intervalDataUtilityAccountIdQueryParam'
@@ -235,11 +231,9 @@ paths:
       tags:
       - Plug
       summary: Fetch Utility Interval Metadata (Beta)
-      description: '**This endpoint is in _beta_. Click [here](release-phases) for a description on Arcadia''s release phases.**
+      description: '**This endpoint is in _beta_. Click here for a description on Arcadia''s release phases.**
 
-        Returns metadata on what utility interval data is available.
-
-        '
+        Returns metadata on what utility interval data is available.'
       operationId: getUtilityIntervalMetadata
       parameters:
       - $ref: '#/components/parameters/intervalDataUtilityAccountIdQueryParam'
@@ -279,29 +273,30 @@ paths:
                 - $ref: '#/components/schemas/UtilityIntervalsAmbiguousMeterError'
 components:
   parameters:
-    startTimeQueryParam:
+    utilityStatementIdQueryParam:
       in: query
-      name: start_time
-      required: false
-      description: Retrieve interval data starting from and including this timestamp. If not provided, this will default to a year before the end timestamp.
-      schema:
-        type: string
-        format: date-time
-        example: '2020-03-18T22:00:00-07:00'
-    utilityStatementIdInPathParam:
       name: utility_statement_id
-      in: path
-      required: true
+      required: false
+      description: Retrieve interval data from the service period of a specific utility statement. Cannot be used with start_time or end_time parameters.
       schema:
         type: integer
-    paginationUpdatedAfterParam:
+    deprecatedClientUserIdQueryParam:
       in: query
-      name: updated_after
+      name: client_user_id
       required: false
-      description: ISO8601 datetime, used to traverse paginated responses. Use of this parameter is mutually exclusive with `updated_before`.
+      deprecated: true
+      description: A client_user_id to filter the list of returned items by. This field is deprecated, prefer to use `utility_account_id` instead.
       schema:
         type: string
-        format: date-time
+    arcVersionInHeaderParam:
+      name: Arcadia-Version
+      in: header
+      example: '2022-10-13'
+      description: The Arcadia-Version for the request
+      required: true
+      schema:
+        type: string
+        default: '2022-10-13'
     paginationOrderParam:
       in: query
       name: order
@@ -313,13 +308,31 @@ components:
         - asc
         - desc
         default: desc
-    intervalDataUtilityAccountIdQueryParam:
+    paginationUpdatedAfterParam:
       in: query
-      name: utility_account_id
+      name: updated_after
       required: false
-      description: ID of the utility account to pull interval data from. You must provide this parameter or `utility_meter_id`, but not both.
+      description: ISO8601 datetime, used to traverse paginated responses. Use of this parameter is mutually exclusive with `updated_before`.
+      schema:
+        type: string
+        format: date-time
+    startTimeQueryParam:
+      in: query
+      name: start_time
+      required: false
+      description: Retrieve interval data starting from and including this timestamp. If not provided, this will default to a year before the end timestamp.
+      schema:
+        type: string
+        format: date-time
+        example: '2020-03-18T22:00:00-07:00'
+    paginationLimitParam:
+      in: query
+      name: limit
+      required: false
       schema:
         type: integer
+        minimum: 1
+        default: 10
     paginationUpdatedBeforeParam:
       in: query
       name: updated_before
@@ -328,6 +341,19 @@ components:
       schema:
         type: string
         format: date-time
+    utilityStatementIdInPathParam:
+      name: utility_statement_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    utilityAccountIdQueryParam:
+      in: query
+      name: utility_account_id
+      required: false
+      description: A utility account id to filter the list of returned items by.
+      schema:
+        type: integer
     endTimeQueryParam:
       in: query
       name: end_time
@@ -337,22 +363,13 @@ components:
         type: string
         format: date-time
         example: '2021-03-18T22:00:00-07:00'
-    utilityStatementIdQueryParam:
+    intervalDataUtilityAccountIdQueryParam:
       in: query
-      name: utility_statement_id
+      name: utility_account_id
       required: false
-      description: Retrieve interval data from the service period of a specific utility statement. Cannot be used with start_time or end_time parameters.
+      description: ID of the utility account to pull interval data from. You must provide this parameter or `utility_meter_id`, but not both.
       schema:
         type: integer
-    arcVersionInHeaderParam:
-      name: Arcadia-Version
-      in: header
-      example: '2022-10-13'
-      description: The Arcadia-Version for the request
-      required: true
-      schema:
-        type: string
-        default: '2022-10-13'
     intervalDataUtilityMeterIdQueryParam:
       in: query
       name: utility_meter_id
@@ -360,44 +377,8 @@ components:
       description: ID of the utility meter to pull interval data from. You must provide this parameter or `utility_account_id`, but not both.
       schema:
         type: integer
-    paginationLimitParam:
-      in: query
-      name: limit
-      required: false
-      schema:
-        type: integer
-        minimum: 1
-        default: 10
-    deprecatedClientUserIdQueryParam:
-      in: query
-      name: client_user_id
-      required: false
-      deprecated: true
-      description: A client_user_id to filter the list of returned items by. This field is deprecated, prefer to use `utility_account_id` instead.
-      schema:
-        type: string
-    utilityAccountIdQueryParam:
-      in: query
-      name: utility_account_id
-      required: false
-      description: A utility account id to filter the list of returned items by.
-      schema:
-        type: integer
   schemas:
-    PaginatedUtilityStatements:
-      required:
-      - data
-      - total_count
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/UtilityStatement'
-        total_count:
-          type: integer
-          example: 1
-      additionalProperties: false
-    UtilityIntervalsAmbiguousMeterError:
+    UtilityIntervalsNoDataForMeterError:
       required:
       - error
       properties:
@@ -410,113 +391,11 @@ components:
             description:
               type: string
               enum:
-              - This utility account is associated with multiple meters. You must filter interval data by utility_meter_id instead of utility_account_id when the utility account is associated with multiple meters.
-            type:
-              type: string
-              enum:
-              - BAD_REQUEST
-      additionalProperties: false
-    UtilityIntervalsBothAccountIdAndMeterIdProvided:
-      required:
-      - error
-      properties:
-        error:
-          type: object
-          required:
-          - description
-          - type
-          properties:
-            description:
-              type: string
-              enum:
-              - You must provide exactly one of the utility_account_id or utility_meter_id parameters.
-            type:
-              type: string
-              enum:
-              - BAD_REQUEST
-      additionalProperties: false
-    UtilityIntervalsPerStatementNotFoundError:
-      required:
-      - error
-      properties:
-        error:
-          type: object
-          required:
-          - description
-          - type
-          - details
-          properties:
-            description:
-              type: string
-              enum:
-              - We do not yet have utility intervals covering the entirety of this utility statement's time range. Please see details for which utility meter's data is incomplete.
+              - There are no utility intervals available for this utility meter.
             type:
               type: string
               enum:
               - NOT_FOUND
-            details:
-              type: object
-              required:
-              - intervals_earliest_time
-              - intervals_latest_time
-              - utility_meter_id
-              properties:
-                intervals_earliest_time:
-                  type: string
-                  format: date-time
-                  example: '2021-03-19T08:00:00-07:00'
-                intervals_latest_time:
-                  type: string
-                  format: date-time
-                  example: '2022-03-19T08:00:00-07:00'
-                utility_meter_id:
-                  type: number
-                  example: '358901'
-                  description: Which utility meter did not have full coverage for the time range of this utility statement.
-      additionalProperties: false
-    UtilityIntervalsInvalidMeterServiceTypeError:
-      required:
-      - error
-      properties:
-        error:
-          type: object
-          required:
-          - description
-          - type
-          properties:
-            description:
-              type: string
-              enum:
-              - Arcadia does not currently support interval data for non-electric utility meters.
-            type:
-              type: string
-              enum:
-              - BAD_REQUEST
-      additionalProperties: false
-    UtilityStatementsFeatureAvailabilityError:
-      required:
-      - error
-      properties:
-        error:
-          type: object
-          required:
-          - description
-          - type
-          - details
-          properties:
-            description:
-              type: string
-              enum:
-              - The utility_statements feature is not available for this UtilityAccount.
-              - The utility_statements feature is not ready yet. Please refer to UtilityAccount#FeatureAvailability for updates.
-            type:
-              type: string
-              enum:
-              - BAD_REQUEST
-            details:
-              type:
-              - object
-              - 'null'
       additionalProperties: false
     UtilityIntervalItem:
       required:
@@ -558,7 +437,7 @@ components:
           deprecated: true
           type: boolean
       additionalProperties: false
-    UtilityIntervalsStatementRangeUnavailableError:
+    UtilityIntervalsPerStatementNotFoundError:
       required:
       - error
       properties:
@@ -567,15 +446,97 @@ components:
           required:
           - description
           - type
+          - details
           properties:
             description:
               type: string
               enum:
-              - Unable to determine service window for the given utility statement.
+              - We do not yet have utility intervals covering the entirety of this utility statement's time range. Please see details for which utility meter's data is incomplete.
+            type:
+              type: string
+              enum:
+              - NOT_FOUND
+            details:
+              type: object
+              required:
+              - intervals_earliest_time
+              - intervals_latest_time
+              - utility_meter_id
+              properties:
+                intervals_earliest_time:
+                  type: string
+                  format: date-time
+                  example: '2021-03-19T08:00:00-07:00'
+                intervals_latest_time:
+                  type: string
+                  format: date-time
+                  example: '2022-03-19T08:00:00-07:00'
+                utility_meter_id:
+                  type: number
+                  example: '358901'
+                  description: Which utility meter did not have full coverage for the time range of this utility statement.
+      additionalProperties: false
+    UtilityIntervalsInvalidTimeRange:
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - description
+          - type
+          - details
+          properties:
+            description:
+              type: string
+              enum:
+              - Provided start_time and/or end_time are outside this account's available utility intervals time range. Please see details for the available time range.
             type:
               type: string
               enum:
               - BAD_REQUEST
+            details:
+              anyOf:
+              - type: 'null'
+              - type: object
+                required:
+                - intervals_earliest_time
+                - intervals_latest_time
+                properties:
+                  intervals_earliest_time:
+                    type: string
+                    format: date-time
+                    example: '2021-03-19T08:00:00-07:00'
+                  intervals_latest_time:
+                    type: string
+                    format: date-time
+                    example: '2022-03-19T08:00:00-07:00'
+      additionalProperties: false
+    UtilityIntervalsFeatureAvailabilityError:
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - description
+          - type
+          - details
+          properties:
+            description:
+              type: string
+              enum:
+              - The utility_intervals feature is not available for this UtilityAccount.
+              - The utility_intervals feature is not ready yet. Please refer to UtilityAccount#FeatureAvailability for updates.
+              - Parameter(s) start_time and/or end_time cannot be used with utility_statement_id parameter.
+            type:
+              type: string
+              enum:
+              - BAD_REQUEST
+            details:
+              type:
+              - object
+              - 'null'
       additionalProperties: false
     UtilityStatement:
       required:
@@ -957,7 +918,7 @@ components:
                   conflicting_utility_statment_id:
                     type: integer
       additionalProperties: false
-    UtilityIntervalsInvalidTimeRange:
+    UtilityIntervalsInvalidMeterServiceTypeError:
       required:
       - error
       properties:
@@ -966,41 +927,28 @@ components:
           required:
           - description
           - type
-          - details
           properties:
             description:
               type: string
               enum:
-              - Provided start_time and/or end_time are outside this account's available utility intervals time range. Please see details for the available time range.
+              - Arcadia does not currently support interval data for non-electric utility meters.
             type:
               type: string
               enum:
               - BAD_REQUEST
-            details:
-              anyOf:
-              - type: 'null'
-              - type: object
-                required:
-                - intervals_earliest_time
-                - intervals_latest_time
-                properties:
-                  intervals_earliest_time:
-                    type: string
-                    format: date-time
-                    example: '2021-03-19T08:00:00-07:00'
-                  intervals_latest_time:
-                    type: string
-                    format: date-time
-                    example: '2022-03-19T08:00:00-07:00'
       additionalProperties: false
-    UtilityAccountNotFoundError:
+    PaginatedUtilityStatements:
       required:
-      - error
+      - data
+      - total_count
       properties:
-        error:
-          type: string
-          enum:
-          - Couldn't find UtilityAccount
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UtilityStatement'
+        total_count:
+          type: integer
+          example: 1
       additionalProperties: false
     UtilityIntervalsPerStatementDataResponse:
       required:
@@ -1030,6 +978,25 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UtilityIntervalItem'
+      additionalProperties: false
+    UtilityIntervalsStatementRangeUnavailableError:
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - description
+          - type
+          properties:
+            description:
+              type: string
+              enum:
+              - Unable to determine service window for the given utility statement.
+            type:
+              type: string
+              enum:
+              - BAD_REQUEST
       additionalProperties: false
     Tariff:
       description: Information about a tariff.
@@ -1076,6 +1043,44 @@ components:
           type: string
           description: Name of the utility associated with this tariff
           example: Pacific Gas & Electric
+    UtilityIntervalMetadataResponse:
+      required:
+      - intervals_earliest_time
+      - intervals_latest_time
+      properties:
+        intervals_earliest_time:
+          description: The earliest available interval data timestamp
+          type: string
+          format: date-time
+        intervals_latest_time:
+          description: The latest available interval data timestamp
+          type: string
+          format: date-time
+        utility_meter_id:
+          example: 1234
+          type:
+          - integer
+          - 'null'
+      additionalProperties: false
+    UtilityIntervalsBothAccountIdAndMeterIdProvided:
+      required:
+      - error
+      properties:
+        error:
+          type: object
+          required:
+          - description
+          - type
+          properties:
+            description:
+              type: string
+              enum:
+              - You must provide exactly one of the utility_account_id or utility_meter_id parameters.
+            type:
+              type: string
+              enum:
+              - BAD_REQUEST
+      additionalProperties: false
     UtilityIntervalDataResponse:
       required:
       - client_user_id
@@ -1116,7 +1121,7 @@ components:
           items:
             $ref: '#/components/schemas/UtilityIntervalItem'
       additionalProperties: false
-    UtilityIntervalsFeatureAvailabilityError:
+    UtilityStatementsFeatureAvailabilityError:
       required:
       - error
       properties:
@@ -1130,9 +1135,8 @@ components:
             description:
               type: string
               enum:
-              - The utility_intervals feature is not available for this UtilityAccount.
-              - The utility_intervals feature is not ready yet. Please refer to UtilityAccount#FeatureAvailability for updates.
-              - Parameter(s) start_time and/or end_time cannot be used with utility_statement_id parameter.
+              - The utility_statements feature is not available for this UtilityAccount.
+              - The utility_statements feature is not ready yet. Please refer to UtilityAccount#FeatureAvailability for updates.
             type:
               type: string
               enum:
@@ -1142,7 +1146,16 @@ components:
               - object
               - 'null'
       additionalProperties: false
-    UtilityIntervalsNoDataForMeterError:
+    UtilityAccountNotFoundError:
+      required:
+      - error
+      properties:
+        error:
+          type: string
+          enum:
+          - Couldn't find UtilityAccount
+      additionalProperties: false
+    UtilityIntervalsAmbiguousMeterError:
       required:
       - error
       properties:
@@ -1155,30 +1168,11 @@ components:
             description:
               type: string
               enum:
-              - There are no utility intervals available for this utility meter.
+              - This utility account is associated with multiple meters. You must filter interval data by utility_meter_id instead of utility_account_id when the utility account is associated with multiple meters.
             type:
               type: string
               enum:
-              - NOT_FOUND
-      additionalProperties: false
-    UtilityIntervalMetadataResponse:
-      required:
-      - intervals_earliest_time
-      - intervals_latest_time
-      properties:
-        intervals_earliest_time:
-          description: The earliest available interval data timestamp
-          type: string
-          format: date-time
-        intervals_latest_time:
-          description: The latest available interval data timestamp
-          type: string
-          format: date-time
-        utility_meter_id:
-          example: 1234
-          type:
-          - integer
-          - 'null'
+              - BAD_REQUEST
       additionalProperties: false
   headers:
     ArcVersion:
